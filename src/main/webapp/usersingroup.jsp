@@ -5,9 +5,12 @@
     <title>Strona glowna</title>
 </head>
 <body>
-<br/>
-<a href="login.jsp">Login</a>
-<br>
-<a href="register.jsp">Register</a>
+<div>
+    <ul>
+        <li>user1: </li>
+        <li>user2: </li>
+        <li>user3: </li>
+    </ul>
+</div>
 </body>
 </html>

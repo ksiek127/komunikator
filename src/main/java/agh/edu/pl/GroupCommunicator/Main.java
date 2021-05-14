@@ -1,7 +1,14 @@
+package agh.edu.pl.GroupCommunicator;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import tables.Address;
+import tables.User;
+
+import java.sql.Date;
 
 public class Main {
     private static final SessionFactory ourSessionFactory;
