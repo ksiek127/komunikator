@@ -13,7 +13,7 @@ repositories {
 }
 
 ext {
-    javaMainClass = "Main"
+    javaMainClass = "agh/edu/pl/GroupCommunicator/Main"
     junitVersion = '5.7.1'
 }
 
@@ -22,7 +22,7 @@ targetCompatibility = 1.8
 
 dependencies {
     compile 'org.hibernate:hibernate-core:5.4.31.Final'
-    compile group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '6.1.0.jre7'
+    compile group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '9.3.1.jre8-preview'
 
     compileOnly('jakarta.persistence:jakarta.persistence-api:3.0.0')
     compileOnly('jakarta.servlet:jakarta.servlet-api:5.0.0')
