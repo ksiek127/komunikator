@@ -1,4 +1,4 @@
-package tables;
+package agh.edu.pl.GroupCommunicator.tables;
 
 public enum GroupRank {
     ADMIN, MODERATOR, MEMBER;

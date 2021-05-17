@@ -3,7 +3,6 @@ package agh.edu.pl.GroupCommunicator;
 import java.io.IOException;
 import java.util.List;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,7 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import tables.User;
+import agh.edu.pl.GroupCommunicator.tables.User;
 
 
 @WebServlet(name = "loginHandler", value = "/login-handler")

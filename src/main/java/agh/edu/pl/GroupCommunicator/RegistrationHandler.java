@@ -8,8 +8,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.exception.ConstraintViolationException;
-import tables.Address;
-import tables.User;
+import agh.edu.pl.GroupCommunicator.tables.Address;
+import agh.edu.pl.GroupCommunicator.tables.User;
 import java.io.IOException;
 import java.sql.Date;
 

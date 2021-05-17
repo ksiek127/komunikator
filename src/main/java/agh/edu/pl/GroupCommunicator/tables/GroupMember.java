@@ -1,6 +1,6 @@
-package tables;
+package agh.edu.pl.GroupCommunicator.tables;
 
-import tables.pk.GroupMemberPK;
+import agh.edu.pl.GroupCommunicator.tables.pk.GroupMemberPK;
 
 import javax.persistence.*;
 

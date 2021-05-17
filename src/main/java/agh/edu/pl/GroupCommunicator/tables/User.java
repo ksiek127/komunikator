@@ -1,4 +1,4 @@
-package tables;
+package agh.edu.pl.GroupCommunicator.tables;
 
 import org.hibernate.annotations.Check;
 

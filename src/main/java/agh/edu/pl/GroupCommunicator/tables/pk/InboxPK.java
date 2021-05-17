@@ -1,32 +1,32 @@
-package tables.pk;
+package agh.edu.pl.GroupCommunicator.tables.pk;
 
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
-public class OutboxPK implements Serializable {
+public class InboxPK implements Serializable {
     private int mailId;
-    private int toUser;
+    private int fromUser;
 
-    public OutboxPK() {
+    public InboxPK() {
     }
 
-    public OutboxPK(int mailId, int toUser) {
+    public InboxPK(int mailId, int fromUser) {
         this.mailId = mailId;
-        this.toUser = toUser;
+        this.fromUser = fromUser;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OutboxPK outboxPK = (OutboxPK) o;
-        return mailId == outboxPK.mailId && toUser == outboxPK.toUser;
+        InboxPK inboxPK = (InboxPK) o;
+        return mailId == inboxPK.mailId && fromUser == inboxPK.fromUser;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(mailId, toUser);
+        return Objects.hash(mailId, fromUser);
     }
 }

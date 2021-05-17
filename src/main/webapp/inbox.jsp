@@ -10,9 +10,9 @@
 </h1>
 <br/>
 <ul>
-    <li>mail1: <a href="#">wyswietl tresc</a><button>usun ze skrzynki</button></li>
-    <li>mail2: <a href="#">wyswietl tresc</a><button>usun ze skrzynki</button></li>
-    <li>mail3: <a href="#">wyswietl tresc</a><button>usun ze skrzynki</button></li>
+    <li>mail1: <a href="inboxemail.jsp">wyswietl tresc</a><button>usun ze skrzynki</button></li>
+    <li>mail2: <a href="inboxemail.jsp">wyswietl tresc</a><button>usun ze skrzynki</button></li>
+    <li>mail3: <a href="inboxemail.jsp">wyswietl tresc</a><button>usun ze skrzynki</button></li>
 </ul>
 </body>
 </html>

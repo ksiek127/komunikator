@@ -1,6 +1,6 @@
-package tables;
+package agh.edu.pl.GroupCommunicator.tables;
 
-import tables.pk.GroupRequestPK;
+import agh.edu.pl.GroupCommunicator.tables.pk.GroupRequestPK;
 
 import javax.persistence.*;
 import java.io.Serializable;

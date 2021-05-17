@@ -24,8 +24,8 @@
         </div>
     </div>
     <div class="d-grid gap-2" style="margin-top:2vh;padding:1vw">
-        <a class="btn btn-primary" href="#" role="button">Inbox</a>
-        <a class="btn btn-primary" href="#" role="button">Outbox</a>
+        <a class="btn btn-primary" href="inbox.jsp" role="button">Inbox</a>
+        <a class="btn btn-primary" href="outbox.jsp" role="button">Outbox</a>
         <a class="btn btn-outline-secondary" href="index.jsp" role="button">Log out</a>
     </div>
 </div>
