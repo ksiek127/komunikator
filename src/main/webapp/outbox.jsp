@@ -6,13 +6,14 @@
     <title>Outbox</title>
 </head>
 <body>
-<h1><%= "Outbox" %>
+<h1><%= "Inbox" %>
 </h1>
 <br/>
-<ul>
-    <li>mail1: <a href="#">wyswietl tresc</a><button>usun ze skrzynki</button></li>
-    <li>mail2: <a href="#">wyswietl tresc</a><button>usun ze skrzynki</button></li>
-    <li>mail3: <a href="#">wyswietl tresc</a><button>usun ze skrzynki</button></li>
-</ul>
+<c:forEach var="email" items="${emails}">
+    <tr>
+        <td><c:out value="${email.title}"/></td>
+        <td><c:out value="${email.message}"/></td>
+    </tr>
+</c:forEach>
 </body>
 </html>

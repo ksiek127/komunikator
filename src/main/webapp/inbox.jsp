@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,10 +9,11 @@
 <h1><%= "Inbox" %>
 </h1>
 <br/>
-<ul>
-    <li>mail1: <a href="inboxemail.jsp">wyswietl tresc</a><button>usun ze skrzynki</button></li>
-    <li>mail2: <a href="inboxemail.jsp">wyswietl tresc</a><button>usun ze skrzynki</button></li>
-    <li>mail3: <a href="inboxemail.jsp">wyswietl tresc</a><button>usun ze skrzynki</button></li>
-</ul>
+    <c:forEach var="email" items="${requestScope.emails}">
+        <tr>
+            <td><c:out value="${email.title}"/></td>
+            <td><c:out value="${email.message}"/></td>
+        </tr>
+    </c:forEach>
 </body>
 </html>
