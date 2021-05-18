@@ -6,7 +6,7 @@
     <title>Outbox</title>
 </head>
 <body>
-<h1><%= "Inbox" %>
+<h1><%= "Outbox" %>
 </h1>
 <br/>
 <c:forEach var="email" items="${emails}">
