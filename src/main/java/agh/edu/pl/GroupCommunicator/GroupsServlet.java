@@ -27,7 +27,8 @@ public class GroupsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String email = request.getParameter("email");
-        List<Group> groups = null;
+        List<Group> groupsMember = null; //grupy, w ktorych jestem zwyklym czlonkiem
+        List<Group> groupsAdmin = null; //jestem adminem
         Transaction tx = null;
         User user = null;
         try(Session session = Main.getSession()){
@@ -38,7 +39,9 @@ public class GroupsServlet extends HttpServlet {
             user = usersList.isEmpty() ? null : usersList.get(0);
             assert user != null;
             int userId = user.getUserID();
-            groups = session.createQuery("select group from GroupMember groupMember where groupMember.user.userID = " + userId, Group.class)
+            groupsMember = session.createQuery("select group from GroupMember groupMember where groupMember.user.userID = " + userId +" and groupMember.groupRank = MEMBER", Group.class)
+                    .getResultList();
+            groupsAdmin = session.createQuery("select group from GroupMember groupMember where groupMember.user.userID = " + userId +" and groupMember.groupRank = ADMIN", Group.class)
                     .getResultList();
             tx.commit();
         } catch (Exception e){
@@ -47,7 +50,8 @@ public class GroupsServlet extends HttpServlet {
             }
             e.printStackTrace();
         }
-        request.setAttribute("groups", groups);
+        request.setAttribute("groupsMember", groupsMember);
+        request.setAttribute("groupsAdmin", groupsAdmin);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/groups.jsp");
         dispatcher.forward(request, response);
     }

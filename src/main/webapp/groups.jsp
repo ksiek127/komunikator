@@ -8,10 +8,7 @@
 </h1>
 <br/>
 <c:forEach var="group" items="${groups}">
-    <tr>
-        <td><c:out value="${group.title}"/></td>
-        <td><c:out value="${group.message}"/></td>
-    </tr>
+    <c:out value="${group.name}"/>
 </c:forEach>
 </body>
 </html>
