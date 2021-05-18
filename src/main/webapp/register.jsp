@@ -9,6 +9,7 @@
     <title>GroupCommunicator Registration</title>
 </head>
 <body>
+
 <div class="conatiner-md">
     <div class="card">
         <div class="card-header">
@@ -62,6 +63,7 @@
                            name="zipcode" value="${fn:escapeXml(param.zipcode)}">
                 </div>
                 <button type="submit" class="btn btn-outline-primary">Register</button>
+                <a class="btn btn-outline-secondary" href="index.jsp" role="button">Back</a>
             </form>
         </div>
     </div>

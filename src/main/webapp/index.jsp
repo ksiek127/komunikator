@@ -31,6 +31,11 @@
                     Please type in your email to log in
                 </div>
             </c:if>
+            <c:if test="${requestScope.removed_user == true}">
+                <div class="alert alert-success" role="alert">
+                    User with e-mail address: ${requestScope.user_email} removed!
+                </div>
+            </c:if>
             <form action="login-handler" method="post">
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1">@</span>
