@@ -34,6 +34,12 @@
         </form>
         <a class="btn btn-outline-secondary" href="index.jsp" role="button">Log out</a>
     </div>
+    <div>
+        <form action="groups">
+            <input type="hidden" name="email" value="${requestScope.email}">
+            <button type="submit">Groups</button>
+        </form>
+    </div>
 </div>
 </body>
 </html>
