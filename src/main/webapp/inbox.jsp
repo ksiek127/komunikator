@@ -10,10 +10,8 @@
 </h1>
 <br/>
     <c:forEach var="email" items="${requestScope.emails}">
-        <tr>
-            <td><c:out value="${email.title}"/></td>
-            <td><c:out value="${email.message}"/></td>
-        </tr>
+        <c:out value="${email.title}"/> <br>
+        <c:out value="${email.message}"/> <br> <br>
     </c:forEach>
 </body>
 </html>

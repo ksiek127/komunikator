@@ -19,6 +19,7 @@ public class LoginHandler extends HttpServlet{
         super();
     }
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         String email = request.getParameter("email");
         if(email.isEmpty()){
