@@ -11,15 +11,26 @@ public class Address {
     private String city;
     @Column(nullable = false, name = "zipCode")
     private String zipCode;
+    @Column(nullable = false)
+    private String country;
 
     public Address() {
 
     }
 
-    public Address(String street, String city, String zipCode) {
+    public Address(String street, String city, String zipCode, String country) {
         this.street = street;
         this.city = city;
         this.zipCode = zipCode;
+        this.country = country;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public String getStreet() {
@@ -48,6 +59,6 @@ public class Address {
 
     @Override
     public String toString() {
-        return street + " " + city + " " + zipCode;
+        return street + " " + city + " " + zipCode + " " + country;
     }
 }
