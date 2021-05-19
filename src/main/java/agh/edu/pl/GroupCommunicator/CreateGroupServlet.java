@@ -8,12 +8,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@SuppressWarnings("unchecked")
-@WebServlet(name = "create-group", value = "/create-group")
+@WebServlet(name = "CreateGroupServlet", value = "/create-group")
 public class CreateGroupServlet extends HttpServlet {
-    public CreateGroupServlet() {
-        super();
-    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
