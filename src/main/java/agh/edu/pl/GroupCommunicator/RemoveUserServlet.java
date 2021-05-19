@@ -27,6 +27,8 @@ public class RemoveUserServlet extends HttpServlet {
             session.delete(user);
             tx.commit();
         } catch (Exception e) {
+            request.setAttribute("error_while_removing_user", true);
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
             if (tx != null) {
                 tx.rollback();
             }
