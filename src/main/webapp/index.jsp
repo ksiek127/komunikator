@@ -16,9 +16,19 @@
             Welcome to <b>GroupCommunicator</b> application!
         </div>
         <div class="card-body">
+            <c:if test="${requestScope.logged_out == true}">
+                <div class="alert alert-success" role="alert">
+                    Logged out successfully
+                </div>
+            </c:if>
             <c:if test="${requestScope.created_user == true}">
                 <div class="alert alert-success" role="alert">
                     Account created! You can log in with your e-mail address: ${requestScope.user_email}
+                </div>
+            </c:if>
+            <c:if test="${requestScope.email_first == true}">
+                <div class="alert alert-warning" role="alert">
+                    Enter your email address first
                 </div>
             </c:if>
             <c:if test="${requestScope.no_user == true}">
@@ -33,7 +43,7 @@
             </c:if>
             <c:if test="${requestScope.removed_user == true}">
                 <div class="alert alert-success" role="alert">
-                    User with e-mail address: ${requestScope.user_email} removed!
+                    Account successfully removed
                 </div>
             </c:if>
             <form action="login-handler" method="post">
