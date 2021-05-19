@@ -46,6 +46,11 @@
                     Account successfully removed
                 </div>
             </c:if>
+            <c:if test="${requestScope.error_while_removing_user == true}">
+                <div class="alert alert-warning" role="alert">
+                    Something went wrong while removing the account...
+                </div>
+            </c:if>
             <form action="login-handler" method="post">
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1">@</span>
