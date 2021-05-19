@@ -10,12 +10,23 @@ public class Group {
     private int groupID;
     @Column(nullable = false, unique = true, length = 32)
     private String name;
+    @Column(nullable = false, length = 100)
+    private String description;
 
     public Group() {
     }
 
-    public Group(String name) {
+    public Group(String name, String description) {
         this.name = name;
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getGroupID() {
