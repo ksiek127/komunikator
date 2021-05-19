@@ -4,9 +4,9 @@ public enum GroupRank {
     ADMIN, MODERATOR, MEMBER;
 
     @Override
-    public String toString(){
+    public String toString() {
         String result;
-        switch(this){
+        switch (this) {
             case ADMIN:
                 result = "Admin";
                 break;
