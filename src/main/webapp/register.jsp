@@ -62,6 +62,11 @@
                     <input type="text" class="form-control" id="zipcode"
                            name="zipcode" value="${fn:escapeXml(param.zipcode)}">
                 </div>
+                <div class="mb-3">
+                    <label for="country" class="form-label">Country</label>
+                    <input type="text" class="form-control" id="country"
+                           name="country" value="${fn:escapeXml(param.country)}">
+                </div>
                 <button type="submit" class="btn btn-outline-primary">Register</button>
                 <a class="btn btn-outline-secondary" href="index.jsp" role="button">Back</a>
             </form>
