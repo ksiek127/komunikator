@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Lista grup</title>
+    <title>Group search</title>
 </head>
 <body>
 <br/>
@@ -16,6 +16,36 @@
                 Search for a group
             </div>
             <div class="card-body">
+                <c:if test="${requestScope.group_leave_and_admin_change_success == true}">
+                    <div class="alert alert-success" role="alert">
+                        Left the group with admin changed
+                    </div>
+                </c:if>
+                <c:if test="${requestScope.group_leave_and_admin_change_failed == true}">
+                    <div class="alert alert-warning" role="alert">
+                        Oops! Something has gone wrong with leaving the group and changing the admin...
+                    </div>
+                </c:if>
+                <c:if test="${requestScope.group_leave_success == true}">
+                    <div class="alert alert-success" role="alert">
+                        Left the group
+                    </div>
+                </c:if>
+                <c:if test="${requestScope.group_leave_failed == true}">
+                    <div class="alert alert-warning" role="alert">
+                        Oops! Something has gone wrong with leaving the group...
+                    </div>
+                </c:if>
+                <c:if test="${requestScope.group_remove_success == true}">
+                    <div class="alert alert-success" role="alert">
+                        Group removed successfully
+                    </div>
+                </c:if>
+                <c:if test="${requestScope.group_remove_failed == true}">
+                    <div class="alert alert-warning" role="alert">
+                        Oops! Something has gone wrong with removing the group...
+                    </div>
+                </c:if>
                 <c:if test="${requestScope.request_delete_failed == true}">
                     <div class="alert alert-warning" role="alert">
                         Oops! Something has gone wrong with deleting the request...
@@ -90,9 +120,11 @@
                                         <button type="submit" class="btn btn-outline-danger">Delete request</button>
                                     </form>
                                 </c:if>
-<%--                                mozna potem zmienic zeby tu byla mozliwosc usuniecia sie z grupy--%>
                                 <c:if test="${group.value == 'joined'}">
-                                    <span class="badge rounded-pill bg-info text-dark">You are already in this group</span>
+                                    <form action="leaveGroup" method="post">
+                                        <input type="hidden" name="group_id" value="${group.key.groupID}">
+                                        <button type="submit" class="btn btn-outline-danger">Leave group</button>
+                                    </form>
                                 </c:if>
                             </li>
                         </c:forEach>
