@@ -1,17 +1,14 @@
 package agh.edu.pl.GroupCommunicator;
 
-import agh.edu.pl.GroupCommunicator.tables.*;
+import agh.edu.pl.GroupCommunicator.tables.User;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-
-import java.sql.Date;
-import java.util.List;
 
 public class Main {
     private static final SessionFactory ourSessionFactory;
+    private static User user;
 
     static {
         try {
@@ -22,6 +19,14 @@ public class Main {
         } catch (Throwable ex) {
             throw new ExceptionInInitializerError(ex);
         }
+    }
+
+    public static void setUser(User user) {
+        Main.user = user;
+    }
+
+    public static User getUser() {
+        return user;
     }
 
     public static Session getSession() throws HibernateException {
