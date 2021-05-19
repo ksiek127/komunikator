@@ -14,21 +14,19 @@ import org.hibernate.Transaction;
 import java.io.IOException;
 import java.util.List;
 
-@SuppressWarnings("unchecked")
-@WebServlet(name = "outbox", value = "/outbox")
+@WebServlet(name = "OutboxServlet", value = "/outbox")
 public class OutboxServlet extends HttpServlet {
-    public OutboxServlet() {
-        super();
-    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException{
-        String email = request.getParameter("email");
+            throws ServletException, IOException {
+        String email = Main.getUser().getEmail();
         List<Mail> emails = null;
         User user = null;
         Transaction tx = null;
-        try(Session session = Main.getSession()){
+        try (Session session = Main.getSession()) {
+//            User user = Main.getUser() zamiast tych ponizszych query do uzyskania usera
+//            powinno zalatwic sprawe ale nie chce mieszac za bardzo
             tx = session.beginTransaction();
             List<User> usersList = session.createQuery("from User as user where user.email=:userEmail", User.class)
                     .setParameter("userEmail", email)
@@ -39,14 +37,13 @@ public class OutboxServlet extends HttpServlet {
             emails = session.createQuery("select mail from Inbox inbox where inbox.fromUser = " + userId, Mail.class)
                     .getResultList();
             tx.commit();
-        } catch (Exception e){
-            if(tx != null){
+        } catch (Exception e) {
+            if (tx != null) {
                 tx.rollback();
             }
             e.printStackTrace();
         }
         request.setAttribute("emails", emails);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/outbox.jsp");
-        dispatcher.forward(request, response);
+        request.getRequestDispatcher("/outbox.jsp").forward(request, response);
     }
 }
