@@ -13,21 +13,18 @@
 <div class="container">
     <div class="card-sm">
         <div class="card-header">
-            Welcome, <b>${requestScope.firstname}</b>!
+            Welcome, <b>${requestScope.user.firstname}</b>!
         </div>
         <div class="card-body">
             <h5 class="card-title">Here is your data</h5>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item"><b>Name:</b> ${requestScope.firstname} ${requestScope.lastname}</li>
-                <li class="list-group-item"><b>Email:</b> ${requestScope.email}</li>
-                <li class="list-group-item"><b>Birth date:</b> ${requestScope.birthdate}</li>
-                <li class="list-group-item"><b>Address:</b> ${requestScope.address}</li>
+                <li class="list-group-item"><b>Name:</b> ${requestScope.user.firstname} ${requestScope.user.lastname}</li>
+                <li class="list-group-item"><b>Email:</b> ${requestScope.user.email}</li>
+                <li class="list-group-item"><b>Birth date:</b> ${requestScope.user.birthDate}</li>
+                <li class="list-group-item"><b>Address:</b> ${requestScope.user.address}</li>
             </ul>
 
-            <form action="editdataform">
-                <input type="hidden" name="email" value="${requestScope.email}">
-                <button type="submit" class="btn btn-outline-primary">Edit your account details</button>
-            </form>
+            <a href="editdata.jsp" class="btn btn-outline-primary">Edit your account details</a>
         </div>
     </div>
 
@@ -43,31 +40,16 @@
                 What do you want to do?
             </div>
             <div class="card-body">
-                <form action="inbox">
-                    <input type="hidden" name="email" value="${requestScope.email}">
-                    <button type="submit" class="btn btn-outline-primary">Inbox</button>
-                </form>
-
-                <form action="outbox">
-                    <input type="hidden" name="email" value="${requestScope.email}">
-                    <button type="submit" class="btn btn-outline-primary">Outbox</button>
-                </form>
-
-                <form action="groups">
-                    <input type="hidden" name="email" value="${requestScope.email}">
-                    <button type="submit" class="btn btn-outline-primary">Groups</button>
-                </form>
-
-                <form action="removeUser">
-                    <input type="hidden" name="email" value="${requestScope.email}">
-                    <button type="submit" class="btn btn-outline-secondary">Remove</button>
-                </form>
+                <a href="inbox" class="btn btn-outline-primary">Inbox</a>
+                <a href="outbox" class="btn btn-outline-primary">Outbox</a>
+                <a href="groups" class="btn btn-outline-primary">Groups</a>
+                <a href="removeUser" class="btn btn-outline-primary">Remove</a>
             </div>
         </div>
     </div>
 
     <div class="d-grid gap-2" style="margin-top:2vh;padding:1vw">
-        <a class="btn btn-outline-secondary" href="index.jsp" role="button">Log out</a>
+        <a class="btn btn-outline-secondary" href="logout" role="button">Log out</a>
     </div>
 </div>
 </body>
