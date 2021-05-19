@@ -43,6 +43,7 @@
                 <a href="inbox" class="btn btn-outline-primary">Inbox</a>
                 <a href="outbox" class="btn btn-outline-primary">Outbox</a>
                 <a href="groups" class="btn btn-outline-primary">Groups</a>
+                <a href="groups-search" class="btn btn-outline-primary">Groups search</a>
                 <a href="removeUser" class="btn btn-outline-primary">Remove</a>
             </div>
         </div>
