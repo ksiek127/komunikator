@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
-@Table(name="[User]")
+@Table(name = "[User]")
 @Check(constraints = "birthDate < CURRENT_TIMESTAMP and email like '%@%' and zipCode like '[0-9][0-9]-[0-9][0-9][0-9]'")
 public class User {
     @Id
