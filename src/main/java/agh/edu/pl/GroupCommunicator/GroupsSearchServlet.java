@@ -29,8 +29,6 @@ public class GroupsSearchServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("im here post");
-        System.out.println(request.getParameter("group_name"));
         String groupNameRegex = request.getParameter("group_name");
         if (groupNameRegex == null) {
             request.setAttribute("no_group_name", true);
@@ -56,7 +54,6 @@ public class GroupsSearchServlet extends HttpServlet {
                             .setParameter("uId", Main.getUser().getUserID())
                             .getResultList();
                     if (gm != null && gm.size() == 1) {
-                        System.out.println(gm);
                         groupsMap.put(group, "joined");
                     } else {
 //                        check if user already requested joining the group
@@ -67,7 +64,6 @@ public class GroupsSearchServlet extends HttpServlet {
                                 .setParameter("uId", Main.getUser().getUserID())
                                 .getResultList();
                         if (gr != null && gr.size() == 1) {
-                            System.out.println(gr);
                             groupsMap.put(group, "requested");
                         } else {
                             groupsMap.put(group, "none");
