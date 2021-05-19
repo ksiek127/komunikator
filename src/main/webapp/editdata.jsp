@@ -24,7 +24,8 @@
                 </c:if>
                 <c:if test="${requestScope.constraint_exception == true}">
                     <div class="alert alert-warning" role="alert">
-                        Wrong data! Check if all your data is valid
+                        Wrong data! Your zip code is invalid or you want to change
+                        your email to the one already assigned to another account
                     </div>
                 </c:if>
                 <div class="mb-3">
@@ -46,7 +47,6 @@
                     <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control" id="email"
                            name="email" value="${fn:escapeXml(param.email)}">
-                    <input type="hidden" name="oldemail" value="${requestScope.email}">
                 </div>
                 <div class="mb-3">
                     <label for="street" class="form-label">Street</label>
@@ -62,6 +62,11 @@
                     <label for="zipcode" class="form-label">Zip code</label>
                     <input type="text" class="form-control" id="zipcode"
                            name="zipcode" value="${fn:escapeXml(param.zipcode)}">
+                </div>
+                <div class="mb-3">
+                    <label for="country" class="form-label">Country</label>
+                    <input type="text" class="form-control" id="country"
+                           name="country" value="${fn:escapeXml(param.country)}">
                 </div>
 
 
