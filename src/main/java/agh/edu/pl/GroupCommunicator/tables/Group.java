@@ -3,12 +3,12 @@ package agh.edu.pl.GroupCommunicator.tables;
 import javax.persistence.*;
 
 @Entity
-@Table(name="[Group]")
+@Table(name = "[Group]")
 public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int groupID;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true, length = 32)
     private String name;
 
     public Group() {
