@@ -2,7 +2,6 @@ package agh.edu.pl.GroupCommunicator;
 
 import agh.edu.pl.GroupCommunicator.tables.Group;
 import agh.edu.pl.GroupCommunicator.tables.GroupRequest;
-import agh.edu.pl.GroupCommunicator.tables.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,7 +11,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet(name = "SendRequestServlet", urlPatterns = "/sendRequest")
 public class SendRequestServlet extends HttpServlet {
@@ -35,6 +33,7 @@ public class SendRequestServlet extends HttpServlet {
         } catch (Exception ex) {
             request.setAttribute("request_failed", true);
             request.getRequestDispatcher("searchgroup.jsp").forward(request, response);
+            ex.printStackTrace();
         } finally {
             session.close();
         }
