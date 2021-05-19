@@ -1,10 +1,12 @@
 package agh.edu.pl.GroupCommunicator.tables;
 
 import agh.edu.pl.GroupCommunicator.tables.pk.GroupMemberPK;
+import org.hibernate.annotations.Check;
 
 import javax.persistence.*;
 
 @Entity
+@Check(constraints = "groupRank in ('Admin', 'Member', 'Moderator')")
 public class GroupMember {
     @EmbeddedId
     private GroupMemberPK groupMemberId;
@@ -32,5 +34,13 @@ public class GroupMember {
         this.user = user;
         this.group = group;
         this.groupRank = groupRank;
+    }
+
+    public int getUserId() {
+        return this.groupMemberId.getUserId();
+    }
+
+    public int getGroupId() {
+        return this.groupMemberId.getGroupId();
     }
 }

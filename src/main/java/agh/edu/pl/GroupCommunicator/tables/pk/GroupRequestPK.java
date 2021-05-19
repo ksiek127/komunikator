@@ -18,6 +18,14 @@ public class GroupRequestPK implements Serializable {
         this.groupId = groupId;
     }
 
+    public int getUserId() {
+        return userId;
+    }
+
+    public int getGroupId() {
+        return groupId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

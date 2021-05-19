@@ -28,4 +28,12 @@ public class GroupRequest implements Serializable {
         this.group = group;
         this.user = user;
     }
+
+    public int getUserId() {
+        return this.groupRequestId.getUserId();
+    }
+
+    public int getGroupId() {
+        return this.groupRequestId.getGroupId();
+    }
 }
