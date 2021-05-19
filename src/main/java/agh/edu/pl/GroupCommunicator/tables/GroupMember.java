@@ -43,4 +43,12 @@ public class GroupMember {
     public int getGroupId() {
         return this.groupMemberId.getGroupId();
     }
+
+    public GroupRank getGroupRank() {
+        return groupRank;
+    }
+
+    public void setGroupRank(GroupRank groupRank) {
+        this.groupRank = groupRank;
+    }
 }
