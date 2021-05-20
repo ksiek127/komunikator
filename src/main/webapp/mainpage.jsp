@@ -44,6 +44,7 @@
                 <a href="outbox" class="btn btn-outline-primary">Outbox</a>
                 <a href="groups" class="btn btn-outline-primary">Groups</a>
                 <a href="groups-search" class="btn btn-outline-primary">Groups search</a>
+                <a href="creategroup.jsp" class="btn btn-outline-primary">Create group</a>
                 <a href="removeUser" class="btn btn-outline-primary">Remove</a>
             </div>
         </div>

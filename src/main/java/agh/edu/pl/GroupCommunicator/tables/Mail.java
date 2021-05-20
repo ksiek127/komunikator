@@ -14,14 +14,17 @@ public class Mail {
     private String title;
     @Column(nullable = false)
     private Date created;
+    @Column
+    private int groupId;
 
     public Mail() {
 
     }
 
-    public Mail(String message, String title) {
+    public Mail(String message, String title, int groupId) {
         this.message = message;
         this.title = title;
+        this.groupId = groupId;
     }
 
     public int getMailID() {
@@ -46,5 +49,13 @@ public class Mail {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public int getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
     }
 }
