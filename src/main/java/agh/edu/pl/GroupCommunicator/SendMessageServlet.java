@@ -12,7 +12,7 @@ import org.hibernate.Transaction;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "send-message", value = "/send-message")
+@WebServlet(name = "SendMessageServlet", value = "/send-message")
 public class SendMessageServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -34,7 +34,7 @@ public class SendMessageServlet extends HttpServlet {
             try (Session session = Main.getSession()) {
                 Transaction tx = session.beginTransaction();
                 int userId = user.getUserID();
-                members = session.createQuery("select user from GroupMember member where member.group.groupID = " + groupId, User.class)
+                members = session.createQuery("select user from GroupMember as member where member.group.groupID = " + groupId, User.class)
                         .getResultList();
                 for (User member : members) {
                     Outbox outbox = new Outbox(mail, member);

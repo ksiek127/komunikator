@@ -8,21 +8,19 @@
 <h1><%= "Groups" %>
 </h1>
 <br/>
-<form action="groups">
-    <c:forEach var="groupM" items="${groupsMember}">
+    <c:forEach var="groupM" items="${requestScope.groupsMember}">
         <c:out value="${groupM.name}"/>
         <form action="go-to-message" method="post">
             <input type="hidden" name="groupId" value="${groupM.groupID}">
-            <a href="sendmessage.jsp" class="btn btn-outline-primary">Send message</a>
+            <button type="submit" class="btn btn-outline-primary">Send message</button>
         </form>
     </c:forEach>
-    <c:forEach var="groupA" items="${groupsAdmin}">
+    <c:forEach var="groupA" items="${requestScope.groupsAdmin}">
         <c:out value="${groupA.name}"/>
         <form action="go-to-message" method="post">
             <input type="hidden" name="groupId" value="${groupA.groupID}">
-            <a href="sendmessage.jsp" class="btn btn-outline-primary">Send message</a>
+            <button type="submit" class="btn btn-outline-primary">Send message</button>
         </form>
     </c:forEach>
-</form>
 </body>
 </html>

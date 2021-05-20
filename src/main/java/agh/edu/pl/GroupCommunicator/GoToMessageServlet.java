@@ -8,13 +8,12 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet(name = "go-to-message", value = "/go-to-message")
+@WebServlet(name = "GoToMessageServlet", value = "/go-to-message")
 public class GoToMessageServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
-        int groupId = Integer.parseInt(request.getParameter("groupId"));
-        request.setAttribute("groupId", groupId);
-        request.getRequestDispatcher("/sendmessage.jsp").forward(request, response);
+        request.setAttribute("groupId", request.getParameter("groupId"));
+        request.getRequestDispatcher("sendmessage.jsp").forward(request, response);
     }
 }
