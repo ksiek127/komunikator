@@ -23,7 +23,7 @@
            name="message" value="${fn:escapeXml(param.message)}">
   </div>
   <input type="hidden" name="groupId" value="${requestScope.groupId}">
-  <button type="submit">Send</button>
+  <button type="submit">Send </button>
 </form>
 </body>
 </html>

@@ -24,28 +24,27 @@ public class SendMessageServlet extends HttpServlet {
             request.setAttribute("empty_fields", true);
             request.getRequestDispatcher("/sendmessage.jsp").forward(request, response);
         }else{
-            System.out.println("test3");
-            System.out.println(request.getParameter("groupId"));
             int groupId = Integer.parseInt(request.getParameter("groupId"));
-            System.out.println(groupId);
-            Mail mail = new Mail(message, title, groupId);
-            Inbox inbox = new Inbox(mail, user, false);
-            List<User> members;
+            List<GroupMember> members;
             try (Session session = Main.getSession()) {
                 Transaction tx = session.beginTransaction();
-                int userId = user.getUserID();
-                members = session.createQuery("select user from GroupMember as member where member.group.groupID = " + groupId, User.class)
+                Mail mail = new Mail(message, title, groupId);
+                Inbox inbox = new Inbox(mail, user, false);
+                session.save(mail);
+                members = session
+                        .createQuery("from GroupMember as gm where gm.group.groupID=:gId", GroupMember.class)
+                        .setParameter("gId", groupId)
                         .getResultList();
-                for (User member : members) {
-                    Outbox outbox = new Outbox(mail, member);
+                for (GroupMember member : members) {
+                    Outbox outbox = new Outbox(mail, member.getUser());
                     session.save(outbox);
                 }
-                session.save(mail);
                 session.save(inbox);
                 tx.commit();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+        response.sendRedirect("messagesent.jsp");
     }
 }

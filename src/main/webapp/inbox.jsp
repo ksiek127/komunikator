@@ -22,7 +22,8 @@
                     <c:forEach var="email" items="${requestScope.emails}">
                         <li class="list-group-item">
                             <b>${email.title}:</b> <br>
-                                ${email.message}</li>
+                                ${email.message}
+                        </li>
                     </c:forEach>
                 </ul>
                 <br>

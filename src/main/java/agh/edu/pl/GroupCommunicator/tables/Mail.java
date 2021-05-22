@@ -2,6 +2,7 @@ package agh.edu.pl.GroupCommunicator.tables;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Calendar;
 
 @Entity
 public class Mail {
@@ -25,6 +26,7 @@ public class Mail {
         this.message = message;
         this.title = title;
         this.groupId = groupId;
+        this.created = new java.sql.Date(Calendar.getInstance().getTime().getTime());
     }
 
     public int getMailID() {

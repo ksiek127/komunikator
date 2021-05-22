@@ -51,4 +51,8 @@ public class GroupMember {
     public void setGroupRank(GroupRank groupRank) {
         this.groupRank = groupRank;
     }
+
+    public User getUser() {
+        return user;
+    }
 }
