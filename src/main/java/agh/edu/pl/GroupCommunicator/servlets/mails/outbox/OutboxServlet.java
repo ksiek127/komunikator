@@ -1,9 +1,8 @@
-package agh.edu.pl.GroupCommunicator.servlets.emails.outbox;
+package agh.edu.pl.GroupCommunicator.servlets.mails.outbox;
 
 import agh.edu.pl.GroupCommunicator.Main;
 import agh.edu.pl.GroupCommunicator.tables.Mail;
 import agh.edu.pl.GroupCommunicator.tables.User;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

@@ -1,9 +1,7 @@
-package agh.edu.pl.GroupCommunicator.servlets.emails;
+package agh.edu.pl.GroupCommunicator.servlets.mails;
 
 import agh.edu.pl.GroupCommunicator.Main;
 import agh.edu.pl.GroupCommunicator.tables.Group;
-import agh.edu.pl.GroupCommunicator.tables.Mail;
-import agh.edu.pl.GroupCommunicator.tables.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,7 +11,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet(name = "MessageServlet", value = "/message-servlet")
 public class MessageServlet extends HttpServlet {

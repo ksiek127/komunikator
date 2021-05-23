@@ -1,4 +1,4 @@
-package agh.edu.pl.GroupCommunicator.servlets.emails;
+package agh.edu.pl.GroupCommunicator.servlets.mails;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

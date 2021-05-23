@@ -1,4 +1,4 @@
-package agh.edu.pl.GroupCommunicator.servlets.emails.inbox;
+package agh.edu.pl.GroupCommunicator.servlets.mails.inbox;
 
 import agh.edu.pl.GroupCommunicator.Main;
 import agh.edu.pl.GroupCommunicator.tables.Mail;
