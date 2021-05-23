@@ -36,6 +36,11 @@ public class User {
         this.address = address;
     }
 
+    public String getNameAndEmail() {
+        return "User name: " + this.firstname + " " + this.lastname + "     Email: " + this.email +
+                "     Address: " + this.address.toString();
+    }
+
     public int getUserID() {
         return userID;
     }
