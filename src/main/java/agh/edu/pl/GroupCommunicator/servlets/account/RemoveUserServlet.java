@@ -1,5 +1,6 @@
-package agh.edu.pl.GroupCommunicator;
+package agh.edu.pl.GroupCommunicator.servlets.account;
 
+import agh.edu.pl.GroupCommunicator.Main;
 import agh.edu.pl.GroupCommunicator.tables.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

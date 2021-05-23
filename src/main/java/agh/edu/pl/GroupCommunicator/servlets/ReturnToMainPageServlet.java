@@ -1,5 +1,6 @@
-package agh.edu.pl.GroupCommunicator;
+package agh.edu.pl.GroupCommunicator.servlets;
 
+import agh.edu.pl.GroupCommunicator.Main;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

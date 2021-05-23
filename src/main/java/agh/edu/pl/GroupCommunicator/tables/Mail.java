@@ -1,8 +1,9 @@
 package agh.edu.pl.GroupCommunicator.tables;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
-import java.sql.Date;
-import java.util.Calendar;
+import java.util.Date;
 
 @Entity
 public class Mail {
@@ -14,6 +15,8 @@ public class Mail {
     @Column(nullable = false, length = 32)
     private String title;
     @Column(nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
     private Date created;
     @Column
     private int groupId;
@@ -26,7 +29,6 @@ public class Mail {
         this.message = message;
         this.title = title;
         this.groupId = groupId;
-        this.created = new java.sql.Date(Calendar.getInstance().getTime().getTime());
     }
 
     public int getMailID() {

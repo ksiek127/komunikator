@@ -1,5 +1,6 @@
-package agh.edu.pl.GroupCommunicator;
+package agh.edu.pl.GroupCommunicator.servlets.emails;
 
+import agh.edu.pl.GroupCommunicator.Main;
 import agh.edu.pl.GroupCommunicator.tables.Group;
 import agh.edu.pl.GroupCommunicator.tables.Mail;
 import agh.edu.pl.GroupCommunicator.tables.User;
@@ -14,7 +15,7 @@ import org.hibernate.Transaction;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "messageServlet", value = "/message-servlet")
+@WebServlet(name = "MessageServlet", value = "/message-servlet")
 public class MessageServlet extends HttpServlet {
 
     @Override
