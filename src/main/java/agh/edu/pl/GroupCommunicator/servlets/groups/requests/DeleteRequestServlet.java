@@ -1,8 +1,9 @@
-package agh.edu.pl.GroupCommunicator;
+package agh.edu.pl.GroupCommunicator.servlets.groups.requests;
 
+import agh.edu.pl.GroupCommunicator.Main;
 import agh.edu.pl.GroupCommunicator.tables.Group;
-import agh.edu.pl.GroupCommunicator.tables.GroupMember;
-import agh.edu.pl.GroupCommunicator.tables.pk.GroupMemberPK;
+import agh.edu.pl.GroupCommunicator.tables.GroupRequest;
+import agh.edu.pl.GroupCommunicator.tables.pk.GroupRequestPK;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,43 +13,35 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.io.IOException;
-import java.util.List;
 
-@WebServlet(name = "DeleteGroupServlet", urlPatterns = "/deleteGroup")
-public class DeleteGroupServlet extends HttpServlet {
+@WebServlet(name = "DeleteRequestServlet", urlPatterns = "/deleteRequest")
+public class DeleteRequestServlet extends HttpServlet {
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int groupId = Integer.parseInt(request.getParameter("group_id"));
 
-        Group group;
         Session session = Main.getSession();
         try {
             Transaction tx = session.beginTransaction();
 
-            List<GroupMember> gms = session
-                    .createQuery("from GroupMember as gm where gm.group.groupID=:gId", GroupMember.class)
-                    .setParameter("gId", groupId)
-                    .getResultList();
+            Group group = session.get(Group.class, groupId);
 
-            for (GroupMember gm: gms) {
-                session.delete(gm);
-            }
+            GroupRequestPK grPk = new GroupRequestPK(Main.getUser().getUserID(), groupId);
+            GroupRequest gr = session.get(GroupRequest.class, grPk);
 
-            group = session.get(Group.class, groupId);
-
-            session.delete(group);
+            session.delete(gr);
 
             tx.commit();
         } catch (Exception ex) {
-            request.setAttribute("group_remove_failed", true);
+            request.setAttribute("request_delete_failed", true);
             request.getRequestDispatcher("searchgroup.jsp").forward(request, response);
-            ex.printStackTrace();
         } finally {
             session.close();
         }
 
-        request.setAttribute("group_remove_success", true);
+        request.setAttribute("request_deleted", true);
         request.getRequestDispatcher("searchgroup.jsp").forward(request, response);
     }
 }

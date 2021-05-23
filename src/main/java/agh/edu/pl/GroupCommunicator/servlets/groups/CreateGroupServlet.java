@@ -1,5 +1,6 @@
-package agh.edu.pl.GroupCommunicator;
+package agh.edu.pl.GroupCommunicator.servlets.groups;
 
+import agh.edu.pl.GroupCommunicator.Main;
 import agh.edu.pl.GroupCommunicator.tables.Group;
 import agh.edu.pl.GroupCommunicator.tables.GroupMember;
 import agh.edu.pl.GroupCommunicator.tables.GroupRank;
@@ -44,7 +45,7 @@ public class CreateGroupServlet extends HttpServlet {
             } finally {
                 session.close();
             }
-            request.getRequestDispatcher("/mainpage.jsp").forward(request, response);
+            request.getRequestDispatcher("/returnToMainPage").forward(request, response);
         }
     }
 }

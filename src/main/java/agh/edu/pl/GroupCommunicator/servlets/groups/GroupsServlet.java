@@ -1,5 +1,6 @@
-package agh.edu.pl.GroupCommunicator;
+package agh.edu.pl.GroupCommunicator.servlets.groups;
 
+import agh.edu.pl.GroupCommunicator.Main;
 import agh.edu.pl.GroupCommunicator.tables.Group;
 import agh.edu.pl.GroupCommunicator.tables.User;
 import jakarta.servlet.RequestDispatcher;
@@ -24,6 +25,7 @@ public class GroupsServlet extends HttpServlet {
         String email = Main.getUser().getEmail();
         List<Group> groupsMember = null; //grupy, w ktorych jestem zwyklym czlonkiem
         List<Group> groupsAdmin = null; //jestem adminem
+        List<Group> groupsModerator = null; // jestem moderatorem
         Transaction tx = null;
         User user = null;
         try (Session session = Main.getSession()) {
@@ -38,6 +40,8 @@ public class GroupsServlet extends HttpServlet {
                     .getResultList();
             groupsAdmin = session.createQuery("select group from GroupMember groupMember where groupMember.user.userID = " + userId + " and groupMember.groupRank = 'ADMIN'", Group.class)
                     .getResultList();
+            groupsModerator = session.createQuery("select group from GroupMember groupMember where groupMember.user.userID = " + userId + " and groupMember.groupRank = 'MODERATOR'", Group.class)
+                    .getResultList();
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
@@ -47,6 +51,7 @@ public class GroupsServlet extends HttpServlet {
         }
         request.setAttribute("groupsMember", groupsMember);
         request.setAttribute("groupsAdmin", groupsAdmin);
+        request.setAttribute("groupsModerator", groupsModerator);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/groups.jsp");
         dispatcher.forward(request, response);
     }
