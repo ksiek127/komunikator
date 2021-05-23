@@ -16,25 +16,21 @@
             Here's your <b>Inbox</b>
         </div>
         <div class="card-body">
-            <form action="inbox-handler" method="post">
-
-                <ul class="list-group list-group-flush">
-                    <c:forEach var="email" items="${requestScope.emails}">
-                        <li class="list-group-item">
-                            <b>${email.title}:</b> <br>
-                            <form action="message-servlet" method="post">
-                                <input type="hidden" name="title" value="${email.title}">
-                                <input type="hidden" name="msg" value="${email.message}">
-                                <input type="hidden" name="groupId" value="${email.groupId}">
-                                <input type="submit" value="Show message">
-                            </form>
-                        </li>
-                    </c:forEach>
-                </ul>
-                <br>
-
-                <button type="button" class="btn btn-outline-primary" name="back" onclick="history.back()">Back</button>
-            </form>
+            <ul class="list-group list-group-flush">
+                <c:forEach var="email" items="${requestScope.emails}">
+                    <li class="list-group-item">
+                        <b>${email.title}:</b> <br>
+                        <form action="message-servlet" method="post">
+                            <input type="hidden" name="title" value="${email.title}">
+                            <input type="hidden" name="msg" value="${email.message}">
+                            <input type="hidden" name="groupId" value="${email.groupId}">
+                            <input type="submit" value="Show message">
+                        </form>
+                    </li>
+                </c:forEach>
+            </ul>
+            <br>
+            <a href="returnToMainPage" class="btn btn-outline-primary">Return</a>
         </div>
     </div>
 </div>

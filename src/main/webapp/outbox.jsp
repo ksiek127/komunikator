@@ -27,7 +27,7 @@
                 </ul>
                 <br>
 
-                <button type="button" class="btn btn-outline-primary" name="back" onclick="history.back()">Back</button>
+                <a href="returnToMainPage" class="btn btn-outline-primary">Return</a>
             </form>
         </div>
     </div>

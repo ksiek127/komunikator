@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 <html>
 <head>
     <title>Send message</title>
@@ -24,7 +26,7 @@
   </div>
   <input type="hidden" name="groupId" value="${requestScope.groupId}">
   <button type="submit">Send </button>
-  <a href="mainpage.jsp">Back to main page</a>
+  <a href="groups" class="btn btn-outline-primary">Return</a>
 </form>
 </body>
 </html>

@@ -42,7 +42,7 @@
                 </form>
             </c:if>
             <button type="button" class="btn btn-outline-primary" name="back" onclick="history.back()">
-                Don't delete this group, return
+                Don't leave this group, return
             </button>
         </div>
     </div>

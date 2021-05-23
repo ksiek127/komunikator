@@ -40,18 +40,29 @@
                 What do you want to do?
             </div>
             <div class="card-body">
-                <a href="inbox" class="btn btn-outline-primary">Inbox</a>
-                <a href="outbox" class="btn btn-outline-primary">Outbox</a>
-                <a href="groups" class="btn btn-outline-primary">Groups</a>
-                <a href="grouprequests.jsp" class="btn btn-outline-primary">Group requests</a>
-                <a href="groups-search" class="btn btn-outline-primary">Groups search</a>
-                <a href="creategroup.jsp" class="btn btn-outline-primary">Create group</a>
-                <a href="removeUser" class="btn btn-outline-primary">Remove</a>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <a href="inbox" class="btn btn-outline-primary">Inbox</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="outbox" class="btn btn-outline-primary">Outbox</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="groups" class="btn btn-outline-primary">Groups</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="groups-search" class="btn btn-outline-primary">Groups search</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="creategroup.jsp" class="btn btn-outline-primary">Create group</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
 
     <div class="d-grid gap-2" style="margin-top:2vh;padding:1vw">
+        <a href="removeUser" class="btn btn-outline-danger">Delete this account</a>
         <a class="btn btn-outline-secondary" href="logout" role="button">Log out</a>
     </div>
 </div>
