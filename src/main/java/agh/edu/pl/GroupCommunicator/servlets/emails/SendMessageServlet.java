@@ -1,5 +1,6 @@
-package agh.edu.pl.GroupCommunicator;
+package agh.edu.pl.GroupCommunicator.servlets.emails;
 
+import agh.edu.pl.GroupCommunicator.Main;
 import agh.edu.pl.GroupCommunicator.tables.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -29,19 +30,24 @@ public class SendMessageServlet extends HttpServlet {
             try (Session session = Main.getSession()) {
                 Transaction tx = session.beginTransaction();
                 Mail mail = new Mail(message, title, groupId);
-                Inbox inbox = new Inbox(mail, user, false);
+                Outbox outbox = new Outbox(mail, user);
                 session.save(mail);
                 members = session
                         .createQuery("from GroupMember as gm where gm.group.groupID=:gId", GroupMember.class)
                         .setParameter("gId", groupId)
                         .getResultList();
+                System.out.println(members);
                 for (GroupMember member : members) {
-                    Outbox outbox = new Outbox(mail, member.getUser());
-                    session.save(outbox);
+                    if (member.getUser().getUserID() != Main.getUser().getUserID()) {
+                        System.out.println(member.getUser().getUserID());
+                        Inbox inbox = new Inbox(mail, member.getUser(), false);
+                        session.save(inbox);
+                    }
                 }
-                session.save(inbox);
+                session.save(outbox);
                 tx.commit();
             } catch (Exception e) {
+//                tu zrobic poinformowanie uzytkownika o bledzie
                 e.printStackTrace();
             }
         }
