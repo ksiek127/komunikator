@@ -16,19 +16,19 @@ public class Inbox implements Serializable {
     private Mail mail;
 
     @ManyToOne
-    @MapsId("fromUser")
-    @JoinColumn(name = "fromUser", nullable = false)
-    private User fromUser;
+    @MapsId("toUser")
+    @JoinColumn(name = "toUser", nullable = false)
+    private User toUser;
     private boolean wasRead;
 
     public Inbox() {
 
     }
 
-    public Inbox(Mail mail, User fromUser, boolean wasRead) {
-        this.inboxId = new InboxPK(mail.getMailID(), fromUser.getUserID());
+    public Inbox(Mail mail, User toUser, boolean wasRead) {
+        this.inboxId = new InboxPK(mail.getMailID(), toUser.getUserID());
         this.mail = mail;
-        this.fromUser = fromUser;
+        this.toUser = toUser;
         this.wasRead = wasRead;
     }
 }

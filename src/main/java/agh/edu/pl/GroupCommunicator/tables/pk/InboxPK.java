@@ -7,14 +7,14 @@ import java.util.Objects;
 @Embeddable
 public class InboxPK implements Serializable {
     private int mailId;
-    private int fromUser;
+    private int toUser;
 
     public InboxPK() {
     }
 
-    public InboxPK(int mailId, int fromUser) {
+    public InboxPK(int mailId, int toUser) {
         this.mailId = mailId;
-        this.fromUser = fromUser;
+        this.toUser = toUser;
     }
 
     @Override
@@ -22,11 +22,11 @@ public class InboxPK implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         InboxPK inboxPK = (InboxPK) o;
-        return mailId == inboxPK.mailId && fromUser == inboxPK.fromUser;
+        return mailId == inboxPK.mailId && toUser == inboxPK.toUser;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(mailId, fromUser);
+        return Objects.hash(mailId, toUser);
     }
 }

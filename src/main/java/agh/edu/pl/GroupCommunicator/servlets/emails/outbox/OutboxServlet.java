@@ -1,5 +1,6 @@
-package agh.edu.pl.GroupCommunicator;
+package agh.edu.pl.GroupCommunicator.servlets.emails.outbox;
 
+import agh.edu.pl.GroupCommunicator.Main;
 import agh.edu.pl.GroupCommunicator.tables.Mail;
 import agh.edu.pl.GroupCommunicator.tables.User;
 import jakarta.servlet.RequestDispatcher;
@@ -27,7 +28,7 @@ public class OutboxServlet extends HttpServlet {
              Transaction tx = session.beginTransaction();
             assert user != null;
             int userId = user.getUserID();
-            emails = session.createQuery("select mail from Inbox inbox where inbox.fromUser = " + userId, Mail.class)
+            emails = session.createQuery("select mail from Outbox outbox where outbox.fromUser = " + userId, Mail.class)
                     .getResultList();
             tx.commit();
         } catch (Exception e) {

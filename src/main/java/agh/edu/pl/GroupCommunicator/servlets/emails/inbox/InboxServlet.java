@@ -1,8 +1,8 @@
-package agh.edu.pl.GroupCommunicator;
+package agh.edu.pl.GroupCommunicator.servlets.emails.inbox;
 
+import agh.edu.pl.GroupCommunicator.Main;
 import agh.edu.pl.GroupCommunicator.tables.Mail;
 import agh.edu.pl.GroupCommunicator.tables.User;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,7 +12,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "InboxServlet", value = "/inbox")
@@ -27,7 +26,7 @@ public class InboxServlet extends HttpServlet {
             User user = Main.getUser();
             Transaction tx = session.beginTransaction();
             int userId = user.getUserID();
-            emails = session.createQuery("select mail from Outbox outbox where outbox.toUser = " + userId, Mail.class)
+            emails = session.createQuery("select mail from Inbox inbox where inbox.toUser = " + userId, Mail.class)
                     .getResultList();
             tx.commit();
         } catch (Exception e) {

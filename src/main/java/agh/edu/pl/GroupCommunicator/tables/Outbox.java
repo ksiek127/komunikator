@@ -16,18 +16,18 @@ public class Outbox implements Serializable {
     private Mail mail;
 
     @ManyToOne
-    @MapsId("toUser")
-    @JoinColumn(name = "toUser", nullable = false)
-    private User toUser;
+    @MapsId("fromUser")
+    @JoinColumn(name = "fromUser", nullable = false)
+    private User fromUser;
 
     public Outbox() {
 
     }
 
-    public Outbox(Mail mail, User toUser) {
-        this.outboxId = new OutboxPK(mail.getMailID(), toUser.getUserID());
+    public Outbox(Mail mail, User fromUser) {
+        this.outboxId = new OutboxPK(mail.getMailID(), fromUser.getUserID());
         this.mail = mail;
-        this.toUser = toUser;
+        this.fromUser = fromUser;
     }
 
 }
