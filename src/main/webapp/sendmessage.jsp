@@ -24,6 +24,7 @@
   </div>
   <input type="hidden" name="groupId" value="${requestScope.groupId}">
   <button type="submit">Send </button>
+  <a href="mainpage.jsp">Back to main page</a>
 </form>
 </body>
 </html>

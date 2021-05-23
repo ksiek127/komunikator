@@ -22,7 +22,12 @@
                     <c:forEach var="email" items="${requestScope.emails}">
                         <li class="list-group-item">
                             <b>${email.title}:</b> <br>
-                                ${email.message}
+                            <form action="message-servlet" method="post">
+                                <input type="hidden" name="title" value="${email.title}">
+                                <input type="hidden" name="msg" value="${email.message}">
+                                <input type="hidden" name="groupId" value="${email.groupId}">
+                                <input type="submit" value="Show message">
+                            </form>
                         </li>
                     </c:forEach>
                 </ul>
