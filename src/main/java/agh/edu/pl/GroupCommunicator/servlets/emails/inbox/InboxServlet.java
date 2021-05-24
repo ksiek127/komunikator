@@ -21,18 +21,22 @@ public class InboxServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String email = Main.getUser().getEmail();
-        List<Mail> emails = null;
+        List<Mail> emails_new = null;
+        List<Mail> emails_read = null;
         try (Session session = Main.getSession()) {
             User user = Main.getUser();
             Transaction tx = session.beginTransaction();
             int userId = user.getUserID();
-            emails = session.createQuery("select mail from Inbox inbox where inbox.toUser = " + userId, Mail.class)
+            emails_new = session.createQuery("select mail from Inbox inbox where inbox.toUser = " + userId + " and inbox.wasRead = false", Mail.class)
+                    .getResultList();
+            emails_read = session.createQuery("select mail from Inbox inbox where inbox.toUser = " + userId + " and inbox.wasRead = true", Mail.class)
                     .getResultList();
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        request.setAttribute("emails", emails);
+        request.setAttribute("new_emails", emails_new);
+        request.setAttribute("old_emails", emails_read);
         request.getRequestDispatcher("/inbox.jsp").forward(request, response);
     }
 }

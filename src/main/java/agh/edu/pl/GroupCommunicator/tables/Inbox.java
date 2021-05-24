@@ -31,4 +31,12 @@ public class Inbox implements Serializable {
         this.toUser = toUser;
         this.wasRead = wasRead;
     }
+
+    public boolean isWasRead() {
+        return wasRead;
+    }
+
+    public void setWasRead(boolean wasRead) {
+        this.wasRead = wasRead;
+    }
 }

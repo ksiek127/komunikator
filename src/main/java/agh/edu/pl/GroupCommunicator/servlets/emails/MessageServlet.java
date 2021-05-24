@@ -2,6 +2,7 @@ package agh.edu.pl.GroupCommunicator.servlets.emails;
 
 import agh.edu.pl.GroupCommunicator.Main;
 import agh.edu.pl.GroupCommunicator.tables.Group;
+import agh.edu.pl.GroupCommunicator.tables.Inbox;
 import agh.edu.pl.GroupCommunicator.tables.Mail;
 import agh.edu.pl.GroupCommunicator.tables.User;
 import jakarta.servlet.ServletException;
@@ -44,6 +45,14 @@ public class MessageServlet extends HttpServlet {
             Group group = session.createQuery("from Group as group where group.groupID = " + groupId, Group.class)
                     .getResultList().get(0);
             groupName = group.getName();
+
+            int userId = Main.getUser().getUserID();
+            Inbox inboxMail = session.createQuery("from Inbox as inbox where inbox.toUser = " + userId + " and inbox.mail = " + mailId, Inbox.class)
+                    .getResultList().get(0);
+
+            inboxMail.setWasRead(true);
+
+            session.update(inboxMail);
             tx.commit();
         } finally {
             session.close();
