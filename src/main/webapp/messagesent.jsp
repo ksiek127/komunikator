@@ -6,7 +6,33 @@
     <title>Message sent</title>
 </head>
 <body>
-    Message sent
-    <a href="groups" class="btn btn-outline-primary">Return</a>
+    <br/>
+    <div class="container-sm">
+        <div class="card">
+            <div class="card-header">
+                <b>Success!</b>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Your message:</h5>
+                <br/>
+                <div class="container-sm">
+                    <div class="card">
+                        <div class="card-header">
+                            <b>${requestScope.title}</b>
+                        </div>
+                        <div class="card-body">
+                            ${requestScope.message}
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                has been sent to <b>${requestScope.groupName}!</b>
+                <br/>
+                <a href="groups" class="btn btn-outline-primary">Return to group list</a>
+            </div>
+        </div>
+    </div>
+
+
 </body>
 </html>
