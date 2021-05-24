@@ -58,7 +58,6 @@ public class SendMessageServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
-        //response.sendRedirect("messagesent.jsp");
         request.setAttribute("title", title);
         request.setAttribute("message", message);
         request.setAttribute("groupName", groupName);

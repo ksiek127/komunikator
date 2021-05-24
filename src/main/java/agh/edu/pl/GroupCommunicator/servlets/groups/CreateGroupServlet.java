@@ -25,7 +25,6 @@ public class CreateGroupServlet extends HttpServlet {
             throws ServletException, IOException {
         String name = request.getParameter("name");
         String description = request.getParameter("description");
-        String email = request.getParameter("email");
         User user = Main.getUser();
         if(name.isEmpty() || description.isEmpty()){
             request.setAttribute("empty_fields", true);
@@ -45,7 +44,9 @@ public class CreateGroupServlet extends HttpServlet {
             } finally {
                 session.close();
             }
-            request.getRequestDispatcher("/returnToMainPage").forward(request, response);
+            request.setAttribute("name", name);
+            request.setAttribute("description", description);
+            request.getRequestDispatcher("groupcreated.jsp").forward(request, response);
         }
     }
 }
