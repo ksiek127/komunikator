@@ -28,6 +28,12 @@
             <c:if test="${requestScope.outbox == true}">
                 <a href="outbox" class="btn btn-outline-primary">Return</a>
             </c:if>
+            <c:if test="${requestScope.groupbox == true}">
+                <form action="groupbox" method="post">
+                    <input type="hidden" name="groupId" value="${requestScope.groupId}">
+                    <button type="submit" class="btn btn-outline-primary">Return</button>
+                </form>
+            </c:if>
         </div>
     </div>
 </div>

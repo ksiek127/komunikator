@@ -72,6 +72,10 @@ public class MessageServlet extends HttpServlet {
         if(path.equals("outbox")) {
             request.setAttribute("outbox", true);
         }
+        if(path.equals("groupbox")) {
+            request.setAttribute("groupbox", true);
+            request.setAttribute("groupId", groupId);
+        }
         request.getRequestDispatcher("/message.jsp").forward(request, response);
     }
 }

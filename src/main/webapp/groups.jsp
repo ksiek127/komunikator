@@ -31,13 +31,17 @@
                             <input type="hidden" name="groupName" value="${group.name}">
                             <button type="submit" class="btn btn-outline-primary">Check requests</button>
                         </form>
-                        <form action="leaveGroup" method="post">
+                        <form action="groupbox" method="post">
                             <input type="hidden" name="groupId" value="${group.groupID}">
-                            <button type="submit" class="btn btn-outline-danger">Leave group</button>
+                            <button type="submit" class="btn btn-outline-primary">Group Mails</button>
                         </form>
                         <form action="go-to-message" method="post">
                             <input type="hidden" name="groupId" value="${group.groupID}">
                             <button type="submit" class="btn btn-outline-primary">Send message</button>
+                        </form>
+                        <form action="leaveGroup" method="post">
+                            <input type="hidden" name="groupId" value="${group.groupID}">
+                            <button type="submit" class="btn btn-outline-danger">Leave group</button>
                         </form>
                     </div>
                     </li>
@@ -51,13 +55,17 @@
                             <input type="hidden" name="groupName" value="${group.name}">
                             <button type="submit" class="btn btn-outline-primary">Edit members</button>
                         </form>
-                        <form action="leaveGroup" method="post">
-                            <input type="hidden" name="group_id" value="${group.groupID}">
-                            <button type="submit" class="btn btn-outline-danger">Leave group</button>
+                        <form action="groupbox" method="post">
+                            <input type="hidden" name="groupId" value="${group.groupID}">
+                            <button type="submit" class="btn btn-outline-primary">Group Mails</button>
                         </form>
                         <form action="go-to-message" method="post">
                             <input type="hidden" name="groupId" value="${group.groupID}">
                             <button type="submit" class="btn btn-outline-primary">Send message</button>
+                        </form>
+                        <form action="leaveGroup" method="post">
+                            <input type="hidden" name="group_id" value="${group.groupID}">
+                            <button type="submit" class="btn btn-outline-danger">Leave group</button>
                         </form>
                     </div>
                 </li>
@@ -71,13 +79,17 @@
                             <input type="hidden" name="groupName" value="${group.name}">
                             <button type="submit" class="btn btn-outline-primary">Members list</button>
                         </form>
-                        <form action="leaveGroup" method="post">
-                            <input type="hidden" name="group_id" value="${group.groupID}">
-                            <button type="submit" class="btn btn-outline-danger">Leave group</button>
+                        <form action="groupbox" method="post">
+                            <input type="hidden" name="groupId" value="${group.groupID}">
+                            <button type="submit" class="btn btn-outline-primary">Group Mails</button>
                         </form>
                         <form action="go-to-message" method="post">
                             <input type="hidden" name="groupId" value="${group.groupID}">
                             <button type="submit" class="btn btn-outline-primary">Send message</button>
+                        </form>
+                        <form action="leaveGroup" method="post">
+                            <input type="hidden" name="group_id" value="${group.groupID}">
+                            <button type="submit" class="btn btn-outline-danger">Leave group</button>
                         </form>
                     </div>
                 </li>
