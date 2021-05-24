@@ -16,19 +16,21 @@
             Here's your <b>Outbox</b>
         </div>
         <div class="card-body">
-            <form action="outbox-handler" method="post">
+            <ul class="list-group list-group-flush">
+                <c:forEach var="email" items="${requestScope.emails}">
+                    <li class="list-group-item">
+                        <b>Title: </b>${email.title} <br><br>
+                        <form action="message-servlet" method="post">
+                            <input type="hidden" name="mailId" value="${email.mailID}">
+                            <input type="hidden" name="path" value="outbox">
+                            <input type="submit" value="Show message" class="btn btn-outline-primary">
+                        </form>
+                    </li>
+                </c:forEach>
+            </ul>
+            <br>
+            <a href="returnToMainPage" class="btn btn-outline-primary">Return</a>
 
-                <ul class="list-group list-group-flush">
-                    <c:forEach var="email" items="${requestScope.emails}">
-                        <li class="list-group-item">
-                            <b>${email.title}:</b> <br>
-                                ${email.message}</li>
-                    </c:forEach>
-                </ul>
-                <br>
-
-                <a href="returnToMainPage" class="btn btn-outline-primary">Return</a>
-            </form>
         </div>
     </div>
 </div>

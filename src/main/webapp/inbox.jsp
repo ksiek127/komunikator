@@ -22,6 +22,7 @@
                         <b>Title: </b>${email.title}  <span class="badge bg-primary">New</span> <br><br>
                         <form action="message-servlet" method="post">
                             <input type="hidden" name="mailId" value="${email.mailID}">
+                            <input type="hidden" name="path" value="inbox">
                             <input type="submit" value="Show message" class="btn btn-outline-primary">
                         </form>
                     </li>
@@ -31,6 +32,7 @@
                         <b>Title: </b>${email.title} <br><br>
                         <form action="message-servlet" method="post">
                             <input type="hidden" name="mailId" value="${email.mailID}">
+                            <input type="hidden" name="path" value="inbox">
                             <input type="submit" value="Show message" class="btn btn-outline-primary">
                         </form>
                     </li>

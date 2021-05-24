@@ -15,7 +15,6 @@ import org.hibernate.Transaction;
 
 import java.io.IOException;
 import java.util.Date;
-import java.util.List;
 
 @WebServlet(name = "MessageServlet", value = "/message-servlet")
 public class MessageServlet extends HttpServlet {
@@ -29,6 +28,9 @@ public class MessageServlet extends HttpServlet {
         int groupId;
         String groupName;
         Date date;
+        User user = Main.getUser();
+
+        String path = request.getParameter("path");
 
         Session session = Main.getSession();
         try {
@@ -46,13 +48,16 @@ public class MessageServlet extends HttpServlet {
                     .getResultList().get(0);
             groupName = group.getName();
 
-            int userId = Main.getUser().getUserID();
-            Inbox inboxMail = session.createQuery("from Inbox as inbox where inbox.toUser = " + userId + " and inbox.mail = " + mailId, Inbox.class)
-                    .getResultList().get(0);
+            if(path.equals("inbox")) {
+                int userId = user.getUserID();
+                Inbox inboxMail = session.createQuery("from Inbox as inbox where inbox.toUser = " + userId + " and inbox.mail = " + mailId, Inbox.class)
+                        .getResultList().get(0);
 
-            inboxMail.setWasRead(true);
+                inboxMail.setWasRead(true);
 
-            session.update(inboxMail);
+                session.update(inboxMail);
+            }
+
             tx.commit();
         } finally {
             session.close();
@@ -61,6 +66,12 @@ public class MessageServlet extends HttpServlet {
         request.setAttribute("msg", msg);
         request.setAttribute("date", date);
         request.setAttribute("groupName", groupName);
+        if(path.equals("inbox")) {
+            request.setAttribute("inbox", true);
+        }
+        if(path.equals("outbox")) {
+            request.setAttribute("outbox", true);
+        }
         request.getRequestDispatcher("/message.jsp").forward(request, response);
     }
 }
