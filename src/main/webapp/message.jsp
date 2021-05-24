@@ -6,8 +6,25 @@
     <title>Message</title>
 </head>
 <body>
-<b>Title: ${requestScope.title}</b> <br>
-<b>From: ${requestScope.groupName}</b> <br>
-Message: ${requestScope.msg}
+
+<br/>
+<div class="container-sm">
+    <div class="card">
+        <div class="card-header">
+            Here's your <b>e-mail</b>
+        </div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><b>Title:</b> ${requestScope.title}</li>
+                <li class="list-group-item"><b>From:</b> ${requestScope.groupName}</li>
+                <li class="list-group-item"><b>Date:</b> ${requestScope.date}</li>
+                <li class="list-group-item"><b>Message:</b><br>${requestScope.msg}</li>
+            </ul>
+            <br>
+            <a href="inbox" class="btn btn-outline-primary">Return</a>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

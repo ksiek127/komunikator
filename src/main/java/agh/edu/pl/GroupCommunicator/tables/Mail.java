@@ -62,4 +62,12 @@ public class Mail {
     public void setGroupId(int groupId) {
         this.groupId = groupId;
     }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
 }
