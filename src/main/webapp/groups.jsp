@@ -19,6 +19,11 @@
             <ul class="list-group list-group-flush">
                 <c:forEach var="group" items="${requestScope.groupsMap}">
                     <li class="list-group-item">
+                        <c:if test="${requestScope.edit_data_successful == true}">
+                            <div class="alert alert-success" role="alert">
+                                Success!
+                            </div>
+                        </c:if>
                         <p><b>Group Name: </b> ${group.key.name}
                             <c:if test="${group.value == 'ADMIN'}">
                             <span class="badge bg-primary">Admin</span>
@@ -26,6 +31,8 @@
                             <c:if test="${group.value == 'MODERATOR'}">
                                 <span class="badge bg-secondary">Moderator</span>
                             </c:if>
+                            <br/>
+                            <b>Description: </b> ${group.key.description}
                         </p>
                     <div class="container-sm">
                         <form action="groupMembersList" method="post">
@@ -46,6 +53,10 @@
                             <input type="hidden" name="groupId" value="${group.key.groupID}">
                             <button type="submit" class="btn btn-outline-primary">Send message</button>
                         </form>
+                        <form action="edit-group-data" method="post">
+                            <input type="hidden" name="groupId" value="${group.key.groupID}">
+                            <button type="submit" class="btn btn-outline-primary">Edit group data</button>
+                        </form>
                         <form action="leaveGroup" method="post">
                             <input type="hidden" name="group_id" value="${group.key.groupID}">
                             <button type="submit" class="btn btn-outline-danger">Leave group</button>
@@ -55,7 +66,9 @@
                 </c:forEach>
                 <c:forEach var="group" items="${requestScope.groupsMember}">
                     <li class="list-group-item">
-                        <p><b>Group Name: </b> ${group.name} <span class="badge bg-dark">Member</span></p>
+                        <p><b>Group Name: </b> ${group.name} <span class="badge bg-dark">Member</span>
+                            <br/><br/>
+                            <b>Description: </b> ${group.description}</p>
                     <div class="container-sm">
                         <form action="groupMembersList" method="post">
                             <input type="hidden" name="groupId" value="${group.groupID}">
