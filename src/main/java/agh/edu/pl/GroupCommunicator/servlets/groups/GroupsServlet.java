@@ -13,7 +13,9 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "GroupsServlet", value = "/groups")
 public class GroupsServlet extends HttpServlet {
@@ -24,10 +26,9 @@ public class GroupsServlet extends HttpServlet {
 
         String email = Main.getUser().getEmail();
         List<Group> groupsMember = null; //grupy, w ktorych jestem zwyklym czlonkiem
-        List<Group> groupsAdmin = null; //jestem adminem
-        List<Group> groupsModerator = null; // jestem moderatorem
+        Map<Group, String> mapGroupsAdminMod = new HashMap<>();
         Transaction tx = null;
-        User user = null;
+        User user;
         try (Session session = Main.getSession()) {
             tx = session.beginTransaction();
             List<User> usersList = session.createQuery("from User as user where user.email=:userEmail", User.class)
@@ -36,12 +37,23 @@ public class GroupsServlet extends HttpServlet {
             user = usersList.isEmpty() ? null : usersList.get(0);
             assert user != null;
             int userId = user.getUserID();
-            groupsMember = session.createQuery("select group from GroupMember groupMember where groupMember.user.userID = " + userId + " and groupMember.groupRank = 'MEMBER'", Group.class)
+            groupsMember = session.createQuery("select group from GroupMember groupMember where " +
+                    "groupMember.user.userID = " + userId + " and groupMember.groupRank = 'MEMBER'", Group.class)
                     .getResultList();
-            groupsAdmin = session.createQuery("select group from GroupMember groupMember where groupMember.user.userID = " + userId + " and groupMember.groupRank = 'ADMIN'", Group.class)
+            List<Group> groupsAdmin = session.createQuery("select group from GroupMember groupMember where " +
+                    "groupMember.user.userID = " + userId + " and groupMember.groupRank = 'ADMIN'", Group.class)
                     .getResultList();
-            groupsModerator = session.createQuery("select group from GroupMember groupMember where groupMember.user.userID = " + userId + " and groupMember.groupRank = 'MODERATOR'", Group.class)
+            List<Group> groupsModerator = session.createQuery("select group from GroupMember groupMember where " +
+                    "groupMember.user.userID = " + userId + " and groupMember.groupRank = 'MODERATOR'", Group.class)
                     .getResultList();
+
+            for (Group group: groupsAdmin) {
+                mapGroupsAdminMod.put(group, "ADMIN");
+            }
+            for (Group group: groupsModerator) {
+                mapGroupsAdminMod.put(group, "MODERATOR");
+            }
+
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
@@ -50,8 +62,7 @@ public class GroupsServlet extends HttpServlet {
             e.printStackTrace();
         }
         request.setAttribute("groupsMember", groupsMember);
-        request.setAttribute("groupsAdmin", groupsAdmin);
-        request.setAttribute("groupsModerator", groupsModerator);
+        request.setAttribute("groupsMap", mapGroupsAdminMod);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/groups.jsp");
         dispatcher.forward(request, response);
     }

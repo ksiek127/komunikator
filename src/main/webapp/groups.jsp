@@ -17,58 +17,41 @@
         </div>
         <div class="card-body">
             <ul class="list-group list-group-flush">
-                <c:forEach var="group" items="${requestScope.groupsAdmin}">
+                <c:forEach var="group" items="${requestScope.groupsMap}">
                     <li class="list-group-item">
-                        <p><b>Group Name: </b> ${group.name} <span class="badge bg-primary">Admin</span></p>
+                        <p><b>Group Name: </b> ${group.key.name}
+                            <c:if test="${group.value == 'ADMIN'}">
+                            <span class="badge bg-primary">Admin</span>
+                            </c:if>
+                            <c:if test="${group.value == 'MODERATOR'}">
+                                <span class="badge bg-secondary">Moderator</span>
+                            </c:if>
+                        </p>
                     <div class="container-sm">
                         <form action="groupMembersList" method="post">
-                            <input type="hidden" name="groupId" value="${group.groupID}">
-                            <input type="hidden" name="groupName" value="${group.name}">
+                            <input type="hidden" name="groupId" value="${group.key.groupID}">
+                            <input type="hidden" name="groupName" value="${group.key.name}">
                             <button type="submit" class="btn btn-outline-primary">Edit members</button>
                         </form>
                         <form action="groupRequests" method="post">
-                            <input type="hidden" name="groupId" value="${group.groupID}">
-                            <input type="hidden" name="groupName" value="${group.name}">
+                            <input type="hidden" name="groupId" value="${group.key.groupID}">
+                            <input type="hidden" name="groupName" value="${group.key.name}">
                             <button type="submit" class="btn btn-outline-primary">Check requests</button>
                         </form>
                         <form action="groupbox" method="post">
-                            <input type="hidden" name="groupId" value="${group.groupID}">
+                            <input type="hidden" name="groupId" value="${group.key.groupID}">
                             <button type="submit" class="btn btn-outline-primary">Group Mails</button>
                         </form>
                         <form action="go-to-message" method="post">
-                            <input type="hidden" name="groupId" value="${group.groupID}">
+                            <input type="hidden" name="groupId" value="${group.key.groupID}">
                             <button type="submit" class="btn btn-outline-primary">Send message</button>
                         </form>
                         <form action="leaveGroup" method="post">
-                            <input type="hidden" name="groupId" value="${group.groupID}">
+                            <input type="hidden" name="group_id" value="${group.key.groupID}">
                             <button type="submit" class="btn btn-outline-danger">Leave group</button>
                         </form>
                     </div>
                     </li>
-                </c:forEach>
-                <c:forEach var="group" items="${requestScope.groupsModerator}">
-                    <li class="list-group-item">
-                        <p><b>Group Name: </b> ${group.name} <span class="badge bg-info text-dark">Moderator</span></p>
-                    <div class="container-sm">
-                        <form action="groupMembersList" method="post">
-                            <input type="hidden" name="groupId" value="${group.groupID}">
-                            <input type="hidden" name="groupName" value="${group.name}">
-                            <button type="submit" class="btn btn-outline-primary">Edit members</button>
-                        </form>
-                        <form action="groupbox" method="post">
-                            <input type="hidden" name="groupId" value="${group.groupID}">
-                            <button type="submit" class="btn btn-outline-primary">Group Mails</button>
-                        </form>
-                        <form action="go-to-message" method="post">
-                            <input type="hidden" name="groupId" value="${group.groupID}">
-                            <button type="submit" class="btn btn-outline-primary">Send message</button>
-                        </form>
-                        <form action="leaveGroup" method="post">
-                            <input type="hidden" name="group_id" value="${group.groupID}">
-                            <button type="submit" class="btn btn-outline-danger">Leave group</button>
-                        </form>
-                    </div>
-                </li>
                 </c:forEach>
                 <c:forEach var="group" items="${requestScope.groupsMember}">
                     <li class="list-group-item">

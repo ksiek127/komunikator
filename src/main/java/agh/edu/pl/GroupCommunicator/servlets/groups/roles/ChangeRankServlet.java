@@ -1,10 +1,8 @@
-package agh.edu.pl.GroupCommunicator.servlets.groups;
+package agh.edu.pl.GroupCommunicator.servlets.groups.roles;
 
 import agh.edu.pl.GroupCommunicator.Main;
-import agh.edu.pl.GroupCommunicator.tables.Group;
-import agh.edu.pl.GroupCommunicator.tables.GroupMember;
-import agh.edu.pl.GroupCommunicator.tables.User;
-import agh.edu.pl.GroupCommunicator.tables.pk.GroupMemberPK;
+import agh.edu.pl.GroupCommunicator.tables.*;
+import agh.edu.pl.GroupCommunicator.tables.pk.GroupRequestPK;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,13 +12,26 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-@WebServlet(name = "DeleteUserFromGroupServlet", urlPatterns = "/deleteUserFromGroup")
-public class DeleteUserFromGroupServlet extends HttpServlet {
+@WebServlet(name = "ChangeRankServlet", urlPatterns = "/changeRank")
+public class ChangeRankServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        String groupRankString = request.getParameter("groupRank");
+        GroupRank groupRank = null;
+        if (groupRankString.equals("MEMBER")) {
+            groupRank = GroupRank.MEMBER;
+        } else if (groupRankString.equals("MODERATOR")) {
+            groupRank = GroupRank.MODERATOR;
+        } else {
+            request.setAttribute("no_rank_choosen", true);
+            request.getRequestDispatcher("groupMembersList").forward(request, response);
+        }
         int groupId = Integer.parseInt(request.getParameter("groupId"));
         int userId = Integer.parseInt(request.getParameter("userId"));
 
@@ -31,21 +42,20 @@ public class DeleteUserFromGroupServlet extends HttpServlet {
             User user = session.get(User.class, userId);
             Group group = session.get(Group.class, groupId);
 
-            GroupMemberPK gmPk = new GroupMemberPK(user.getUserID(), group.getGroupID());
-            GroupMember gm = session.get(GroupMember.class, gmPk);
+            GroupMember gm = new GroupMember(user, group, groupRank);
 
-            session.delete(gm);
+            session.update(gm);
 
             tx.commit();
         } catch (Exception ex) {
-            request.setAttribute("delete_fail", true);
+            request.setAttribute("change_rank_fail", true);
             request.getRequestDispatcher("groupMembersList").forward(request, response);
             ex.printStackTrace();
         } finally {
             session.close();
         }
 
-        request.setAttribute("delete_success", true);
+        request.setAttribute("change_rank_success", true);
         request.getRequestDispatcher("groupMembersList").forward(request, response);
     }
 }
