@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Outbox</title>
+    <title>Group Mails</title>
 </head>
 <body>
 
@@ -13,24 +13,23 @@
 <div class="container-sm">
     <div class="card">
         <div class="card-header">
-            Here's your <b>Outbox</b>
+            Here's <b>Groupbox</b>
         </div>
         <div class="card-body">
             <ul class="list-group list-group-flush">
                 <c:forEach var="email" items="${requestScope.emails}">
                     <li class="list-group-item">
-                        <b>Title: </b>${email.title} <br><br>
+                        <b>Title: </b>${email.title}<br><br>
                         <form action="message-servlet" method="post">
                             <input type="hidden" name="mailId" value="${email.mailID}">
-                            <input type="hidden" name="path" value="outbox">
+                            <input type="hidden" name="path" value="groupbox">
                             <input type="submit" value="Show message" class="btn btn-outline-primary">
                         </form>
                     </li>
                 </c:forEach>
             </ul>
             <br>
-            <a href="returnToMainPage" class="btn btn-outline-primary">Return</a>
-
+            <a href="groups" class="btn btn-outline-primary">Return</a>
         </div>
     </div>
 </div>

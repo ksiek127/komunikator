@@ -8,25 +8,39 @@
     <title>Send message</title>
 </head>
 <body>
-<form action="send-message" method="post">
-  <c:if test="${requestScope.empty_fields == true}">
-    <div class="alert alert-warning" role="alert">
-      All fields must be filled
+
+<br/>
+<div class="container-sm">
+  <div class="card">
+    <div class="card-header">
+      New <b>message</b>
     </div>
-  </c:if>
-  <div class="mb-3">
-    <label for="title" class="form-label">Title: </label>
-    <input type="text" class="form-control" id="title"
-           name="title" value="${fn:escapeXml(param.title)}">
+    <div class="card-body">
+
+      <form action="send-message" method="post">
+        <c:if test="${requestScope.empty_fields == true}">
+          <div class="alert alert-warning" role="alert">
+            All fields must be filled
+          </div>
+        </c:if>
+        <div class="mb-3">
+          <label for="title" class="form-label">Title: </label>
+          <input type="text" class="form-control" id="title"
+                 name="title" value="${fn:escapeXml(param.title)}">
+        </div>
+        <div class="mb-3">
+          <label for="message" class="form-label">Message: </label>
+          <input type="text" class="form-control" id="message"
+                 name="message" value="${fn:escapeXml(param.message)}">
+        </div>
+        <input type="hidden" name="groupId" value="${requestScope.groupId}">
+        <button type="submit" class="btn btn-outline-primary">Send </button>
+        <a href="groups" class="btn btn-outline-secondary">Return</a>
+      </form>
+
+    </div>
   </div>
-  <div class="mb-3">
-    <label for="message" class="form-label">Message: </label>
-    <input type="text" class="form-control" id="message"
-           name="message" value="${fn:escapeXml(param.message)}">
-  </div>
-  <input type="hidden" name="groupId" value="${requestScope.groupId}">
-  <button type="submit">Send </button>
-  <a href="groups" class="btn btn-outline-primary">Return</a>
-</form>
+</div>
+
 </body>
 </html>

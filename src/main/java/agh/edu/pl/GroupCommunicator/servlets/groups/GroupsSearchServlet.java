@@ -31,7 +31,7 @@ public class GroupsSearchServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String groupNameRegex = request.getParameter("group_name");
-        if (groupNameRegex == null) {
+        if (groupNameRegex.equals("")) {
             request.setAttribute("no_group_name", true);
             request.getRequestDispatcher("searchgroup.jsp").forward(request, response);
         } else {

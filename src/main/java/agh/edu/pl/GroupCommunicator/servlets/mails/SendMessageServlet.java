@@ -21,14 +21,21 @@ public class SendMessageServlet extends HttpServlet {
         User user = Main.getUser();
         String title = request.getParameter("title");
         String message = request.getParameter("message");
+        int groupId = Integer.parseInt(request.getParameter("groupId"));
+        String groupName = null;
         if(title.isEmpty() || message.isEmpty()){
             request.setAttribute("empty_fields", true);
             request.getRequestDispatcher("/sendmessage.jsp").forward(request, response);
         }else{
-            int groupId = Integer.parseInt(request.getParameter("groupId"));
             List<GroupMember> members;
             try (Session session = Main.getSession()) {
                 Transaction tx = session.beginTransaction();
+
+                groupName = session
+                        .createQuery("from Group as group where group.groupID=:groupId", Group.class)
+                        .setParameter("groupId", groupId)
+                        .getResultList().get(0).getName();
+
                 Mail mail = new Mail(message, title, groupId);
                 Outbox outbox = new Outbox(mail, user);
                 session.save(mail);
@@ -51,6 +58,10 @@ public class SendMessageServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
-        response.sendRedirect("messagesent.jsp");
+        //response.sendRedirect("messagesent.jsp");
+        request.setAttribute("title", title);
+        request.setAttribute("message", message);
+        request.setAttribute("groupName", groupName);
+        request.getRequestDispatcher("messagesent.jsp").forward(request, response);
     }
 }

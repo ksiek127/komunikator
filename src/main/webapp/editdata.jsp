@@ -19,7 +19,7 @@
             <form action="edit-data-handler" method="post">
                 <c:if test="${requestScope.empty_fields == true}">
                     <div class="alert alert-warning" role="alert">
-                        At least one field must be filled! <br> If you don't want to change your data click "Back"
+                        At least one field must be filled! <br> If you don't want to change your data click "Return"
                     </div>
                 </c:if>
                 <c:if test="${requestScope.constraint_exception == true}">
