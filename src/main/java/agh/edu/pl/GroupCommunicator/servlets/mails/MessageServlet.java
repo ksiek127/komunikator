@@ -63,6 +63,7 @@ public class MessageServlet extends HttpServlet {
             session.close();
         }
         request.setAttribute("mailId", mailId);
+        request.setAttribute("groupId", groupId);
         request.setAttribute("title", title);
         request.setAttribute("msg", msg);
         request.setAttribute("date", date);

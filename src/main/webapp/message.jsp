@@ -29,6 +29,10 @@
                     <input type="hidden" name="where" value="inbox">
                     <button type="submit" class="btn btn-outline-primary">Delete</button>
                 </form>
+                <form action="go-to-message" method="post">
+                    <input type="hidden" name="groupId" value="${requestScope.groupId}">
+                    <button type="submit" class="btn btn-outline-primary">Reply</button>
+                </form>
             </c:if>
             <c:if test="${requestScope.outbox == true}">
                 <a href="outbox" class="btn btn-outline-primary">Return</a>
