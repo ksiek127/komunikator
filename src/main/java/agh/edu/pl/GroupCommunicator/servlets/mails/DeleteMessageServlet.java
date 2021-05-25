@@ -22,8 +22,16 @@ public class DeleteMessageServlet extends HttpServlet {
         try (Session session = Main.getSession()) {
             User user = Main.getUser();
             Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("delete from Inbox as inbox where inbox.mail.mailID = " + mailId
-            + " and inbox.toUser.userID = " + user.getUserID());
+            String where = request.getParameter("where");
+            Query query = null;
+            if(where.equals("inbox")){
+                query = session.createQuery("delete from Inbox as inbox where inbox.mail.mailID = " + mailId
+                        + " and inbox.toUser.userID = " + user.getUserID());
+            }else if(where.equals("outbox")){
+                query = session.createQuery("delete from Outbox as outbox where outbox.mail.mailID = " + mailId
+                        + " and outbox.fromUser.userID = " + user.getUserID());
+            }
+            assert query != null;
             int result = query.executeUpdate();
             tx.commit();
         } catch (Exception e) {

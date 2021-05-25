@@ -26,12 +26,17 @@
                 <a href="inbox" class="btn btn-outline-primary">Return</a>
                 <form action="delete-message" method="post">
                     <input type="hidden" name="mailId" value="${requestScope.mailId}">
-<%--                    <input type="hidden" name="where" value="inbox">--%>
+                    <input type="hidden" name="where" value="inbox">
                     <button type="submit" class="btn btn-outline-primary">Delete</button>
                 </form>
             </c:if>
             <c:if test="${requestScope.outbox == true}">
                 <a href="outbox" class="btn btn-outline-primary">Return</a>
+                <form action="delete-message" method="post">
+                    <input type="hidden" name="mailId" value="${requestScope.mailId}">
+                    <input type="hidden" name="where" value="outbox">
+                    <button type="submit" class="btn btn-outline-primary">Delete</button>
+                </form>
             </c:if>
             <c:if test="${requestScope.groupbox == true}">
                 <form action="groupbox" method="post">
