@@ -1,7 +1,6 @@
 package agh.edu.pl.GroupCommunicator.servlets.mails;
 
 import agh.edu.pl.GroupCommunicator.Main;
-import agh.edu.pl.GroupCommunicator.tables.Mail;
 import agh.edu.pl.GroupCommunicator.tables.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -17,7 +16,8 @@ import java.io.IOException;
 @WebServlet(name = "DeleteMessage", value = "/delete-message")
 public class DeleteMessageServlet extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         int mailId = Integer.parseInt(request.getParameter("mailId"));
         try (Session session = Main.getSession()) {
             User user = Main.getUser();
@@ -43,6 +43,6 @@ public class DeleteMessageServlet extends HttpServlet {
 //        }else if(where.equals("outbox")){
 //            request.getRequestDispatcher("/outbox").forward(request, response);
 //        }
-        request.getRequestDispatcher("/mainpage.jsp").forward(request, response);
+        request.getRequestDispatcher("/returnToMainPage").forward(request, response);
     }
 }

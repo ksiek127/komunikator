@@ -1,6 +1,8 @@
 package agh.edu.pl.GroupCommunicator.tables;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,25 +12,31 @@ public class Mail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int mailID;
+
     @Column(nullable = false, length = 1000)
     private String message;
+
     @Column(nullable = false, length = 32)
     private String title;
+
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
     private Date created;
-    @Column
-    private int groupId;
+
+    @ManyToOne
+    @JoinColumn(name = "groupID", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Group group;
 
     public Mail() {
 
     }
 
-    public Mail(String message, String title, int groupId) {
+    public Mail(String message, String title, Group group) {
         this.message = message;
         this.title = title;
-        this.groupId = groupId;
+        this.group = group;
     }
 
     public int getMailID() {
@@ -55,12 +63,16 @@ public class Mail {
         this.title = title;
     }
 
-    public int getGroupId() {
-        return groupId;
+    public Group getGroup() {
+        return group;
     }
 
-    public void setGroupId(int groupId) {
-        this.groupId = groupId;
+    public int getGroupId() {
+        return this.group.getGroupID();
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
     public Date getCreated() {

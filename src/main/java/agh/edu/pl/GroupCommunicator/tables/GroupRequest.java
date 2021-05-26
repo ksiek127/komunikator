@@ -1,6 +1,8 @@
 package agh.edu.pl.GroupCommunicator.tables;
 
 import agh.edu.pl.GroupCommunicator.tables.pk.GroupRequestPK;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,11 +13,13 @@ public class GroupRequest implements Serializable {
     private GroupRequestPK groupRequestId;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @MapsId("groupId")
     @JoinColumn(name = "groupId", nullable = false)
     private Group group;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @MapsId("userId")
     @JoinColumn(name = "userId", nullable = false)
     private User user;

@@ -62,7 +62,7 @@
     </div>
 
     <div class="d-grid gap-2" style="margin-top:2vh;padding:1vw">
-        <a href="removeUser" class="btn btn-outline-danger">Delete this account</a>
+        <a href="checkIfGroupAdmin" class="btn btn-outline-danger">Delete this account</a>
         <a class="btn btn-outline-secondary" href="logout" role="button">Log out</a>
     </div>
 </div>

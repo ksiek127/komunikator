@@ -20,16 +20,19 @@
                     and leave.
                     <form action="deleteGroup" method="post">
                         <input type="hidden" name="group_id" value="${requestScope.group.groupID}">
+                        <input type="hidden" name="returnPage" value="searchgroup.jsp">
                         <button type="submit" class="btn btn-outline-danger">Delete group</button>
                     </form>
                     <form action="pickAdminFromMembers" method="post">
                         <input type="hidden" name="group_id" value="${requestScope.group.groupID}">
+                        <input type="hidden" name="returnPage" value="searchgroup.jsp">
                         <button type="submit" class="btn btn-outline-danger">Pick new admin and leave</button>
                     </form>
                 </c:if>
                 <c:if test="${requestScope.group_admin == false}">
                     <form action="leaveGroupHandler" method="post">
                         <input type="hidden" name="group_id" value="${requestScope.group.groupID}">
+                        <input type="hidden" name="returnPage" value="searchgroup.jsp">
                         <button type="submit" class="btn btn-outline-danger">Leave group</button>
                     </form>
                 </c:if>
@@ -38,11 +41,12 @@
                 No more members in this group, if you leave, this group will be deleted.
                 <form action="deleteGroup" method="post">
                     <input type="hidden" name="group_id" value="${requestScope.group.groupID}">
+                    <input type="hidden" name="returnPage" value="/groups">
                     <button type="submit" class="btn btn-outline-danger">Delete group</button>
                 </form>
             </c:if>
             <button type="button" class="btn btn-outline-primary" name="back" onclick="history.back()">
-                Don't leave this group, return
+                Return
             </button>
         </div>
     </div>

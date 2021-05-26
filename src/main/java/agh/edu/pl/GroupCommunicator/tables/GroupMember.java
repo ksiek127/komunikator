@@ -2,6 +2,8 @@ package agh.edu.pl.GroupCommunicator.tables;
 
 import agh.edu.pl.GroupCommunicator.tables.pk.GroupMemberPK;
 import org.hibernate.annotations.Check;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -12,11 +14,13 @@ public class GroupMember {
     private GroupMemberPK groupMemberId;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @MapsId("userId")
     @JoinColumn(name = "userId", nullable = false)
     private User user;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @MapsId("groupId")
     @JoinColumn(name = "groupId", nullable = false)
     private Group group;

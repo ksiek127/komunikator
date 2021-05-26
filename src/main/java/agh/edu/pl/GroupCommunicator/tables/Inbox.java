@@ -1,6 +1,8 @@
 package agh.edu.pl.GroupCommunicator.tables;
 
 import agh.edu.pl.GroupCommunicator.tables.pk.InboxPK;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,11 +13,13 @@ public class Inbox implements Serializable {
     private InboxPK inboxId;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @MapsId("mailId")
     @JoinColumn(name = "mailId", nullable = false)
     private Mail mail;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @MapsId("toUser")
     @JoinColumn(name = "toUser", nullable = false)
     private User toUser;
@@ -25,14 +29,22 @@ public class Inbox implements Serializable {
 
     }
 
-    public Inbox(Mail mail, User toUser, boolean wasRead) {
+    public Inbox(Mail mail, User toUser) {
         this.inboxId = new InboxPK(mail.getMailID(), toUser.getUserID());
         this.mail = mail;
         this.toUser = toUser;
-        this.wasRead = wasRead;
+        this.wasRead = false;
     }
 
-    public boolean isWasRead() {
+    public Mail getMail() {
+        return mail;
+    }
+
+    public User getToUser() {
+        return toUser;
+    }
+
+    public boolean getWasRead() {
         return wasRead;
     }
 

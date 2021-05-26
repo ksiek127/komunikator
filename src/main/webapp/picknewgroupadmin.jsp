@@ -16,18 +16,29 @@
             </div>
             <div class="card-body">
                 <ul class="list-group list-group-flush">
-                    <c:forEach var="member" items="${requestScope.group_members}">
-                        <li class="list-group-item">
-                            Name: ${member.firstname} ${member.lastname}
-                            Email: ${member.email}
-                            Address: ${member.address}
-                            <form action="giveAdminRoleAndLeaveGroup" method="post">
-                                <input type="hidden" name="group_id" value="${requestScope.groupId}">
-                                <input type="hidden" name="user_id" value="${member.userID}">
-                                <button type="submit" class="btn btn-outline-danger">Give Admin Role</button>
-                            </form>
-                        </li>
-                    </c:forEach>
+                    <c:if test="${requestScope.group_empty == true}">
+                        No other members in this group, delete it
+                        <form action="deleteGroup" method="post">
+                            <input type="hidden" name="group_id" value="${requestScope.groupId}">
+                            <input type="hidden" name="returnPage" value="/checkIfGroupAdmin">
+                            <button type="submit" class="btn btn-outline-danger">Delete group</button>
+                        </form>
+                    </c:if>
+                    <c:if test="${requestScope.group_empty != true}">
+                        <c:forEach var="member" items="${requestScope.group_members}">
+                            <li class="list-group-item">
+                                Name: ${member.firstname} ${member.lastname}
+                                Email: ${member.email}
+                                Address: ${member.address}
+                                <form action="giveAdminRoleAndLeaveGroup" method="post">
+                                    <input type="hidden" name="group_id" value="${requestScope.groupId}">
+                                    <input type="hidden" name="user_id" value="${member.userID}">
+                                    <input type="hidden" name="returnPage" value="${requestScope.returnPage}">
+                                    <button type="submit" class="btn btn-outline-danger">Give Admin Role</button>
+                                </form>
+                            </li>
+                        </c:forEach>
+                    </c:if>
                 </ul>
             </div>
         </div>

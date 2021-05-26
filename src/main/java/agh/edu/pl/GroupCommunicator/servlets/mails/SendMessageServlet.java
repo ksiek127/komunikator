@@ -31,12 +31,11 @@ public class SendMessageServlet extends HttpServlet {
             try (Session session = Main.getSession()) {
                 Transaction tx = session.beginTransaction();
 
-                groupName = session
-                        .createQuery("from Group as group where group.groupID=:groupId", Group.class)
-                        .setParameter("groupId", groupId)
-                        .getResultList().get(0).getName();
+                Group group = session.get(Group.class, groupId);
 
-                Mail mail = new Mail(message, title, groupId);
+                groupName = group.getName();
+
+                Mail mail = new Mail(message, title, group);
                 Outbox outbox = new Outbox(mail, user);
                 session.save(mail);
                 members = session
@@ -47,7 +46,7 @@ public class SendMessageServlet extends HttpServlet {
                 for (GroupMember member : members) {
                     if (member.getUser().getUserID() != Main.getUser().getUserID()) {
                         System.out.println(member.getUser().getUserID());
-                        Inbox inbox = new Inbox(mail, member.getUser(), false);
+                        Inbox inbox = new Inbox(mail, member.getUser());
                         session.save(inbox);
                     }
                 }

@@ -21,20 +21,16 @@ public class DeleteGroupServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int groupId = Integer.parseInt(request.getParameter("group_id"));
+        String returnPage = request.getParameter("returnPage");
+
+        if (returnPage == null) {
+            returnPage = "/returnToMainPage";
+        }
 
         Group group;
         Session session = Main.getSession();
         try {
             Transaction tx = session.beginTransaction();
-
-            List<GroupMember> gms = session
-                    .createQuery("from GroupMember as gm where gm.group.groupID=:gId", GroupMember.class)
-                    .setParameter("gId", groupId)
-                    .getResultList();
-
-            for (GroupMember gm: gms) {
-                session.delete(gm);
-            }
 
             group = session.get(Group.class, groupId);
 
@@ -43,13 +39,13 @@ public class DeleteGroupServlet extends HttpServlet {
             tx.commit();
         } catch (Exception ex) {
             request.setAttribute("group_remove_failed", true);
-            request.getRequestDispatcher("searchgroup.jsp").forward(request, response);
+            request.getRequestDispatcher(returnPage).forward(request, response);
             ex.printStackTrace();
         } finally {
             session.close();
         }
 
         request.setAttribute("group_remove_success", true);
-        request.getRequestDispatcher("searchgroup.jsp").forward(request, response);
+        request.getRequestDispatcher(returnPage).forward(request, response);
     }
 }

@@ -25,6 +25,7 @@ public class GiveAdminRoleAndLeaveGroupServlet extends HttpServlet {
 
         int new_admin_user_id = Integer.parseInt(request.getParameter("user_id"));
         int group_id = Integer.parseInt(request.getParameter("group_id"));
+        String returnPage = request.getParameter("returnPage");
 
         Session session = Main.getSession();
         List<User> groupMembers = null;
@@ -48,13 +49,13 @@ public class GiveAdminRoleAndLeaveGroupServlet extends HttpServlet {
             tx.commit();
         } catch (Exception ex) {
             request.setAttribute("group_leave_and_admin_change_failed", true);
-            request.getRequestDispatcher("searchgroup.jsp").forward(request, response);
+            request.getRequestDispatcher(returnPage).forward(request, response);
             ex.printStackTrace();
         } finally {
             session.close();
         }
 
         request.setAttribute("group_leave_and_admin_change_success", true);
-        request.getRequestDispatcher("searchgroup.jsp").forward(request, response);
+        request.getRequestDispatcher(returnPage).forward(request, response);
     }
 }
