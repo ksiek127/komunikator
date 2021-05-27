@@ -64,7 +64,7 @@ public class EditGroupDataServlet extends HttpServlet {
                 session.close();
             }
             request.setAttribute("edit_data_successful", true);
-            request.getRequestDispatcher("/groups.jsp").forward(request, response);
+            request.getRequestDispatcher("/groups").forward(request, response);
         }
     }
 }
