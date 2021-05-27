@@ -22,6 +22,11 @@
                         All fields must be filled
                     </div>
                 </c:if>
+                <c:if test="${requestScope.name_taken == true}">
+                    <div class="alert alert-warning" role="alert">
+                        This name is already taken
+                    </div>
+                </c:if>
                 <div class="mb-3">
                     <label for="name" class="form-label">Group name: </label>
                     <input type="text" class="form-control" id="name"
