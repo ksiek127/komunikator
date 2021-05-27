@@ -19,9 +19,11 @@
             <ul class="list-group list-group-flush">
                 <c:forEach var="email" items="${requestScope.emails}">
                     <li class="list-group-item">
-                        <b>Title: </b>${email.title}<br><br>
+                        <b>Title: </b>${email.key.title}<br>
+                        <b>Author: </b>${email.value}<br>
+                        <b>Date: </b>${email.key.createdFormatted}<br><br>
                         <form action="message-servlet" method="post">
-                            <input type="hidden" name="mailId" value="${email.mailID}">
+                            <input type="hidden" name="mailId" value="${email.key.mailID}">
                             <input type="hidden" name="path" value="groupbox">
                             <input type="submit" value="Show message" class="btn btn-outline-primary">
                         </form>

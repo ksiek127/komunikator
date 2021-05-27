@@ -45,7 +45,7 @@
                 <c:if test="${requestScope.admin == true}">
                     <c:forEach var="member" items="${requestScope.groupMembers}">
                         <li class="list-group-item">
-                            <p>${member.user.nameAndEmail}</p>
+                            <p>${member.user.nameAndEmailAndAddress}</p>
                             <p>Group rank: ${member.groupRank}</p>
                             <div class="container-sm">
                                 <form action="changeRank" method="post">
@@ -79,7 +79,7 @@
                 <c:if test="${requestScope.moderator == true}">
                     <c:forEach var="member" items="${requestScope.groupMembers}">
                         <li class="list-group-item">
-                            <p>${member.user.nameAndEmail}</p>
+                            <p>${member.user.nameAndEmailAndAddress}</p>
                             <p>Group rank: ${member.groupRank}</p>
                                 <c:if test="${member.groupRank == 'MEMBER'}">
                                 <div class="container-sm">
@@ -115,7 +115,7 @@
                 <c:if test="${requestScope.member == true}">
                     <c:forEach var="member" items="${requestScope.groupMembers}">
                         <li class="list-group-item">
-                            <p>${member.user.nameAndEmail}</p>
+                            <p>${member.user.nameAndEmailAndAddress}</p>
                             <p>Group rank: ${member.groupRank}</p>
                         </li>
                     </c:forEach>

@@ -59,6 +59,7 @@
                         </form>
                         <form action="leaveGroup" method="post">
                             <input type="hidden" name="group_id" value="${group.key.groupID}">
+                            <input type="hidden" name="returnPage" value="/groups">
                             <button type="submit" class="btn btn-outline-danger">Leave group</button>
                         </form>
                     </div>
@@ -85,6 +86,7 @@
                         </form>
                         <form action="leaveGroup" method="post">
                             <input type="hidden" name="group_id" value="${group.groupID}">
+                            <input type="hidden" name="returnPage" value="/groups">
                             <button type="submit" class="btn btn-outline-danger">Leave group</button>
                         </form>
                     </div>

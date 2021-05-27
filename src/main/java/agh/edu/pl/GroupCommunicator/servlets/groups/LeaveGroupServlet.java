@@ -23,6 +23,7 @@ public class LeaveGroupServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int groupId = Integer.parseInt(request.getParameter("group_id"));
+        String returnPage = request.getParameter("returnPage");
 
         Group group = null;
         GroupMember gm = null;
@@ -44,7 +45,7 @@ public class LeaveGroupServlet extends HttpServlet {
             tx.commit();
         } catch (Exception ex) {
             request.setAttribute("leave_failed", true);
-            request.getRequestDispatcher("searchgroup.jsp").forward(request, response);
+            request.getRequestDispatcher(returnPage).forward(request, response);
             ex.printStackTrace();
         } finally {
             session.close();
@@ -53,7 +54,7 @@ public class LeaveGroupServlet extends HttpServlet {
 
         if (gm == null || group == null) {
             request.setAttribute("leave_failed", true);
-            request.getRequestDispatcher("searchgroup.jsp").forward(request, response);
+            request.getRequestDispatcher(returnPage).forward(request, response);
         } else {
             if (gm.getGroupRank() == GroupRank.ADMIN) {
                 request.setAttribute("group_admin", true);
@@ -63,6 +64,7 @@ public class LeaveGroupServlet extends HttpServlet {
             if (gms != null && gms.size() > 1) {
                 request.setAttribute("other_members", true);
             }
+            request.setAttribute("returnPage", returnPage);
             request.setAttribute("group", group);
             request.getRequestDispatcher("leavegroup.jsp").forward(request, response);
         }

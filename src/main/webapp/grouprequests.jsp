@@ -44,7 +44,7 @@
             <ul class="list-group list-group-flush">
                 <c:forEach var="user" items="${requestScope.users}">
                     <li class="list-group-item">
-                        <p>${user.nameAndEmail}</p>
+                        <p>${user.nameAndEmailAndAddress}</p>
                         <form action="acceptRequest" method="post">
                             <input type="hidden" name="userId" value="${user.userID}">
                             <input type="hidden" name="groupName" value="${requestScope.group_name}">

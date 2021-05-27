@@ -22,6 +22,7 @@ public class LeaveGroupHandlerServlet extends HttpServlet {
             throws ServletException, IOException {
 
         int groupId = Integer.parseInt(request.getParameter("group_id"));
+        String returnPage = request.getParameter("returnPage");
 
         Session session = Main.getSession();
         try {
@@ -35,13 +36,13 @@ public class LeaveGroupHandlerServlet extends HttpServlet {
             tx.commit();
         } catch (Exception ex) {
             request.setAttribute("group_leave_failed", true);
-            request.getRequestDispatcher("searchgroup.jsp").forward(request, response);
+            request.getRequestDispatcher(returnPage).forward(request, response);
             ex.printStackTrace();
         } finally {
             session.close();
         }
 
         request.setAttribute("group_leave_success", true);
-        request.getRequestDispatcher("searchgroup.jsp").forward(request, response);
+        request.getRequestDispatcher(returnPage).forward(request, response);
     }
 }

@@ -27,9 +27,13 @@ public class InboxServlet extends HttpServlet {
             User user = Main.getUser();
             Transaction tx = session.beginTransaction();
             int userId = user.getUserID();
-            emails_new = session.createQuery("select mail from Inbox inbox where inbox.toUser = " + userId + " and inbox.wasRead = false", Mail.class)
+            emails_new = session.createQuery("select mail from Inbox inbox where inbox.toUser.userID =:userId " +
+                    "and inbox.wasRead = false", Mail.class)
+                    .setParameter("userId", userId)
                     .getResultList();
-            emails_read = session.createQuery("select mail from Inbox inbox where inbox.toUser = " + userId + " and inbox.wasRead = true", Mail.class)
+            emails_read = session.createQuery("select mail from Inbox inbox where inbox.toUser.userID =:userId" +
+                    " and inbox.wasRead = true", Mail.class)
+                    .setParameter("userId", userId)
                     .getResultList();
             tx.commit();
         } catch (Exception e) {

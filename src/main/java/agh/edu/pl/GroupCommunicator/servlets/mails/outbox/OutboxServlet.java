@@ -27,7 +27,9 @@ public class OutboxServlet extends HttpServlet {
              Transaction tx = session.beginTransaction();
             assert user != null;
             int userId = user.getUserID();
-            emails = session.createQuery("select mail from Outbox outbox where outbox.fromUser = " + userId, Mail.class)
+            emails = session.createQuery("select mail from Outbox outbox where outbox.fromUser.userID =:userId",
+                    Mail.class)
+                    .setParameter("userId", userId)
                     .getResultList();
             tx.commit();
         } catch (Exception e) {

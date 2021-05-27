@@ -5,6 +5,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -79,7 +80,8 @@ public class Mail {
         return created;
     }
 
-    public void setCreated(Date created) {
-        this.created = created;
+    public String getCreatedFormatted() {
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
+        return formatter.format(created);
     }
 }
