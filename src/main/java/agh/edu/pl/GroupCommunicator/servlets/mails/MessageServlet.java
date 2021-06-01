@@ -48,7 +48,7 @@ public class MessageServlet extends HttpServlet {
                     .getResultList().get(0);
             groupName = group.getName();
 
-            if(path.equals("inbox")) {
+            if (path.equals("inbox")) {
                 int userId = user.getUserID();
                 Inbox inboxMail = session.createQuery("from Inbox as inbox where inbox.toUser = " + userId + " and inbox.mail = " + mailId, Inbox.class)
                         .getResultList().get(0);
@@ -68,13 +68,13 @@ public class MessageServlet extends HttpServlet {
         request.setAttribute("msg", msg);
         request.setAttribute("date", date);
         request.setAttribute("groupName", groupName);
-        if(path.equals("inbox")) {
+        if (path.equals("inbox")) {
             request.setAttribute("inbox", true);
         }
-        if(path.equals("outbox")) {
+        if (path.equals("outbox")) {
             request.setAttribute("outbox", true);
         }
-        if(path.equals("groupbox")) {
+        if (path.equals("groupbox")) {
             request.setAttribute("groupbox", true);
             request.setAttribute("groupId", groupId);
         }

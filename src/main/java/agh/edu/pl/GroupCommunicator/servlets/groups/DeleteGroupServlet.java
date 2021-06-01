@@ -2,8 +2,6 @@ package agh.edu.pl.GroupCommunicator.servlets.groups;
 
 import agh.edu.pl.GroupCommunicator.Main;
 import agh.edu.pl.GroupCommunicator.tables.Group;
-import agh.edu.pl.GroupCommunicator.tables.GroupMember;
-import agh.edu.pl.GroupCommunicator.tables.pk.GroupMemberPK;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,7 +11,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet(name = "DeleteGroupServlet", urlPatterns = "/deleteGroup")
 public class DeleteGroupServlet extends HttpServlet {

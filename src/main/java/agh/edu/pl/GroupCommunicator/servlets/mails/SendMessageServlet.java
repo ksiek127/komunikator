@@ -17,16 +17,16 @@ import java.util.List;
 public class SendMessageServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException{
+            throws ServletException, IOException {
         User user = Main.getUser();
         String title = request.getParameter("title");
         String message = request.getParameter("message");
         int groupId = Integer.parseInt(request.getParameter("groupId"));
         String groupName = null;
-        if(title.isEmpty() || message.isEmpty()){
+        if (title.isEmpty() || message.isEmpty()) {
             request.setAttribute("empty_fields", true);
-            request.getRequestDispatcher("/sendmessage.jsp").forward(request, response);
-        }else{
+            request.getRequestDispatcher("/sendMail.jsp").forward(request, response);
+        } else {
             List<GroupMember> members;
             try (Session session = Main.getSession()) {
                 Transaction tx = session.beginTransaction();
@@ -60,6 +60,6 @@ public class SendMessageServlet extends HttpServlet {
         request.setAttribute("title", title);
         request.setAttribute("message", message);
         request.setAttribute("groupName", groupName);
-        request.getRequestDispatcher("messagesent.jsp").forward(request, response);
+        request.getRequestDispatcher("messageSent.jsp").forward(request, response);
     }
 }

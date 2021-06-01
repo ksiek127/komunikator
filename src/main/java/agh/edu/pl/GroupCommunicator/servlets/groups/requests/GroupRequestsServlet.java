@@ -1,9 +1,6 @@
 package agh.edu.pl.GroupCommunicator.servlets.groups.requests;
 
 import agh.edu.pl.GroupCommunicator.Main;
-import agh.edu.pl.GroupCommunicator.tables.Group;
-import agh.edu.pl.GroupCommunicator.tables.GroupRank;
-import agh.edu.pl.GroupCommunicator.tables.GroupRequest;
 import agh.edu.pl.GroupCommunicator.tables.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -37,7 +34,7 @@ public class GroupRequestsServlet extends HttpServlet {
                     .getResultList();
 
             tx.commit();
-        } catch (Throwable ex){
+        } catch (Throwable ex) {
             ex.printStackTrace();
         } finally {
             session.close();
@@ -45,6 +42,6 @@ public class GroupRequestsServlet extends HttpServlet {
         request.setAttribute("users", users);
         request.setAttribute("groupId", groupId);
         request.setAttribute("group_name", groupName);
-        request.getRequestDispatcher("/grouprequests.jsp").forward(request, response);
+        request.getRequestDispatcher("/groupRequests.jsp").forward(request, response);
     }
 }

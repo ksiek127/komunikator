@@ -14,6 +14,6 @@ public class EditGroupData extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setAttribute("groupId", request.getParameter("groupId"));
-        request.getRequestDispatcher("editgroupdata.jsp").forward(request, response);
+        request.getRequestDispatcher("editGroupData.jsp").forward(request, response);
     }
 }

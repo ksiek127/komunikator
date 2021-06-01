@@ -4,7 +4,6 @@ import agh.edu.pl.GroupCommunicator.Main;
 import agh.edu.pl.GroupCommunicator.tables.Group;
 import agh.edu.pl.GroupCommunicator.tables.GroupMember;
 import agh.edu.pl.GroupCommunicator.tables.GroupRank;
-import agh.edu.pl.GroupCommunicator.tables.GroupRequest;
 import agh.edu.pl.GroupCommunicator.tables.pk.GroupMemberPK;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -66,7 +65,7 @@ public class LeaveGroupServlet extends HttpServlet {
             }
             request.setAttribute("returnPage", returnPage);
             request.setAttribute("group", group);
-            request.getRequestDispatcher("leavegroup.jsp").forward(request, response);
+            request.getRequestDispatcher("leaveGroup.jsp").forward(request, response);
         }
     }
 }

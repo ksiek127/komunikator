@@ -43,7 +43,7 @@ public class EditDataHandlerServlet extends HttpServlet {
                 && city.isEmpty() && zipCode.isEmpty() && country.isEmpty() &&
                 request.getParameter("birthdate").isEmpty()) {
             request.setAttribute("empty_fields", true);
-            request.getRequestDispatcher("/editdata.jsp").forward(request, response);
+            request.getRequestDispatcher("/editData.jsp").forward(request, response);
         } else {
 
             Session session = Main.getSession();
@@ -96,13 +96,13 @@ public class EditDataHandlerServlet extends HttpServlet {
                 user.getAddress().setZipCode(oldZipCode);
                 user.setEmail(oldEmail);
                 request.setAttribute("constraint_exception", true);
-                request.getRequestDispatcher("/editdata.jsp").forward(request, response);
+                request.getRequestDispatcher("/editData.jsp").forward(request, response);
             } finally {
                 session.close();
             }
             request.setAttribute("edit_data_successful", true);
             request.setAttribute("user", user);
-            request.getRequestDispatcher("/mainpage.jsp").forward(request, response);
+            request.getRequestDispatcher("/mainPage.jsp").forward(request, response);
         }
     }
 }

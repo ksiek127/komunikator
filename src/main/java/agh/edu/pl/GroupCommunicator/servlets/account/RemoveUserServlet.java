@@ -4,7 +4,6 @@ import agh.edu.pl.GroupCommunicator.Main;
 import agh.edu.pl.GroupCommunicator.tables.Inbox;
 import agh.edu.pl.GroupCommunicator.tables.Outbox;
 import agh.edu.pl.GroupCommunicator.tables.User;
-import agh.edu.pl.GroupCommunicator.tables.pk.OutboxPK;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -44,7 +43,7 @@ public class RemoveUserServlet extends HttpServlet {
 
             User deletedUser = getDeletedAccountUser(session);
 
-            for (Outbox item: outbox) {
+            for (Outbox item : outbox) {
                 List<Inbox> inbox = session
                         .createQuery("from Inbox as i where i.mail.mailID =: mailId", Inbox.class)
                         .setParameter("mailId", item.getMail().getMailID())

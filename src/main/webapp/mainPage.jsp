@@ -24,7 +24,7 @@
                 <li class="list-group-item"><b>Address:</b> ${requestScope.user.address}</li>
             </ul>
 
-            <a href="editdata.jsp" class="btn btn-outline-primary">Edit your account details</a>
+            <a href="editData.jsp" class="btn btn-outline-primary">Edit your account details</a>
         </div>
     </div>
 
@@ -54,7 +54,7 @@
                         <a href="groups-search" class="btn btn-outline-primary">Groups search</a>
                     </li>
                     <li class="list-group-item">
-                        <a href="creategroup.jsp" class="btn btn-outline-primary">Create group</a>
+                        <a href="createGroup.jsp" class="btn btn-outline-primary">Create group</a>
                     </li>
                 </ul>
             </div>

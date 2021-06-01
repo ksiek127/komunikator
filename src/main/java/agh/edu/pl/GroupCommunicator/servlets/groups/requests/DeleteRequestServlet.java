@@ -36,12 +36,12 @@ public class DeleteRequestServlet extends HttpServlet {
             tx.commit();
         } catch (Exception ex) {
             request.setAttribute("request_delete_failed", true);
-            request.getRequestDispatcher("searchgroup.jsp").forward(request, response);
+            request.getRequestDispatcher("searchGroups.jsp").forward(request, response);
         } finally {
             session.close();
         }
 
         request.setAttribute("request_deleted", true);
-        request.getRequestDispatcher("searchgroup.jsp").forward(request, response);
+        request.getRequestDispatcher("searchGroups.jsp").forward(request, response);
     }
 }

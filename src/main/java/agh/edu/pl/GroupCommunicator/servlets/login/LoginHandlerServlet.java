@@ -26,7 +26,7 @@ public class LoginHandlerServlet extends HttpServlet {
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         } else {
             request.setAttribute("user", currentUser);
-            request.getRequestDispatcher("/mainpage.jsp").forward(request, response);
+            request.getRequestDispatcher("/mainPage.jsp").forward(request, response);
         }
     }
 
@@ -60,7 +60,7 @@ public class LoginHandlerServlet extends HttpServlet {
             } else {
                 Main.setUser(foundUser);
                 request.setAttribute("user", foundUser);
-                request.getRequestDispatcher("/mainpage.jsp").forward(request, response);
+                request.getRequestDispatcher("/mainPage.jsp").forward(request, response);
             }
         }
     }

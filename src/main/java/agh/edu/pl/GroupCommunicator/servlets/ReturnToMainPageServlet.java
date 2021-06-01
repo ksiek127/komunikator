@@ -21,6 +21,6 @@ public class ReturnToMainPageServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setAttribute("user", Main.getUser());
-        request.getRequestDispatcher("mainpage.jsp").forward(request, response);
+        request.getRequestDispatcher("mainPage.jsp").forward(request, response);
     }
 }

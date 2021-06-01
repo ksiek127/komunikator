@@ -3,10 +3,7 @@ package agh.edu.pl.GroupCommunicator.servlets.groups;
 import agh.edu.pl.GroupCommunicator.Main;
 import agh.edu.pl.GroupCommunicator.tables.GroupMember;
 import agh.edu.pl.GroupCommunicator.tables.GroupRank;
-import agh.edu.pl.GroupCommunicator.tables.GroupRequest;
-import agh.edu.pl.GroupCommunicator.tables.User;
 import agh.edu.pl.GroupCommunicator.tables.pk.GroupMemberPK;
-import agh.edu.pl.GroupCommunicator.tables.pk.GroupRequestPK;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,9 +13,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @WebServlet(name = "GroupMembersListServlet", urlPatterns = "/groupMembersList")
 public class GroupMembersListServlet extends HttpServlet {
@@ -64,6 +59,6 @@ public class GroupMembersListServlet extends HttpServlet {
         request.setAttribute("groupMembers", groupMembers);
         request.setAttribute("groupId", groupId);
         request.setAttribute("group_name", groupName);
-        request.getRequestDispatcher("usersingroup.jsp").forward(request, response);
+        request.getRequestDispatcher("usersInGroup.jsp").forward(request, response);
     }
 }

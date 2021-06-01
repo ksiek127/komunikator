@@ -48,7 +48,7 @@ public class AcceptRequestServlet extends HttpServlet {
             session.save(gm);
 
             tx.commit();
-        } catch (Throwable ex){
+        } catch (Throwable ex) {
             request.setAttribute("accept_fail", true);
             request.getRequestDispatcher("groupRequests").forward(request, response);
             ex.printStackTrace();

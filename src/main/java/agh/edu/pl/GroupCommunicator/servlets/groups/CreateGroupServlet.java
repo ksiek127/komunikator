@@ -16,7 +16,6 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.hibernate.query.Query;
 
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet(name = "CreateGroupServlet", value = "/create-group")
 public class CreateGroupServlet extends HttpServlet {
@@ -27,20 +26,20 @@ public class CreateGroupServlet extends HttpServlet {
         String name = request.getParameter("name");
         String description = request.getParameter("description");
         User user = Main.getUser();
-        if(name.isEmpty() || description.isEmpty()){
+        if (name.isEmpty() || description.isEmpty()) {
             request.setAttribute("empty_fields", true);
-            request.getRequestDispatcher("/creategroup.jsp").forward(request, response);
+            request.getRequestDispatcher("/createGroup.jsp").forward(request, response);
         }
         Long count;
-        try(Session session = Main.getSession()) {
+        try (Session session = Main.getSession()) {
             Query query = session.createQuery("select count(*) from Group group where group.name = :gName");
             query.setParameter("gName", name);
             count = (Long) query.uniqueResult();
         }
         if (count > 0) {
             request.setAttribute("name_taken", true);
-            request.getRequestDispatcher("/creategroup.jsp").forward(request, response);
-        } else{
+            request.getRequestDispatcher("/createGroup.jsp").forward(request, response);
+        } else {
             Group group = new Group(name, description);
             try (Session session = Main.getSession()) {
                 Transaction tx = session.beginTransaction();
@@ -50,11 +49,11 @@ public class CreateGroupServlet extends HttpServlet {
                 tx.commit();
             } catch (ConstraintViolationException ex) {
                 request.setAttribute("constraint_exception", true);
-                request.getRequestDispatcher("/creategroup.jsp").forward(request, response);
+                request.getRequestDispatcher("/createGroup.jsp").forward(request, response);
             }
             request.setAttribute("name", name);
             request.setAttribute("description", description);
-            request.getRequestDispatcher("groupcreated.jsp").forward(request, response);
+            request.getRequestDispatcher("groupCreated.jsp").forward(request, response);
         }
     }
 }

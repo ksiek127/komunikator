@@ -12,8 +12,8 @@ import java.io.IOException;
 public class GoToMessageServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException{
+            throws ServletException, IOException {
         request.setAttribute("groupId", request.getParameter("groupId"));
-        request.getRequestDispatcher("sendmessage.jsp").forward(request, response);
+        request.getRequestDispatcher("sendMail.jsp").forward(request, response);
     }
 }

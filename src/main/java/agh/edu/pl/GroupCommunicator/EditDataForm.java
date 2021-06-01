@@ -1,8 +1,5 @@
 package agh.edu.pl.GroupCommunicator;
 
-import agh.edu.pl.GroupCommunicator.tables.Mail;
-import agh.edu.pl.GroupCommunicator.tables.User;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -25,7 +22,7 @@ public class EditDataForm extends HttpServlet {
         String email = request.getParameter("email");
 
         request.setAttribute("email", email);
-        request.getRequestDispatcher("/editdata.jsp").forward(request, response);
+        request.getRequestDispatcher("/editData.jsp").forward(request, response);
     }
 
 }

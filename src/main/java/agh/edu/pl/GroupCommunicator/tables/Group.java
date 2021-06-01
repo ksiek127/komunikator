@@ -41,6 +41,10 @@ public class Group {
         return name;
     }
 
+    public String getNameToLower() {
+        return name.toLowerCase();
+    }
+
     public void setName(String name) {
         this.name = name;
     }

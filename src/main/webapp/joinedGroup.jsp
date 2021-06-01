@@ -9,8 +9,8 @@
 <body>
 Prosba o dolaczenie do grupy zostala wyslana.
 <br/>
-<a href="searchgroup.jsp">Join another group</a>
+<a href="searchGroups.jsp">Join another group</a>
 <br>
-<a href="mainpage.jsp">Main page</a>
+<a href="mainPage.jsp">Main page</a>
 </body>
 </html>

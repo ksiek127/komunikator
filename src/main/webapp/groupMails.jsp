@@ -17,13 +17,13 @@
         </div>
         <div class="card-body">
             <ul class="list-group list-group-flush">
-                <c:forEach var="email" items="${requestScope.emails}">
+                <c:forEach var="mail" items="${requestScope.mails}">
                     <li class="list-group-item">
-                        <b>Title: </b>${email.key.title}<br>
-                        <b>Author: </b>${email.value}<br>
-                        <b>Date: </b>${email.key.createdFormatted}<br><br>
+                        <b>Title: </b>${mail.key.title}<br>
+                        <b>Author: </b>${mail.value}<br>
+                        <b>Date: </b>${mail.key.createdFormatted}<br><br>
                         <form action="message-servlet" method="post">
-                            <input type="hidden" name="mailId" value="${email.key.mailID}">
+                            <input type="hidden" name="mailId" value="${mail.key.mailID}">
                             <input type="hidden" name="path" value="groupbox">
                             <input type="submit" value="Show message" class="btn btn-outline-primary">
                         </form>

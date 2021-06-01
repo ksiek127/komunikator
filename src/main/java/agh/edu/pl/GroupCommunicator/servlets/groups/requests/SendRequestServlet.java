@@ -33,7 +33,7 @@ public class SendRequestServlet extends HttpServlet {
             tx.commit();
         } catch (Exception ex) {
             request.setAttribute("request_failed", true);
-            request.getRequestDispatcher("searchgroup.jsp").forward(request, response);
+            request.getRequestDispatcher("searchGroups.jsp").forward(request, response);
             ex.printStackTrace();
         } finally {
             session.close();
@@ -41,6 +41,6 @@ public class SendRequestServlet extends HttpServlet {
 
         request.setAttribute("group_name", request.getParameter("group_name"));
         request.setAttribute("request_sent", true);
-        request.getRequestDispatcher("searchgroup.jsp").forward(request, response);
+        request.getRequestDispatcher("searchGroups.jsp").forward(request, response);
     }
 }
