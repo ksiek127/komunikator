@@ -1,5 +1,11 @@
 package agh.edu.pl.GroupCommunicator.servlets.groups;
 
+/*
+
+    Forwards map of group members and their roles to groups.jsp, where this data is displayed.
+
+ */
+
 import agh.edu.pl.GroupCommunicator.Main;
 import agh.edu.pl.GroupCommunicator.tables.Group;
 import agh.edu.pl.GroupCommunicator.tables.User;

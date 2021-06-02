@@ -1,5 +1,12 @@
 package agh.edu.pl.GroupCommunicator.servlets.account;
 
+/*
+
+    When user wants to edit their data, this servlet checks if new data doesn't violate constraints,
+    and if it's legal, user's data is updated.
+
+ */
+
 import agh.edu.pl.GroupCommunicator.Main;
 import agh.edu.pl.GroupCommunicator.tables.Address;
 import agh.edu.pl.GroupCommunicator.tables.User;

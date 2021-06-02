@@ -1,5 +1,11 @@
 package agh.edu.pl.GroupCommunicator.servlets.groups;
 
+/*
+
+    Handles leaving group.
+
+ */
+
 import agh.edu.pl.GroupCommunicator.Main;
 import agh.edu.pl.GroupCommunicator.tables.Group;
 import agh.edu.pl.GroupCommunicator.tables.GroupMember;

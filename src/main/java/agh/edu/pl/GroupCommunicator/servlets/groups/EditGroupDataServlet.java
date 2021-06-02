@@ -1,5 +1,12 @@
 package agh.edu.pl.GroupCommunicator.servlets.groups;
 
+/*
+
+    When user tries to edit group data, this servlet checks if the new data does not violate constraints,
+    including checking if the new group name is available.
+
+ */
+
 import agh.edu.pl.GroupCommunicator.Main;
 import agh.edu.pl.GroupCommunicator.tables.Address;
 import agh.edu.pl.GroupCommunicator.tables.Group;

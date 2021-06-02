@@ -1,5 +1,11 @@
 package agh.edu.pl.GroupCommunicator.servlets.groups.requests;
 
+/*
+
+    Handles accepting requests to join a group.
+
+ */
+
 import agh.edu.pl.GroupCommunicator.Main;
 import agh.edu.pl.GroupCommunicator.tables.*;
 import agh.edu.pl.GroupCommunicator.tables.pk.GroupRequestPK;

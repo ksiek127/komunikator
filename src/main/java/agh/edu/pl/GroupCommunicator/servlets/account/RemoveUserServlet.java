@@ -1,5 +1,11 @@
 package agh.edu.pl.GroupCommunicator.servlets.account;
 
+/*
+
+    Servlet that safely removes user from the database.
+
+ */
+
 import agh.edu.pl.GroupCommunicator.Main;
 import agh.edu.pl.GroupCommunicator.tables.Inbox;
 import agh.edu.pl.GroupCommunicator.tables.Outbox;

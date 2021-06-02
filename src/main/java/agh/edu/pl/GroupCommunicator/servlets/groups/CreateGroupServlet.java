@@ -1,5 +1,12 @@
 package agh.edu.pl.GroupCommunicator.servlets.groups;
 
+/*
+
+    When user tries to create a group, this servlet checks if the group name is not already taken, and if group details
+    do not violate constraints, the group is created.
+
+ */
+
 import agh.edu.pl.GroupCommunicator.Main;
 import agh.edu.pl.GroupCommunicator.tables.Group;
 import agh.edu.pl.GroupCommunicator.tables.GroupMember;

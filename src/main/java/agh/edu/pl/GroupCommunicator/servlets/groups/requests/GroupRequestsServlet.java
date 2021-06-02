@@ -1,5 +1,12 @@
 package agh.edu.pl.GroupCommunicator.servlets.groups.requests;
 
+/*
+
+    Gets requests to join the group with ID given as a parameter, and forwards to page where all requests to join this
+    group are displayed
+
+ */
+
 import agh.edu.pl.GroupCommunicator.Main;
 import agh.edu.pl.GroupCommunicator.tables.Group;
 import agh.edu.pl.GroupCommunicator.tables.GroupRank;

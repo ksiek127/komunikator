@@ -1,5 +1,12 @@
 package agh.edu.pl.GroupCommunicator.servlets.account;
 
+/*
+
+    Checks if the data given by user in the registration form does not violate constraints, and if it's legal,
+    the user is now registered. If it's illegal, user has to correct invalid account details.
+
+ */
+
 import agh.edu.pl.GroupCommunicator.Main;
 import agh.edu.pl.GroupCommunicator.tables.Address;
 import agh.edu.pl.GroupCommunicator.tables.User;

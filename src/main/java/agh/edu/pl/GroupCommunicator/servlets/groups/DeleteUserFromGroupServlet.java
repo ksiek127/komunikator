@@ -13,6 +13,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+/*
+
+    Handles removing user from a group.
+
+ */
+
 import java.io.IOException;
 
 @WebServlet(name = "DeleteUserFromGroupServlet", urlPatterns = "/deleteUserFromGroup")

@@ -1,5 +1,12 @@
 package agh.edu.pl.GroupCommunicator.servlets.groups;
 
+/*
+
+    Checks if user is a member or an admin in the group they try to leave. If it's a regular member, they can just leave.
+    If it's an admin, they have to delete the group while leaving.
+
+ */
+
 import agh.edu.pl.GroupCommunicator.Main;
 import agh.edu.pl.GroupCommunicator.tables.Group;
 import agh.edu.pl.GroupCommunicator.tables.GroupMember;

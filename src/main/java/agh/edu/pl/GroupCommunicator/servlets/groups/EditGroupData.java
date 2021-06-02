@@ -1,5 +1,11 @@
 package agh.edu.pl.GroupCommunicator.servlets.groups;
 
+/*
+
+    Forwards group ID to page where user can edit group data, if they have permission to do it.
+
+ */
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

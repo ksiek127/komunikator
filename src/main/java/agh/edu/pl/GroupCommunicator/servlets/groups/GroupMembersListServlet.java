@@ -1,5 +1,11 @@
 package agh.edu.pl.GroupCommunicator.servlets.groups;
 
+/*
+
+    Forwards list of group members to page where all users from given group are displayed.
+
+ */
+
 import agh.edu.pl.GroupCommunicator.Main;
 import agh.edu.pl.GroupCommunicator.tables.GroupMember;
 import agh.edu.pl.GroupCommunicator.tables.GroupRank;
