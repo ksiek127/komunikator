@@ -1,6 +1,7 @@
 package agh.edu.pl.GroupCommunicator.servlets.account;
 
-import agh.edu.pl.GroupCommunicator.Main;
+import agh.edu.pl.GroupCommunicator.HibernateUtils;
+import agh.edu.pl.GroupCommunicator.LoggedUser;
 import agh.edu.pl.GroupCommunicator.tables.Address;
 import agh.edu.pl.GroupCommunicator.tables.User;
 import jakarta.servlet.ServletException;
@@ -25,11 +26,11 @@ public class EditDataHandlerServlet extends HttpServlet {
         String lastname = request.getParameter("lastname");
         String email = request.getParameter("email");
         String street = request.getParameter("street");
+        String country = request.getParameter("country");
         String city = request.getParameter("city");
         String zipCode = request.getParameter("zipcode");
-        String country = request.getParameter("country");
 
-        User user = Main.getUser();
+        User user = LoggedUser.getUser();
 
         if (user == null) {
             request.setAttribute("email_first", true);
@@ -46,7 +47,7 @@ public class EditDataHandlerServlet extends HttpServlet {
             request.getRequestDispatcher("/editData.jsp").forward(request, response);
         } else {
 
-            Session session = Main.getSession();
+            Session session = HibernateUtils.getSession();
             try {
                 Transaction tx = session.beginTransaction();
 

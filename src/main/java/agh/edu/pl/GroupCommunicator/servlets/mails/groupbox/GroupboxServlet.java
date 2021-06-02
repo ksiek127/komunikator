@@ -1,6 +1,6 @@
 package agh.edu.pl.GroupCommunicator.servlets.emails.groupbox;
 
-import agh.edu.pl.GroupCommunicator.Main;
+import agh.edu.pl.GroupCommunicator.HibernateUtils;
 import agh.edu.pl.GroupCommunicator.tables.Mail;
 import agh.edu.pl.GroupCommunicator.tables.User;
 import jakarta.servlet.ServletException;
@@ -25,7 +25,7 @@ public class GroupboxServlet extends HttpServlet {
         int groupId = Integer.parseInt(request.getParameter("groupId"));
         Map<Mail, String> mailsMap = new LinkedHashMap<>();
 
-        try (Session session = Main.getSession()) {
+        try (Session session = HibernateUtils.getSession()) {
             Transaction tx = session.beginTransaction();
             List<Mail> mails = session.createQuery("select mail from Mail as mail where mail.group.groupID =:groupId" +
                     " order by mail.created desc", Mail.class)

@@ -1,6 +1,7 @@
 package agh.edu.pl.GroupCommunicator.servlets.groups;
 
-import agh.edu.pl.GroupCommunicator.Main;
+import agh.edu.pl.GroupCommunicator.HibernateUtils;
+import agh.edu.pl.GroupCommunicator.LoggedUser;
 import agh.edu.pl.GroupCommunicator.tables.Group;
 import agh.edu.pl.GroupCommunicator.tables.User;
 import jakarta.servlet.RequestDispatcher;
@@ -31,12 +32,12 @@ public class GroupsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String email = Main.getUser().getEmail();
-        List<Group> groupsMember = null; //grupy, w ktorych jestem zwyklym czlonkiem
+        String email = LoggedUser.getUser().getEmail();
+        List<Group> groupsMember = null;
         Map<Group, String> mapGroupsAdminMod = new LinkedHashMap<>();
         Transaction tx = null;
         User user;
-        try (Session session = Main.getSession()) {
+        try (Session session = HibernateUtils.getSession()) {
             tx = session.beginTransaction();
             List<User> usersList = session.createQuery("from User as user where user.email=:userEmail", User.class)
                     .setParameter("userEmail", email)

@@ -1,6 +1,7 @@
 package agh.edu.pl.GroupCommunicator.servlets.emails;
 
-import agh.edu.pl.GroupCommunicator.Main;
+import agh.edu.pl.GroupCommunicator.HibernateUtils;
+import agh.edu.pl.GroupCommunicator.LoggedUser;
 import agh.edu.pl.GroupCommunicator.tables.Group;
 import agh.edu.pl.GroupCommunicator.tables.Inbox;
 import agh.edu.pl.GroupCommunicator.tables.Mail;
@@ -28,11 +29,11 @@ public class MessageServlet extends HttpServlet {
         int groupId;
         String groupName;
         Date date;
-        User user = Main.getUser();
+        User user = LoggedUser.getUser();
 
         String path = request.getParameter("path");
 
-        Session session = Main.getSession();
+        Session session = HibernateUtils.getSession();
         try {
             Transaction tx = session.beginTransaction();
 

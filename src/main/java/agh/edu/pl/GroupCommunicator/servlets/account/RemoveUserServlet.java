@@ -1,6 +1,7 @@
 package agh.edu.pl.GroupCommunicator.servlets.account;
 
-import agh.edu.pl.GroupCommunicator.Main;
+import agh.edu.pl.GroupCommunicator.HibernateUtils;
+import agh.edu.pl.GroupCommunicator.LoggedUser;
 import agh.edu.pl.GroupCommunicator.tables.Inbox;
 import agh.edu.pl.GroupCommunicator.tables.Outbox;
 import agh.edu.pl.GroupCommunicator.tables.User;
@@ -30,9 +31,9 @@ public class RemoveUserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        User user = Main.getUser();
+        User user = LoggedUser.getUser();
 
-        Session session = Main.getSession();
+        Session session = HibernateUtils.getSession();
         try {
             Transaction tx = session.beginTransaction();
 
@@ -65,7 +66,7 @@ public class RemoveUserServlet extends HttpServlet {
             session.close();
         }
 
-        session = Main.getSession();
+        session = HibernateUtils.getSession();
         try {
             Transaction tx = session.beginTransaction();
             session.delete(user);

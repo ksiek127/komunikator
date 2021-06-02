@@ -1,6 +1,6 @@
 package agh.edu.pl.GroupCommunicator.servlets.account;
 
-import agh.edu.pl.GroupCommunicator.Main;
+import agh.edu.pl.GroupCommunicator.HibernateUtils;
 import agh.edu.pl.GroupCommunicator.tables.Address;
 import agh.edu.pl.GroupCommunicator.tables.User;
 import jakarta.servlet.ServletException;
@@ -38,7 +38,7 @@ public class RegistrationHandlerServlet extends HttpServlet {
             Date birthDate = Date.valueOf(request.getParameter("birthdate"));
             Address address1 = new Address(street, city, zipCode, country);
             User user = new User(birthDate, firstname, lastname, email, address1);
-            Session session = Main.getSession();
+            Session session = HibernateUtils.getSession();
             try {
                 Transaction tx = session.beginTransaction();
                 session.save(user);

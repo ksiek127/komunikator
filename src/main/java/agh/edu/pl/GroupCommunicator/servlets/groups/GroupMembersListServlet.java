@@ -1,6 +1,7 @@
 package agh.edu.pl.GroupCommunicator.servlets.groups;
 
-import agh.edu.pl.GroupCommunicator.Main;
+import agh.edu.pl.GroupCommunicator.HibernateUtils;
+import agh.edu.pl.GroupCommunicator.LoggedUser;
 import agh.edu.pl.GroupCommunicator.tables.GroupMember;
 import agh.edu.pl.GroupCommunicator.tables.GroupRank;
 import agh.edu.pl.GroupCommunicator.tables.pk.GroupMemberPK;
@@ -26,11 +27,11 @@ public class GroupMembersListServlet extends HttpServlet {
 
         List<GroupMember> groupMembers = null;
         GroupMember currentUser = null;
-        Session session = Main.getSession();
+        Session session = HibernateUtils.getSession();
         try {
             Transaction tx = session.beginTransaction();
 
-            GroupMemberPK gmPk = new GroupMemberPK(Main.getUser().getUserID(), groupId);
+            GroupMemberPK gmPk = new GroupMemberPK(LoggedUser.getUser().getUserID(), groupId);
             currentUser = session.get(GroupMember.class, gmPk);
 
             if (currentUser.getGroupRank().equals(GroupRank.MEMBER)) {
@@ -45,12 +46,11 @@ public class GroupMembersListServlet extends HttpServlet {
                     .createQuery("from GroupMember as gm where gm.user.userID !=: uid and" +
                             " gm.group.groupID =: gid", GroupMember.class)
                     .setParameter("gid", groupId)
-                    .setParameter("uid", Main.getUser().getUserID())
+                    .setParameter("uid", LoggedUser.getUser().getUserID())
                     .getResultList();
 
             tx.commit();
         } catch (Throwable ex) {
-//            tu mozna na jakas strone z bledem przeniesc
             ex.printStackTrace();
         } finally {
             session.close();

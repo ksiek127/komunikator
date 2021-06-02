@@ -1,6 +1,7 @@
 package agh.edu.pl.GroupCommunicator.servlets.groups;
 
-import agh.edu.pl.GroupCommunicator.Main;
+import agh.edu.pl.GroupCommunicator.HibernateUtils;
+import agh.edu.pl.GroupCommunicator.LoggedUser;
 import agh.edu.pl.GroupCommunicator.tables.Group;
 import agh.edu.pl.GroupCommunicator.tables.GroupMember;
 import agh.edu.pl.GroupCommunicator.tables.GroupRequest;
@@ -34,7 +35,7 @@ public class GroupsSearchServlet extends HttpServlet {
             request.setAttribute("no_group_name", true);
             request.getRequestDispatcher("searchGroups.jsp").forward(request, response);
         } else {
-            Session session = Main.getSession();
+            Session session = HibernateUtils.getSession();
             List<Group> groupsList = null;
             Map<Group, String> groupsMap = new HashMap<>();
             try {
@@ -51,7 +52,7 @@ public class GroupsSearchServlet extends HttpServlet {
                             .createQuery("from GroupMember as gm where gm.group.groupID=:gId and gm.user.userID=:uId",
                                     GroupMember.class)
                             .setParameter("gId", group.getGroupID())
-                            .setParameter("uId", Main.getUser().getUserID())
+                            .setParameter("uId", LoggedUser.getUser().getUserID())
                             .getResultList();
                     if (gm != null && gm.size() == 1) {
                         groupsMap.put(group, "joined");
@@ -61,7 +62,7 @@ public class GroupsSearchServlet extends HttpServlet {
                                 .createQuery("from GroupRequest as gr where gr.group.groupID=:gId and gr.user.userID=:uId",
                                         GroupRequest.class)
                                 .setParameter("gId", group.getGroupID())
-                                .setParameter("uId", Main.getUser().getUserID())
+                                .setParameter("uId", LoggedUser.getUser().getUserID())
                                 .getResultList();
                         if (gr != null && gr.size() == 1) {
                             groupsMap.put(group, "requested");

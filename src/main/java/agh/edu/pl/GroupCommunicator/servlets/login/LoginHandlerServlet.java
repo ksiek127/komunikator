@@ -1,6 +1,7 @@
 package agh.edu.pl.GroupCommunicator.servlets.login;
 
-import agh.edu.pl.GroupCommunicator.Main;
+import agh.edu.pl.GroupCommunicator.HibernateUtils;
+import agh.edu.pl.GroupCommunicator.LoggedUser;
 import agh.edu.pl.GroupCommunicator.tables.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -19,7 +20,7 @@ public class LoginHandlerServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User currentUser = Main.getUser();
+        User currentUser = LoggedUser.getUser();
 
         if (currentUser == null) {
             request.setAttribute("email_first", true);
@@ -37,7 +38,7 @@ public class LoginHandlerServlet extends HttpServlet {
             request.setAttribute("login_empty", true);
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         } else {
-            Session session = Main.getSession();
+            Session session = HibernateUtils.getSession();
             User foundUser;
 
             try {
@@ -58,7 +59,7 @@ public class LoginHandlerServlet extends HttpServlet {
                 request.setAttribute("no_user", true);
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
             } else {
-                Main.setUser(foundUser);
+                LoggedUser.setUser(foundUser);
                 request.setAttribute("user", foundUser);
                 request.getRequestDispatcher("/mainPage.jsp").forward(request, response);
             }

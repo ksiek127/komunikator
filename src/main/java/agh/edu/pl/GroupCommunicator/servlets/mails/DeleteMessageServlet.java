@@ -1,6 +1,7 @@
 package agh.edu.pl.GroupCommunicator.servlets.mails;
 
-import agh.edu.pl.GroupCommunicator.Main;
+import agh.edu.pl.GroupCommunicator.HibernateUtils;
+import agh.edu.pl.GroupCommunicator.LoggedUser;
 import agh.edu.pl.GroupCommunicator.tables.Inbox;
 import agh.edu.pl.GroupCommunicator.tables.Outbox;
 import agh.edu.pl.GroupCommunicator.tables.User;
@@ -20,8 +21,8 @@ public class DeleteMessageServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int mailId = Integer.parseInt(request.getParameter("mailId"));
-        try (Session session = Main.getSession()) {
-            User user = Main.getUser();
+        try (Session session = HibernateUtils.getSession()) {
+            User user = LoggedUser.getUser();
             Transaction tx = session.beginTransaction();
             String where = request.getParameter("where");
             if (where.equals("inbox")) {

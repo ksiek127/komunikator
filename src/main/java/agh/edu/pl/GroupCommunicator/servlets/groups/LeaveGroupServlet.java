@@ -1,6 +1,7 @@
 package agh.edu.pl.GroupCommunicator.servlets.groups;
 
-import agh.edu.pl.GroupCommunicator.Main;
+import agh.edu.pl.GroupCommunicator.HibernateUtils;
+import agh.edu.pl.GroupCommunicator.LoggedUser;
 import agh.edu.pl.GroupCommunicator.tables.Group;
 import agh.edu.pl.GroupCommunicator.tables.GroupMember;
 import agh.edu.pl.GroupCommunicator.tables.GroupRank;
@@ -27,7 +28,7 @@ public class LeaveGroupServlet extends HttpServlet {
         Group group = null;
         GroupMember gm = null;
         List<GroupMember> gms = null;
-        Session session = Main.getSession();
+        Session session = HibernateUtils.getSession();
         try {
             Transaction tx = session.beginTransaction();
 
@@ -38,7 +39,7 @@ public class LeaveGroupServlet extends HttpServlet {
                     .setParameter("gId", groupId)
                     .getResultList();
 
-            GroupMemberPK gmPk = new GroupMemberPK(Main.getUser().getUserID(), groupId);
+            GroupMemberPK gmPk = new GroupMemberPK(LoggedUser.getUser().getUserID(), groupId);
             gm = session.get(GroupMember.class, gmPk);
 
             tx.commit();

@@ -1,6 +1,7 @@
 package agh.edu.pl.GroupCommunicator.servlets.account;
 
-import agh.edu.pl.GroupCommunicator.Main;
+import agh.edu.pl.GroupCommunicator.HibernateUtils;
+import agh.edu.pl.GroupCommunicator.LoggedUser;
 import agh.edu.pl.GroupCommunicator.tables.Group;
 import agh.edu.pl.GroupCommunicator.tables.User;
 import jakarta.servlet.ServletException;
@@ -24,8 +25,8 @@ public class CheckIfGroupAdminServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        User user = Main.getUser();
-        Session session = Main.getSession();
+        User user = LoggedUser.getUser();
+        Session session = HibernateUtils.getSession();
         List<Group> groupsWhereAdmin = null;
         try {
 

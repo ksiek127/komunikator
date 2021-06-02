@@ -1,7 +1,7 @@
 package agh.edu.pl.GroupCommunicator.servlets.mails.inbox;
 
-import agh.edu.pl.GroupCommunicator.Main;
-import agh.edu.pl.GroupCommunicator.tables.Group;
+import agh.edu.pl.GroupCommunicator.HibernateUtils;
+import agh.edu.pl.GroupCommunicator.LoggedUser;
 import agh.edu.pl.GroupCommunicator.tables.Mail;
 import agh.edu.pl.GroupCommunicator.tables.User;
 import jakarta.servlet.ServletException;
@@ -27,8 +27,8 @@ public class InboxServlet extends HttpServlet {
 
         Map<Mail, String> mailsNewMap = new LinkedHashMap<>();
         Map<Mail, String> mailsReadMap = new LinkedHashMap<>();
-        try (Session session = Main.getSession()) {
-            User user = Main.getUser();
+        try (Session session = HibernateUtils.getSession()) {
+            User user = LoggedUser.getUser();
             Transaction tx = session.beginTransaction();
             int userId = user.getUserID();
             List<Mail> mails_new = session.createQuery("select mail from Inbox inbox where inbox.toUser.userID =:userId " +

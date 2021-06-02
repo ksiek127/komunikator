@@ -1,6 +1,7 @@
 package agh.edu.pl.GroupCommunicator.servlets.groups.requests;
 
-import agh.edu.pl.GroupCommunicator.Main;
+import agh.edu.pl.GroupCommunicator.HibernateUtils;
+import agh.edu.pl.GroupCommunicator.LoggedUser;
 import agh.edu.pl.GroupCommunicator.tables.Group;
 import agh.edu.pl.GroupCommunicator.tables.GroupRequest;
 import agh.edu.pl.GroupCommunicator.tables.pk.GroupRequestPK;
@@ -22,13 +23,13 @@ public class DeleteRequestServlet extends HttpServlet {
             throws ServletException, IOException {
         int groupId = Integer.parseInt(request.getParameter("group_id"));
 
-        Session session = Main.getSession();
+        Session session = HibernateUtils.getSession();
         try {
             Transaction tx = session.beginTransaction();
 
             Group group = session.get(Group.class, groupId);
 
-            GroupRequestPK grPk = new GroupRequestPK(Main.getUser().getUserID(), groupId);
+            GroupRequestPK grPk = new GroupRequestPK(LoggedUser.getUser().getUserID(), groupId);
             GroupRequest gr = session.get(GroupRequest.class, grPk);
 
             session.delete(gr);

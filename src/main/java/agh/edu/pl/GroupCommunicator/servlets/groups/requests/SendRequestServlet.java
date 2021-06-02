@@ -1,6 +1,7 @@
 package agh.edu.pl.GroupCommunicator.servlets.groups.requests;
 
-import agh.edu.pl.GroupCommunicator.Main;
+import agh.edu.pl.GroupCommunicator.HibernateUtils;
+import agh.edu.pl.GroupCommunicator.LoggedUser;
 import agh.edu.pl.GroupCommunicator.tables.Group;
 import agh.edu.pl.GroupCommunicator.tables.GroupRequest;
 import jakarta.servlet.ServletException;
@@ -20,13 +21,13 @@ public class SendRequestServlet extends HttpServlet {
             throws ServletException, IOException {
         int groupId = Integer.parseInt(request.getParameter("group_id"));
 
-        Session session = Main.getSession();
+        Session session = HibernateUtils.getSession();
         try {
             Transaction tx = session.beginTransaction();
 
             Group group = session.get(Group.class, groupId);
 
-            GroupRequest gr = new GroupRequest(group, Main.getUser());
+            GroupRequest gr = new GroupRequest(group, LoggedUser.getUser());
 
             session.save(gr);
 

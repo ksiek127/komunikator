@@ -1,6 +1,7 @@
 package agh.edu.pl.GroupCommunicator.servlets.mails;
 
-import agh.edu.pl.GroupCommunicator.Main;
+import agh.edu.pl.GroupCommunicator.HibernateUtils;
+import agh.edu.pl.GroupCommunicator.LoggedUser;
 import agh.edu.pl.GroupCommunicator.tables.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -18,7 +19,7 @@ public class SendMessageServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        User user = Main.getUser();
+        User user = LoggedUser.getUser();
         String title = request.getParameter("title");
         String message = request.getParameter("message");
         int groupId = Integer.parseInt(request.getParameter("groupId"));
@@ -28,7 +29,7 @@ public class SendMessageServlet extends HttpServlet {
             request.getRequestDispatcher("/sendMail.jsp").forward(request, response);
         } else {
             List<GroupMember> members;
-            try (Session session = Main.getSession()) {
+            try (Session session = HibernateUtils.getSession()) {
                 Transaction tx = session.beginTransaction();
 
                 Group group = session.get(Group.class, groupId);
@@ -44,7 +45,7 @@ public class SendMessageServlet extends HttpServlet {
                         .getResultList();
                 System.out.println(members);
                 for (GroupMember member : members) {
-                    if (member.getUser().getUserID() != Main.getUser().getUserID()) {
+                    if (member.getUser().getUserID() != LoggedUser.getUser().getUserID()) {
                         System.out.println(member.getUser().getUserID());
                         Inbox inbox = new Inbox(mail, member.getUser());
                         session.save(inbox);
@@ -53,7 +54,6 @@ public class SendMessageServlet extends HttpServlet {
                 session.save(outbox);
                 tx.commit();
             } catch (Exception e) {
-//                tu zrobic poinformowanie uzytkownika o bledzie
                 e.printStackTrace();
             }
         }

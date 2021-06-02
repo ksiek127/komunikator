@@ -8,7 +8,8 @@ package agh.edu.pl.GroupCommunicator.servlets.groups;
 
  */
 
-import agh.edu.pl.GroupCommunicator.Main;
+import agh.edu.pl.GroupCommunicator.HibernateUtils;
+import agh.edu.pl.GroupCommunicator.LoggedUser;
 import agh.edu.pl.GroupCommunicator.tables.Group;
 import agh.edu.pl.GroupCommunicator.tables.GroupMember;
 import agh.edu.pl.GroupCommunicator.tables.GroupRank;
@@ -33,13 +34,13 @@ public class CreateGroupServlet extends HttpServlet {
             throws ServletException, IOException {
         String name = request.getParameter("name");
         String description = request.getParameter("description");
-        User user = Main.getUser();
+        User user = LoggedUser.getUser();
         if (name.isEmpty() || description.isEmpty()) {
             request.setAttribute("empty_fields", true);
             request.getRequestDispatcher("/createGroup.jsp").forward(request, response);
         }
         Long count;
-        try (Session session = Main.getSession()) {
+        try (Session session = HibernateUtils.getSession()) {
             Query query = session.createQuery("select count(*) from Group group where group.name = :gName");
             query.setParameter("gName", name);
             count = (Long) query.uniqueResult();
@@ -49,7 +50,7 @@ public class CreateGroupServlet extends HttpServlet {
             request.getRequestDispatcher("/createGroup.jsp").forward(request, response);
         } else {
             Group group = new Group(name, description);
-            try (Session session = Main.getSession()) {
+            try (Session session = HibernateUtils.getSession()) {
                 Transaction tx = session.beginTransaction();
                 session.save(group);
                 GroupMember groupMember = new GroupMember(user, group, GroupRank.ADMIN);
