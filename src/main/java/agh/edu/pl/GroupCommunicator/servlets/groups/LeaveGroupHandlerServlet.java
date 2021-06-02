@@ -1,5 +1,12 @@
 package agh.edu.pl.GroupCommunicator.servlets.groups;
 
+/*
+
+    Deletes logged user from a choosen group by deleting data from GroupMember table (using group's groupId and logged
+    user's userId). Redirects to returnPage assigned as a request parameter with a success or failure variable
+
+ */
+
 import agh.edu.pl.GroupCommunicator.HibernateUtils;
 import agh.edu.pl.GroupCommunicator.LoggedUser;
 import agh.edu.pl.GroupCommunicator.tables.GroupMember;

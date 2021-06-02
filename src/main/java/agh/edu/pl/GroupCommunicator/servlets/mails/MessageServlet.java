@@ -2,7 +2,7 @@ package agh.edu.pl.GroupCommunicator.servlets.mails;
 
 /*
 
-    Gets details on mail with a given id from database.
+    Gets details of mail with a given id from database.
     Sets mail as read in inbox
     Redirects to message.jsp
 

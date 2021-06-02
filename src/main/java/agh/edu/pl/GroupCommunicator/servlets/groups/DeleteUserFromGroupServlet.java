@@ -1,5 +1,12 @@
 package agh.edu.pl.GroupCommunicator.servlets.groups;
 
+/*
+
+    Deletes selected user from the group and redirects to GroupMembersListServlet with a success or failure variable
+    assigned
+
+ */
+
 import agh.edu.pl.GroupCommunicator.HibernateUtils;
 import agh.edu.pl.GroupCommunicator.tables.Group;
 import agh.edu.pl.GroupCommunicator.tables.GroupMember;

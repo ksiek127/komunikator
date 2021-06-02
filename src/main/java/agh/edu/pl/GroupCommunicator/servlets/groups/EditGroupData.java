@@ -1,5 +1,11 @@
 package agh.edu.pl.GroupCommunicator.servlets.groups;
 
+/*
+
+    Redirects to editGroupData.jsp with a given groupId provided
+
+ */
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

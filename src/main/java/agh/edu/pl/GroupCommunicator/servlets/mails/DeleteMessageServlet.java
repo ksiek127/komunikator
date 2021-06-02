@@ -7,6 +7,7 @@ package agh.edu.pl.GroupCommunicator.servlets.mails;
     Redirects to mainPage.jsp using ReturnToMainPageServlet
 
  */
+
 import agh.edu.pl.GroupCommunicator.HibernateUtils;
 import agh.edu.pl.GroupCommunicator.LoggedUser;
 import agh.edu.pl.GroupCommunicator.tables.Inbox;

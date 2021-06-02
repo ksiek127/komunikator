@@ -1,5 +1,13 @@
 package agh.edu.pl.GroupCommunicator.servlets.groups;
 
+/*
+
+    Loads groups where logged user is a member/moderator/admin and redirects to groups.jsp with assigned list and map of
+    found groups (user is a moderator/admin in a group -> group is put to mapGroupsAdminMod map,
+    user is normal member in a group -> group is added to groupsMember list)
+
+ */
+
 import agh.edu.pl.GroupCommunicator.HibernateUtils;
 import agh.edu.pl.GroupCommunicator.LoggedUser;
 import agh.edu.pl.GroupCommunicator.tables.Group;

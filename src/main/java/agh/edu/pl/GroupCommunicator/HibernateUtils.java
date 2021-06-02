@@ -1,6 +1,12 @@
 package agh.edu.pl.GroupCommunicator;
 
-import agh.edu.pl.GroupCommunicator.tables.User;
+/*
+
+    Creates SessionFactory using configurations specified in hibernate.cfg.xml file
+    Session can be obtained through getSession() method
+
+ */
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

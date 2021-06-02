@@ -1,5 +1,12 @@
 package agh.edu.pl.GroupCommunicator.servlets.groups;
 
+/*
+
+    Deletes group with a given id and redirects to a page provided as a request parameter (returnPage)
+    with success or failure variable assigned to inform the user about the result
+
+ */
+
 import agh.edu.pl.GroupCommunicator.HibernateUtils;
 import agh.edu.pl.GroupCommunicator.tables.Group;
 import jakarta.servlet.ServletException;

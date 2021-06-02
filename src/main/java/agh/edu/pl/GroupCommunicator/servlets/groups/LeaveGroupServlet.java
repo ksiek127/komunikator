@@ -1,5 +1,13 @@
 package agh.edu.pl.GroupCommunicator.servlets.groups;
 
+/*
+
+    Checks chosen group data and redirects to leaveGroup.jsp with an information if the user is the only member
+    in the group and if the user is a group admin. On error redirects to returnPage assigned as a request parameter with
+    a failure variable.
+
+ */
+
 import agh.edu.pl.GroupCommunicator.HibernateUtils;
 import agh.edu.pl.GroupCommunicator.LoggedUser;
 import agh.edu.pl.GroupCommunicator.tables.Group;

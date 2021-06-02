@@ -1,5 +1,12 @@
 package agh.edu.pl.GroupCommunicator.servlets.groups;
 
+/*
+
+    Updates group data and redirects to GroupsServlet on success or to editGroupData.jsp with a failure variable
+    assigned
+
+ */
+
 import agh.edu.pl.GroupCommunicator.HibernateUtils;
 import agh.edu.pl.GroupCommunicator.tables.Group;
 import jakarta.servlet.ServletException;
