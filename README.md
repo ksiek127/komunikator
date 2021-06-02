@@ -24,9 +24,9 @@ Możliwa jest również edycja danych użytkownika i grupy, a także usunięcie 
 
 ## Struktura projektu
 
-W folderze [./src/main/webapp](./src/main/webapp) znajdują się pliki .jsp, które tworzą interfejs.
-Za komunikację z bazą danych odpowiedzialne są servlety znajdujące się w [src/main/java/agh/edu/pl/servlets](src/main/java/agh/edu/pl/servlets). Każdy servlet ma w komentarzu nad kodem napisane, za co jest odpowiedzialny.
-Tabele generujące schemat bazy danych są w [src/main/java/agh/edu/pl/tables](src/main/java/agh/edu/pl/tables).
+W folderze [src/main/webapp](./src/main/webapp) znajdują się pliki .jsp, które tworzą interfejs.
+Za komunikację z bazą danych odpowiedzialne są servlety znajdujące się w [src/main/java/agh/edu/pl/servlets](src/main/java/agh/edu/pl/GroupCommunicator/servlets). Każdy servlet ma w komentarzu nad kodem napisane, za co jest odpowiedzialny.
+Tabele generujące schemat bazy danych są w [src/main/java/agh/edu/pl/tables](src/main/java/agh/edu/pl/GroupCommunicator/tables).
 
 ## Schemat bazy danych
 
