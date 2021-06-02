@@ -1,4 +1,11 @@
-package agh.edu.pl.GroupCommunicator.servlets.emails.groupbox;
+package agh.edu.pl.GroupCommunicator.servlets.mails.groupbox;
+
+/*
+
+    Gets a list of mails sent to group with a given id from database
+    Redirects to groupMails.jsp.
+
+ */
 
 import agh.edu.pl.GroupCommunicator.HibernateUtils;
 import agh.edu.pl.GroupCommunicator.tables.Mail;

@@ -1,5 +1,13 @@
 package agh.edu.pl.GroupCommunicator.servlets.mails;
 
+/*
+
+    Creates new mail with a given title and message.
+    Sends created mail to members of chosen group (add information to inbox)
+    Redirects to messageSent.jsp on success and to sendMail.jsp with error on failure
+
+ */
+
 import agh.edu.pl.GroupCommunicator.HibernateUtils;
 import agh.edu.pl.GroupCommunicator.LoggedUser;
 import agh.edu.pl.GroupCommunicator.tables.*;

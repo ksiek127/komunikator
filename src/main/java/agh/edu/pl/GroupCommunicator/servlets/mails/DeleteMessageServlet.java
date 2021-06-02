@@ -1,5 +1,12 @@
 package agh.edu.pl.GroupCommunicator.servlets.mails;
 
+/*
+
+    Removes received mail with a given id from users inbox or
+    sets sent mail as deleted in users outbox.
+    Redirects to mainPage.jsp using ReturnToMainPageServlet
+
+ */
 import agh.edu.pl.GroupCommunicator.HibernateUtils;
 import agh.edu.pl.GroupCommunicator.LoggedUser;
 import agh.edu.pl.GroupCommunicator.tables.Inbox;

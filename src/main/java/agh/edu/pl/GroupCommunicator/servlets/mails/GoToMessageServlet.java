@@ -1,5 +1,12 @@
 package agh.edu.pl.GroupCommunicator.servlets.mails;
 
+/*
+
+    Redirects user to page where he can send new message.
+    Redirects to sendMail.jsp
+
+ */
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

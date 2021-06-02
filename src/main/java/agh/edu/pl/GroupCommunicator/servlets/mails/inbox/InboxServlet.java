@@ -1,5 +1,12 @@
 package agh.edu.pl.GroupCommunicator.servlets.mails.inbox;
 
+/*
+
+    Gets a list of user's incoming mails (new and read) from database
+    Redirects to inbox.jsp.
+
+ */
+
 import agh.edu.pl.GroupCommunicator.HibernateUtils;
 import agh.edu.pl.GroupCommunicator.LoggedUser;
 import agh.edu.pl.GroupCommunicator.tables.Mail;

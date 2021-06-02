@@ -1,5 +1,12 @@
 package agh.edu.pl.GroupCommunicator.servlets;
 
+/*
+
+    Returns user to his profile page.
+    Redirects to mainPage.jsp
+
+ */
+
 import agh.edu.pl.GroupCommunicator.LoggedUser;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

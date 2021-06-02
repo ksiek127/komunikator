@@ -1,5 +1,13 @@
 package agh.edu.pl.GroupCommunicator.servlets.login;
 
+/*
+
+    Redirects successfully logged user to his profile page.
+    Redirects to mainPage.jsp on success and to index.jsp
+    with error on failure
+
+ */
+
 import agh.edu.pl.GroupCommunicator.HibernateUtils;
 import agh.edu.pl.GroupCommunicator.LoggedUser;
 import agh.edu.pl.GroupCommunicator.tables.User;

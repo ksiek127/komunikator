@@ -1,4 +1,12 @@
-package agh.edu.pl.GroupCommunicator.servlets.emails;
+package agh.edu.pl.GroupCommunicator.servlets.mails;
+
+/*
+
+    Gets details on mail with a given id from database.
+    Sets mail as read in inbox
+    Redirects to message.jsp
+
+ */
 
 import agh.edu.pl.GroupCommunicator.HibernateUtils;
 import agh.edu.pl.GroupCommunicator.LoggedUser;

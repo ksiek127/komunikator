@@ -1,5 +1,12 @@
 package agh.edu.pl.GroupCommunicator.servlets.login;
 
+/*
+
+    Returns user from his profile to login page.
+    Redirects to index.jsp.
+
+ */
+
 import agh.edu.pl.GroupCommunicator.HibernateUtils;
 import agh.edu.pl.GroupCommunicator.LoggedUser;
 import jakarta.servlet.ServletException;

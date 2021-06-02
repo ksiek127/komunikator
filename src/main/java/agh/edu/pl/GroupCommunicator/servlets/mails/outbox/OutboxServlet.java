@@ -1,5 +1,12 @@
 package agh.edu.pl.GroupCommunicator.servlets.mails.outbox;
 
+/*
+
+    Gets a list of user's outgoing mails from database
+    Redirects to outbox.jsp.
+
+ */
+
 import agh.edu.pl.GroupCommunicator.HibernateUtils;
 import agh.edu.pl.GroupCommunicator.LoggedUser;
 import agh.edu.pl.GroupCommunicator.tables.Mail;
