@@ -1,4 +1,4 @@
-package agh.edu.pl.GroupCommunicator;
+package agh.edu.pl.GroupCommunicator.servlets.account;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
