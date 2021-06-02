@@ -1,5 +1,13 @@
 package agh.edu.pl.GroupCommunicator.servlets.groups;
 
+/*
+
+    Creates group with a given name and description.
+    Redirects to groupCreated.jsp on success and to createGroup.jsp
+    with error on failure
+
+ */
+
 import agh.edu.pl.GroupCommunicator.Main;
 import agh.edu.pl.GroupCommunicator.tables.Group;
 import agh.edu.pl.GroupCommunicator.tables.GroupMember;

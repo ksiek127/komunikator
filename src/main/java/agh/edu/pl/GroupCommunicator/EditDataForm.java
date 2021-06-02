@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@SuppressWarnings("unchecked")
 @WebServlet(name = "editdataform", value = "/editdataform")
 public class EditDataForm extends HttpServlet {
 
