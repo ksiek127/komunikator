@@ -1,5 +1,5 @@
 # Komunikator
-Komunikator grupowy to projekt aplikacji webowej, w której możemy stworzyć profil użytkownika, dodawać nowe grupy, przypisywać do nich członków i tworzyć konwersacje grupowe za pomocą przesyłanych maili.
+Komunikator grupowy to aplikacja webowa, w której możemy stworzyć profil użytkownika, dodawać nowe grupy, przypisywać do nich członków i tworzyć konwersacje grupowe za pomocą przesyłanych maili.
 
 Projekt realizowany jest w języku Java z wykorzystaniem frameworka Hibernate do realizacji warstwy dostępu do danych oraz relacyjnej bazy danych Microsoft SQL Server w celu ich przechowywania.
 
