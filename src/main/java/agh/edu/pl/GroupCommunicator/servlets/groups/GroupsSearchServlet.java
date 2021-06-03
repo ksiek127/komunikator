@@ -2,8 +2,9 @@ package agh.edu.pl.GroupCommunicator.servlets.groups;
 
 /*
 
-    Uses group_name parameter provided by the user searching for the group creates a groups map and loads all groups
-    with names matching the group_name parameter. Checks if user is already a member, requested joining or
+    On Get: Redirects to searchGroups.jsp which shows a groups search engine
+    On Post: Uses group_name parameter provided by the user using the groups search engine. Creates a groups map and loads
+    all groups with names matching the group_name parameter. Checks if user is already a member, requested joining or
     can request to join the group. Redirects to searchGroups.jsp with a search result.
 
  */
