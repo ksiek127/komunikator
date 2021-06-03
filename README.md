@@ -12,7 +12,9 @@ Interfejs tworzą strony JSP napisane w formacie HTML z wykorzystaniem servletó
 
 - Krzysztof Siekierzyński
 
+
 - Joanna Klimek
+
 
 ## Działanie aplikacji
 
@@ -56,3 +58,12 @@ Po otwarciu folderu z zaimportowanym projektem w IntelliJ należy zainstalować 
 2. Wskazać katalog, gdzie rozpakowano zainstalowany serwer Apache Tomcat 10.0.6 po naciśnięciu na `Configure...` przy opcji `Application Server` oraz nacisnąć na przycisk `Fix` w prawym dolnym rogu przy ostrzeżeniu `Warning: No artifacts marked for deployment` ![config2](https://user-images.githubusercontent.com/39878361/120623176-ca4e5300-c45f-11eb-8d23-57e3f9fa3a0f.png)
 3. Zakładka `Deployment` powinna wyglądać w następujący sposób ![config3](https://user-images.githubusercontent.com/39878361/120623403-fd90e200-c45f-11eb-97be-de73f1151b3c.png)
 4. Po zaakceptowaniu wprowadzonej konfiguracji można uruchomić aplikację ![config4](https://user-images.githubusercontent.com/39878361/120623708-4183e700-c460-11eb-801d-5ed3fe298b9d.png)
+
+#### Modyfikacja serwera bazodanowego
+Aby zmienić serwer bazodanowy do którego będzie podłączona aplikacja należy odpowiednio zmodyfikować plik [hibernate.cfg.xml](https://github.com/ksiek127/komunikator/blob/master/src/main/resources/hibernate.cfg.xml)
+
+#### WAŻNE
+Aby aplikacja działała poprawnie, należy upewnić się, że w bazie danych w tabeli User występuje użytkownik o adresie email: `deleted@account`. Polecenie dodające wspomnianego użytkownika do bazy danych:
+```
+INSERT INTO [User] (city, country, street, zipCode, birthDate, email, firstname, lastname) VALUES ('City', 'Country', 'Street', '11-111', '2000-01-01 12:00:00.000', 'deleted@account', 'Account', 'Deleted')
+```
