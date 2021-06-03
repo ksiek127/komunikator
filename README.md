@@ -339,7 +339,7 @@ Tworzymy wymagany konstruktor bezparametrowy oraz drugi z wybranymi parametrami
     }
 ```
 
-Tworzymy odpowiednie metody `get` oraz `set` ułatwiający operacje na encjach.
+Tworzymy odpowiednie metody `get` oraz `set` ułatwiające operacje na encjach.
 
 ```
     public int getMailID() {
