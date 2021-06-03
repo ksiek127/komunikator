@@ -32,7 +32,7 @@ Tabele generujące schemat bazy danych są w [src/main/java/agh/edu/pl/tables](s
 
 ## Schemat bazy danych
 
-* jpg *
+![diagram](https://user-images.githubusercontent.com/72787277/120630534-397b7580-c467-11eb-89f8-062f211f8f45.png)
 
 Tabela | Znaczenie
 ------------ | -------------
