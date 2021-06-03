@@ -13,7 +13,7 @@ repositories {
 }
 
 ext {
-    javaMainClass = "agh/edu/pl/GroupCommunicator/Main"
+    javaMainClass = "agh/edu/pl/GroupCommunicator/HibernateUtils"
     junitVersion = '5.7.1'
 }
 
