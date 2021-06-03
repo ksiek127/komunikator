@@ -12,7 +12,6 @@ Interfejs tworzą strony JSP napisane w formacie HTML z wykorzystaniem servletó
 
 - Krzysztof Siekierzyński
 
-
 - Joanna Klimek
 
 
@@ -42,7 +41,10 @@ GroupRequest | Realizując relację wiele-do-wielu, informuje którzy użytkowni
 GroupMember | Realizując relację wiele-do-wielu, informuje jacy użytkownicy aktualnie przynależą do poszczególnych grup oraz jaką posiadają w rangę w danej grupie (admin/moderator/member)
 Mail | Przechowuje podstawowe informacje dotyczące wysłanych maili
 Inbox | Realizując relację wiele-do-wielu, przypisuje mailom ich odbiorców z tabeli User oraz przechowuje informację, czy mail został przeczytany przez danego użytkownika
-Inbox | Realizując relację wiele-do-wielu, przypisuje mailom ich nadawców z tabeli User oraz przechowuje informację, czy mail został usunięty przez danego użytkownika
+Outbox | Realizując relację wiele-do-wielu, przypisuje mailom ich nadawców z tabeli User oraz przechowuje informację, czy mail został usunięty przez danego użytkownika
+
+Schemat bazy wynika ze sposobu działania aplikacji. Stawiając na komunikację grupową postanowiliśmy przypisać maile do grup zamiast użytkowników aplikacji.
+Jako że wiadomości przesyłane są do wielu użytkowników jednocześnie, zdecydowaliśmy się przechowywać jedną kopię maila w tabeli Mail oraz wiele wpisów w tabelach Inbox i Outbox, które informują o tym do kogo i od kogo maile wiadomości zostały wysłane. Natomiast podział na skrzynkę nadawcza i odbiorczą umożliwia nam śledzenie takich informacji jak fakt czy mail został przeczytany przez konkretnego odbiorcę, bądź usunięty z prywatnej skrzynki nadawczej przez nadawcę, bez jednoczesnego całkowitego usuwania maila u wszystkich użytkowników.
 
 ## Uruchamianie aplikacji
 #### Importowanie i budowa aplikacji
