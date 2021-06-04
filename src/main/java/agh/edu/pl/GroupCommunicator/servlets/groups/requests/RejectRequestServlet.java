@@ -13,6 +13,12 @@ import org.hibernate.Transaction;
 
 import java.io.IOException;
 
+/*
+
+    Handles rejecting requests to join a group.
+
+ */
+
 @WebServlet(name = "RejectRequestServlet", urlPatterns = "/rejectRequest")
 public class RejectRequestServlet extends HttpServlet {
     @Override

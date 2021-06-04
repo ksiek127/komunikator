@@ -15,6 +15,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+
+    Gets requests to join the group with ID given as a parameter, and forwards to page where all requests to join this
+    group are displayed
+
+ */
+
 @WebServlet(name = "GroupRequestsServlet", urlPatterns = "/groupRequests")
 public class GroupRequestsServlet extends HttpServlet {
     @Override

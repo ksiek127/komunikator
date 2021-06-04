@@ -15,6 +15,12 @@ import org.hibernate.Transaction;
 
 import java.io.IOException;
 
+/*
+
+    Handles changing member's rank by an admin.
+
+ */
+
 @WebServlet(name = "ChangeRankServlet", urlPatterns = "/changeRank")
 public class ChangeRankServlet extends HttpServlet {
     @Override

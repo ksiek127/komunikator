@@ -16,6 +16,12 @@ import org.hibernate.Transaction;
 import java.io.IOException;
 import java.util.List;
 
+/*
+
+    Servlet that safely removes user from the database.
+
+ */
+
 import static agh.edu.pl.GroupCommunicator.DeletedAccountUser.getDeletedAccountUser;
 
 @WebServlet(name = "RemoveUserServlet", value = "/removeUser")

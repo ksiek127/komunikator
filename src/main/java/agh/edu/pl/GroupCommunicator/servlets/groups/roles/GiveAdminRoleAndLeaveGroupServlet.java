@@ -17,6 +17,12 @@ import org.hibernate.Transaction;
 import java.io.IOException;
 import java.util.List;
 
+/*
+
+    When admin leaves the group, he can give his rank to someone else before leaving.
+
+ */
+
 @WebServlet(name = "GiveAdminRoleAndLeaveGroupServlet", urlPatterns = "/giveAdminRoleAndLeaveGroup")
 public class GiveAdminRoleAndLeaveGroupServlet extends HttpServlet {
     @Override

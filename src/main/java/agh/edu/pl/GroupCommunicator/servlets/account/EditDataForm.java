@@ -1,5 +1,11 @@
 package agh.edu.pl.GroupCommunicator.servlets.account;
 
+/*
+
+    Forwards email to panel where user can edit their data.
+
+ */
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
