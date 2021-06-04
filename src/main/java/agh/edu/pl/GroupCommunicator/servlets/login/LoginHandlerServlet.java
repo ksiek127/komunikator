@@ -1,6 +1,15 @@
 package agh.edu.pl.GroupCommunicator.servlets.login;
 
-import agh.edu.pl.GroupCommunicator.Main;
+/*
+
+    Redirects successfully logged user to his profile page.
+    Redirects to mainPage.jsp on success and to index.jsp
+    with error on failure
+
+ */
+
+import agh.edu.pl.GroupCommunicator.HibernateUtils;
+import agh.edu.pl.GroupCommunicator.LoggedUser;
 import agh.edu.pl.GroupCommunicator.tables.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -19,14 +28,14 @@ public class LoginHandlerServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User currentUser = Main.getUser();
+        User currentUser = LoggedUser.getUser();
 
         if (currentUser == null) {
             request.setAttribute("email_first", true);
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         } else {
             request.setAttribute("user", currentUser);
-            request.getRequestDispatcher("/mainpage.jsp").forward(request, response);
+            request.getRequestDispatcher("/mainPage.jsp").forward(request, response);
         }
     }
 
@@ -37,7 +46,7 @@ public class LoginHandlerServlet extends HttpServlet {
             request.setAttribute("login_empty", true);
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         } else {
-            Session session = Main.getSession();
+            Session session = HibernateUtils.getSession();
             User foundUser;
 
             try {
@@ -58,9 +67,9 @@ public class LoginHandlerServlet extends HttpServlet {
                 request.setAttribute("no_user", true);
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
             } else {
-                Main.setUser(foundUser);
+                LoggedUser.setUser(foundUser);
                 request.setAttribute("user", foundUser);
-                request.getRequestDispatcher("/mainpage.jsp").forward(request, response);
+                request.getRequestDispatcher("/mainPage.jsp").forward(request, response);
             }
         }
     }

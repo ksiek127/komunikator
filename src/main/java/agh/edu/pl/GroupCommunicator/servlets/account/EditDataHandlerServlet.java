@@ -1,13 +1,7 @@
 package agh.edu.pl.GroupCommunicator.servlets.account;
 
-/*
-
-    When user wants to edit their data, this servlet checks if new data doesn't violate constraints,
-    and if it's legal, user's data is updated.
-
- */
-
-import agh.edu.pl.GroupCommunicator.Main;
+import agh.edu.pl.GroupCommunicator.HibernateUtils;
+import agh.edu.pl.GroupCommunicator.LoggedUser;
 import agh.edu.pl.GroupCommunicator.tables.Address;
 import agh.edu.pl.GroupCommunicator.tables.User;
 import jakarta.servlet.ServletException;
@@ -32,11 +26,11 @@ public class EditDataHandlerServlet extends HttpServlet {
         String lastname = request.getParameter("lastname");
         String email = request.getParameter("email");
         String street = request.getParameter("street");
+        String country = request.getParameter("country");
         String city = request.getParameter("city");
         String zipCode = request.getParameter("zipcode");
-        String country = request.getParameter("country");
 
-        User user = Main.getUser();
+        User user = LoggedUser.getUser();
 
         if (user == null) {
             request.setAttribute("email_first", true);
@@ -50,10 +44,10 @@ public class EditDataHandlerServlet extends HttpServlet {
                 && city.isEmpty() && zipCode.isEmpty() && country.isEmpty() &&
                 request.getParameter("birthdate").isEmpty()) {
             request.setAttribute("empty_fields", true);
-            request.getRequestDispatcher("/editdata.jsp").forward(request, response);
+            request.getRequestDispatcher("/editData.jsp").forward(request, response);
         } else {
 
-            Session session = Main.getSession();
+            Session session = HibernateUtils.getSession();
             try {
                 Transaction tx = session.beginTransaction();
 
@@ -103,13 +97,13 @@ public class EditDataHandlerServlet extends HttpServlet {
                 user.getAddress().setZipCode(oldZipCode);
                 user.setEmail(oldEmail);
                 request.setAttribute("constraint_exception", true);
-                request.getRequestDispatcher("/editdata.jsp").forward(request, response);
+                request.getRequestDispatcher("/editData.jsp").forward(request, response);
             } finally {
                 session.close();
             }
             request.setAttribute("edit_data_successful", true);
             request.setAttribute("user", user);
-            request.getRequestDispatcher("/mainpage.jsp").forward(request, response);
+            request.getRequestDispatcher("/mainPage.jsp").forward(request, response);
         }
     }
 }

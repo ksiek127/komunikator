@@ -1,6 +1,7 @@
 package agh.edu.pl.GroupCommunicator.servlets.groups.roles;
 
-import agh.edu.pl.GroupCommunicator.Main;
+import agh.edu.pl.GroupCommunicator.HibernateUtils;
+import agh.edu.pl.GroupCommunicator.LoggedUser;
 import agh.edu.pl.GroupCommunicator.tables.GroupMember;
 import agh.edu.pl.GroupCommunicator.tables.GroupRank;
 import agh.edu.pl.GroupCommunicator.tables.User;
@@ -14,7 +15,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "GiveAdminRoleAndLeaveGroupServlet", urlPatterns = "/giveAdminRoleAndLeaveGroup")
@@ -27,7 +27,7 @@ public class GiveAdminRoleAndLeaveGroupServlet extends HttpServlet {
         int group_id = Integer.parseInt(request.getParameter("group_id"));
         String returnPage = request.getParameter("returnPage");
 
-        Session session = Main.getSession();
+        Session session = HibernateUtils.getSession();
         List<User> groupMembers = null;
         try {
             Transaction tx = session.beginTransaction();
@@ -41,7 +41,7 @@ public class GiveAdminRoleAndLeaveGroupServlet extends HttpServlet {
             session.update(gm);
 
 //            leave group
-            gmPk = new GroupMemberPK(Main.getUser().getUserID(), group_id);
+            gmPk = new GroupMemberPK(LoggedUser.getUser().getUserID(), group_id);
             gm = session.get(GroupMember.class, gmPk);
 
             session.delete(gm);

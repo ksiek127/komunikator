@@ -1,6 +1,14 @@
 package agh.edu.pl.GroupCommunicator.servlets.login;
 
-import agh.edu.pl.GroupCommunicator.Main;
+/*
+
+    Returns user from his profile to login page.
+    Redirects to index.jsp.
+
+ */
+
+import agh.edu.pl.GroupCommunicator.HibernateUtils;
+import agh.edu.pl.GroupCommunicator.LoggedUser;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,7 +21,7 @@ import java.io.IOException;
 public class LogoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Main.setUser(null);
+        LoggedUser.setUser(null);
         request.setAttribute("logged_out", true);
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }

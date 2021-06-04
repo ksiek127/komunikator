@@ -17,13 +17,43 @@
         </div>
         <div class="card-body">
             <ul class="list-group list-group-flush">
+                <c:if test="${requestScope.group_remove_success == true}">
+                    <div class="alert alert-success" role="alert">
+                        Group removed successfully
+                    </div>
+                </c:if>
+                <c:if test="${requestScope.group_remove_failed == true}">
+                    <div class="alert alert-warning" role="alert">
+                        Oops! Something has gone wrong with removing the group...
+                    </div>
+                </c:if>
+                <c:if test="${requestScope.edit_data_successful == true}">
+                    <div class="alert alert-success" role="alert">
+                        Success!
+                    </div>
+                </c:if>
+                <c:if test="${requestScope.group_leave_and_admin_change_success == true}">
+                    <div class="alert alert-success" role="alert">
+                        Left the group with admin changed
+                    </div>
+                </c:if>
+                <c:if test="${requestScope.group_leave_and_admin_change_failed == true}">
+                    <div class="alert alert-warning" role="alert">
+                        Oops! Something has gone wrong with leaving the group and changing the admin...
+                    </div>
+                </c:if>
+                <c:if test="${requestScope.group_leave_success == true}">
+                    <div class="alert alert-success" role="alert">
+                        Left the group
+                    </div>
+                </c:if>
+                <c:if test="${requestScope.group_leave_failed == true}">
+                    <div class="alert alert-warning" role="alert">
+                        Oops! Something has gone wrong with leaving the group...
+                    </div>
+                </c:if>
                 <c:forEach var="group" items="${requestScope.groupsMap}">
                     <li class="list-group-item">
-                        <c:if test="${requestScope.edit_data_successful == true}">
-                            <div class="alert alert-success" role="alert">
-                                Success!
-                            </div>
-                        </c:if>
                         <p><b>Group Name: </b> ${group.key.name}
                             <c:if test="${group.value == 'ADMIN'}">
                             <span class="badge bg-primary">Admin</span>

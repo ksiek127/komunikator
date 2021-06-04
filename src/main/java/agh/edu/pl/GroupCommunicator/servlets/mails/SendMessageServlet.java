@@ -1,6 +1,15 @@
 package agh.edu.pl.GroupCommunicator.servlets.mails;
 
-import agh.edu.pl.GroupCommunicator.Main;
+/*
+
+    Creates new mail with a given title and message.
+    Sends created mail to members of chosen group (add information to inbox)
+    Redirects to messageSent.jsp on success and to sendMail.jsp with error on failure
+
+ */
+
+import agh.edu.pl.GroupCommunicator.HibernateUtils;
+import agh.edu.pl.GroupCommunicator.LoggedUser;
 import agh.edu.pl.GroupCommunicator.tables.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -17,18 +26,18 @@ import java.util.List;
 public class SendMessageServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException{
-        User user = Main.getUser();
+            throws ServletException, IOException {
+        User user = LoggedUser.getUser();
         String title = request.getParameter("title");
         String message = request.getParameter("message");
         int groupId = Integer.parseInt(request.getParameter("groupId"));
         String groupName = null;
-        if(title.isEmpty() || message.isEmpty()){
+        if (title.isEmpty() || message.isEmpty()) {
             request.setAttribute("empty_fields", true);
-            request.getRequestDispatcher("/sendmessage.jsp").forward(request, response);
-        }else{
+            request.getRequestDispatcher("/sendMail.jsp").forward(request, response);
+        } else {
             List<GroupMember> members;
-            try (Session session = Main.getSession()) {
+            try (Session session = HibernateUtils.getSession()) {
                 Transaction tx = session.beginTransaction();
 
                 Group group = session.get(Group.class, groupId);
@@ -44,7 +53,7 @@ public class SendMessageServlet extends HttpServlet {
                         .getResultList();
                 System.out.println(members);
                 for (GroupMember member : members) {
-                    if (member.getUser().getUserID() != Main.getUser().getUserID()) {
+                    if (member.getUser().getUserID() != LoggedUser.getUser().getUserID()) {
                         System.out.println(member.getUser().getUserID());
                         Inbox inbox = new Inbox(mail, member.getUser());
                         session.save(inbox);
@@ -53,13 +62,12 @@ public class SendMessageServlet extends HttpServlet {
                 session.save(outbox);
                 tx.commit();
             } catch (Exception e) {
-//                tu zrobic poinformowanie uzytkownika o bledzie
                 e.printStackTrace();
             }
         }
         request.setAttribute("title", title);
         request.setAttribute("message", message);
         request.setAttribute("groupName", groupName);
-        request.getRequestDispatcher("messagesent.jsp").forward(request, response);
+        request.getRequestDispatcher("messageSent.jsp").forward(request, response);
     }
 }

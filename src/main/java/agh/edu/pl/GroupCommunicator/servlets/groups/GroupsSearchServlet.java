@@ -2,11 +2,14 @@ package agh.edu.pl.GroupCommunicator.servlets.groups;
 
 /*
 
-    Handles searching for a group.
+    Uses group_name parameter provided by the user searching for the group creates a groups map and loads all groups
+    with names matching the group_name parameter. Checks if user is already a member, requested joining or
+    can request to join the group. Redirects to searchGroups.jsp with a search result.
 
  */
 
-import agh.edu.pl.GroupCommunicator.Main;
+import agh.edu.pl.GroupCommunicator.HibernateUtils;
+import agh.edu.pl.GroupCommunicator.LoggedUser;
 import agh.edu.pl.GroupCommunicator.tables.Group;
 import agh.edu.pl.GroupCommunicator.tables.GroupMember;
 import agh.edu.pl.GroupCommunicator.tables.GroupRequest;
@@ -29,8 +32,7 @@ public class GroupsSearchServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("im here get");
-        request.getRequestDispatcher("searchgroup.jsp").forward(request, response);
+        request.getRequestDispatcher("searchGroups.jsp").forward(request, response);
     }
 
     @Override
@@ -39,9 +41,9 @@ public class GroupsSearchServlet extends HttpServlet {
         String groupNameRegex = request.getParameter("group_name");
         if (groupNameRegex.equals("")) {
             request.setAttribute("no_group_name", true);
-            request.getRequestDispatcher("searchgroup.jsp").forward(request, response);
+            request.getRequestDispatcher("searchGroups.jsp").forward(request, response);
         } else {
-            Session session = Main.getSession();
+            Session session = HibernateUtils.getSession();
             List<Group> groupsList = null;
             Map<Group, String> groupsMap = new HashMap<>();
             try {
@@ -52,13 +54,13 @@ public class GroupsSearchServlet extends HttpServlet {
                         .setParameter("groupNameRegex", '%' + groupNameRegex + '%')
                         .getResultList();
 
-                for (Group group: groupsList) {
+                for (Group group : groupsList) {
 //                    check if use is already in the group
                     List<GroupMember> gm = session
                             .createQuery("from GroupMember as gm where gm.group.groupID=:gId and gm.user.userID=:uId",
                                     GroupMember.class)
                             .setParameter("gId", group.getGroupID())
-                            .setParameter("uId", Main.getUser().getUserID())
+                            .setParameter("uId", LoggedUser.getUser().getUserID())
                             .getResultList();
                     if (gm != null && gm.size() == 1) {
                         groupsMap.put(group, "joined");
@@ -68,7 +70,7 @@ public class GroupsSearchServlet extends HttpServlet {
                                 .createQuery("from GroupRequest as gr where gr.group.groupID=:gId and gr.user.userID=:uId",
                                         GroupRequest.class)
                                 .setParameter("gId", group.getGroupID())
-                                .setParameter("uId", Main.getUser().getUserID())
+                                .setParameter("uId", LoggedUser.getUser().getUserID())
                                 .getResultList();
                         if (gr != null && gr.size() == 1) {
                             groupsMap.put(group, "requested");
@@ -80,7 +82,7 @@ public class GroupsSearchServlet extends HttpServlet {
                 tx.commit();
             } catch (Exception ex) {
                 request.setAttribute("search_error", true);
-                request.getRequestDispatcher("searchgroup.jsp").forward(request, response);
+                request.getRequestDispatcher("searchGroups.jsp").forward(request, response);
                 ex.printStackTrace();
             } finally {
                 session.close();
@@ -90,7 +92,7 @@ public class GroupsSearchServlet extends HttpServlet {
                 request.setAttribute("no_such_group", true);
             }
             request.setAttribute("groups", groupsMap);
-            request.getRequestDispatcher("searchgroup.jsp").forward(request, response);
+            request.getRequestDispatcher("searchGroups.jsp").forward(request, response);
         }
 
     }

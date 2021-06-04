@@ -22,6 +22,5 @@
     <mapping class="agh.edu.pl.GroupCommunicator.tables.Inbox"/>
     <mapping class="agh.edu.pl.GroupCommunicator.tables.Outbox"/>
     <mapping class="agh.edu.pl.GroupCommunicator.tables.Mail"/>
-    <mapping class="agh.edu.pl.GroupCommunicator.tables.Attachment"/>
 </session-factory>
 </hibernate-configuration>

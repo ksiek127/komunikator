@@ -18,7 +18,8 @@ public enum GroupRank {
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + this);
-        };
+        }
+        ;
         return result;
     }
 }

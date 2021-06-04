@@ -19,7 +19,9 @@
             <ul class="list-group list-group-flush">
                 <c:forEach var="email" items="${requestScope.emails}">
                     <li class="list-group-item">
-                        <b>Title: </b>${email.title} <br><br>
+                        <b>Title: </b>${email.title}<br>
+                        <b>Created: </b>${email.createdFormatted}<br>
+                        <b>To group: </b> ${email.group.name} <br><br>
                         <form action="message-servlet" method="post">
                             <input type="hidden" name="mailId" value="${email.mailID}">
                             <input type="hidden" name="path" value="outbox">

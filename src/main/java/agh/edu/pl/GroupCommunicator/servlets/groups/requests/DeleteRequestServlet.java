@@ -1,12 +1,7 @@
 package agh.edu.pl.GroupCommunicator.servlets.groups.requests;
 
-/*
-
-    Deletes safely user's request to join a group.
-
- */
-
-import agh.edu.pl.GroupCommunicator.Main;
+import agh.edu.pl.GroupCommunicator.HibernateUtils;
+import agh.edu.pl.GroupCommunicator.LoggedUser;
 import agh.edu.pl.GroupCommunicator.tables.Group;
 import agh.edu.pl.GroupCommunicator.tables.GroupRequest;
 import agh.edu.pl.GroupCommunicator.tables.pk.GroupRequestPK;
@@ -28,13 +23,13 @@ public class DeleteRequestServlet extends HttpServlet {
             throws ServletException, IOException {
         int groupId = Integer.parseInt(request.getParameter("group_id"));
 
-        Session session = Main.getSession();
+        Session session = HibernateUtils.getSession();
         try {
             Transaction tx = session.beginTransaction();
 
             Group group = session.get(Group.class, groupId);
 
-            GroupRequestPK grPk = new GroupRequestPK(Main.getUser().getUserID(), groupId);
+            GroupRequestPK grPk = new GroupRequestPK(LoggedUser.getUser().getUserID(), groupId);
             GroupRequest gr = session.get(GroupRequest.class, grPk);
 
             session.delete(gr);
@@ -42,12 +37,12 @@ public class DeleteRequestServlet extends HttpServlet {
             tx.commit();
         } catch (Exception ex) {
             request.setAttribute("request_delete_failed", true);
-            request.getRequestDispatcher("searchgroup.jsp").forward(request, response);
+            request.getRequestDispatcher("searchGroups.jsp").forward(request, response);
         } finally {
             session.close();
         }
 
         request.setAttribute("request_deleted", true);
-        request.getRequestDispatcher("searchgroup.jsp").forward(request, response);
+        request.getRequestDispatcher("searchGroups.jsp").forward(request, response);
     }
 }

@@ -2,17 +2,15 @@ package agh.edu.pl.GroupCommunicator.servlets.groups;
 
 /*
 
-    Forwards list of group members to page where all users from given group are displayed.
+    Loads group members from a given group and redirects to usersInGroup.jsp with members list assigned
 
  */
 
-import agh.edu.pl.GroupCommunicator.Main;
+import agh.edu.pl.GroupCommunicator.HibernateUtils;
+import agh.edu.pl.GroupCommunicator.LoggedUser;
 import agh.edu.pl.GroupCommunicator.tables.GroupMember;
 import agh.edu.pl.GroupCommunicator.tables.GroupRank;
-import agh.edu.pl.GroupCommunicator.tables.GroupRequest;
-import agh.edu.pl.GroupCommunicator.tables.User;
 import agh.edu.pl.GroupCommunicator.tables.pk.GroupMemberPK;
-import agh.edu.pl.GroupCommunicator.tables.pk.GroupRequestPK;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -22,9 +20,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @WebServlet(name = "GroupMembersListServlet", urlPatterns = "/groupMembersList")
 public class GroupMembersListServlet extends HttpServlet {
@@ -37,11 +33,11 @@ public class GroupMembersListServlet extends HttpServlet {
 
         List<GroupMember> groupMembers = null;
         GroupMember currentUser = null;
-        Session session = Main.getSession();
+        Session session = HibernateUtils.getSession();
         try {
             Transaction tx = session.beginTransaction();
 
-            GroupMemberPK gmPk = new GroupMemberPK(Main.getUser().getUserID(), groupId);
+            GroupMemberPK gmPk = new GroupMemberPK(LoggedUser.getUser().getUserID(), groupId);
             currentUser = session.get(GroupMember.class, gmPk);
 
             if (currentUser.getGroupRank().equals(GroupRank.MEMBER)) {
@@ -56,12 +52,11 @@ public class GroupMembersListServlet extends HttpServlet {
                     .createQuery("from GroupMember as gm where gm.user.userID !=: uid and" +
                             " gm.group.groupID =: gid", GroupMember.class)
                     .setParameter("gid", groupId)
-                    .setParameter("uid", Main.getUser().getUserID())
+                    .setParameter("uid", LoggedUser.getUser().getUserID())
                     .getResultList();
 
             tx.commit();
         } catch (Throwable ex) {
-//            tu mozna na jakas strone z bledem przeniesc
             ex.printStackTrace();
         } finally {
             session.close();
@@ -70,6 +65,6 @@ public class GroupMembersListServlet extends HttpServlet {
         request.setAttribute("groupMembers", groupMembers);
         request.setAttribute("groupId", groupId);
         request.setAttribute("group_name", groupName);
-        request.getRequestDispatcher("usersingroup.jsp").forward(request, response);
+        request.getRequestDispatcher("usersInGroup.jsp").forward(request, response);
     }
 }

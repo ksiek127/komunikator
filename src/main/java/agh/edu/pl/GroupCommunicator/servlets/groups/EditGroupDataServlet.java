@@ -2,16 +2,13 @@ package agh.edu.pl.GroupCommunicator.servlets.groups;
 
 /*
 
-    When user tries to edit group data, this servlet checks if the new data does not violate constraints,
-    including checking if the new group name is available.
+    Updates group data and redirects to GroupsServlet on success or to editGroupData.jsp with a failure variable
+    assigned
 
  */
 
-import agh.edu.pl.GroupCommunicator.Main;
-import agh.edu.pl.GroupCommunicator.tables.Address;
+import agh.edu.pl.GroupCommunicator.HibernateUtils;
 import agh.edu.pl.GroupCommunicator.tables.Group;
-import agh.edu.pl.GroupCommunicator.tables.Mail;
-import agh.edu.pl.GroupCommunicator.tables.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -22,7 +19,6 @@ import org.hibernate.Transaction;
 
 import javax.persistence.PersistenceException;
 import java.io.IOException;
-import java.sql.Date;
 
 @WebServlet(name = "EditGroupDataHandlerServlet", value = "/edit-group-data-handler")
 public class EditGroupDataServlet extends HttpServlet {
@@ -40,10 +36,10 @@ public class EditGroupDataServlet extends HttpServlet {
 
         if (name.isEmpty() && description.isEmpty()) {
             request.setAttribute("empty_fields", true);
-            request.getRequestDispatcher("/editgroupdata.jsp").forward(request, response);
+            request.getRequestDispatcher("/editGroupData.jsp").forward(request, response);
         } else {
 
-            Session session = Main.getSession();
+            Session session = HibernateUtils.getSession();
             try {
                 Transaction tx = session.beginTransaction();
 
@@ -66,7 +62,7 @@ public class EditGroupDataServlet extends HttpServlet {
                 assert group != null;
                 group.setName(oldname);
                 request.setAttribute("constraint_exception", true);
-                request.getRequestDispatcher("/editgroupdata.jsp").forward(request, response);
+                request.getRequestDispatcher("/editGroupData.jsp").forward(request, response);
             } finally {
                 session.close();
             }

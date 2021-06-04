@@ -1,16 +1,7 @@
 package agh.edu.pl.GroupCommunicator.servlets.groups.requests;
 
-/*
-
-    Gets requests to join the group with ID given as a parameter, and forwards to page where all requests to join this
-    group are displayed
-
- */
-
-import agh.edu.pl.GroupCommunicator.Main;
-import agh.edu.pl.GroupCommunicator.tables.Group;
-import agh.edu.pl.GroupCommunicator.tables.GroupRank;
-import agh.edu.pl.GroupCommunicator.tables.GroupRequest;
+import agh.edu.pl.GroupCommunicator.HibernateUtils;
+import agh.edu.pl.GroupCommunicator.LoggedUser;
 import agh.edu.pl.GroupCommunicator.tables.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -32,7 +23,7 @@ public class GroupRequestsServlet extends HttpServlet {
         int groupId = Integer.parseInt(request.getParameter("groupId"));
         String groupName = request.getParameter("groupName");
 
-        Session session = Main.getSession();
+        Session session = HibernateUtils.getSession();
         List<User> users = new ArrayList<>();
         try {
             Transaction tx = session.beginTransaction();
@@ -40,11 +31,11 @@ public class GroupRequestsServlet extends HttpServlet {
                     .createQuery("select user from GroupRequest as gr where gr.group.groupID =:gid" +
                             " and gr.user.userID !=:uid", User.class)
                     .setParameter("gid", groupId)
-                    .setParameter("uid", Main.getUser().getUserID())
+                    .setParameter("uid", LoggedUser.getUser().getUserID())
                     .getResultList();
 
             tx.commit();
-        } catch (Throwable ex){
+        } catch (Throwable ex) {
             ex.printStackTrace();
         } finally {
             session.close();
@@ -52,6 +43,6 @@ public class GroupRequestsServlet extends HttpServlet {
         request.setAttribute("users", users);
         request.setAttribute("groupId", groupId);
         request.setAttribute("group_name", groupName);
-        request.getRequestDispatcher("/grouprequests.jsp").forward(request, response);
+        request.getRequestDispatcher("/groupRequests.jsp").forward(request, response);
     }
 }

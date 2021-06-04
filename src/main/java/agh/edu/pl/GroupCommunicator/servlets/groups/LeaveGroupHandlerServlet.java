@@ -2,12 +2,13 @@ package agh.edu.pl.GroupCommunicator.servlets.groups;
 
 /*
 
-    Handles leaving group.
+    Deletes logged user from a choosen group by deleting data from GroupMember table (using group's groupId and logged
+    user's userId). Redirects to returnPage assigned as a request parameter with a success or failure variable
 
  */
 
-import agh.edu.pl.GroupCommunicator.Main;
-import agh.edu.pl.GroupCommunicator.tables.Group;
+import agh.edu.pl.GroupCommunicator.HibernateUtils;
+import agh.edu.pl.GroupCommunicator.LoggedUser;
 import agh.edu.pl.GroupCommunicator.tables.GroupMember;
 import agh.edu.pl.GroupCommunicator.tables.pk.GroupMemberPK;
 import jakarta.servlet.ServletException;
@@ -30,11 +31,11 @@ public class LeaveGroupHandlerServlet extends HttpServlet {
         int groupId = Integer.parseInt(request.getParameter("group_id"));
         String returnPage = request.getParameter("returnPage");
 
-        Session session = Main.getSession();
+        Session session = HibernateUtils.getSession();
         try {
             Transaction tx = session.beginTransaction();
 
-            GroupMemberPK gmPk = new GroupMemberPK(Main.getUser().getUserID(), groupId);
+            GroupMemberPK gmPk = new GroupMemberPK(LoggedUser.getUser().getUserID(), groupId);
             GroupMember gm = session.get(GroupMember.class, gmPk);
 
             session.delete(gm);

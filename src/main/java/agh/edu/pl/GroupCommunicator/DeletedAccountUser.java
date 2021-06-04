@@ -1,5 +1,12 @@
 package agh.edu.pl.GroupCommunicator;
 
+/*
+
+    Deleted Account User stores necessary data from deleted accounts that is still used by the application
+    This class is used to obtain User object of the Deleted Account User
+
+ */
+
 import agh.edu.pl.GroupCommunicator.tables.User;
 import org.hibernate.Session;
 

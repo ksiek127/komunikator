@@ -1,5 +1,12 @@
 package agh.edu.pl.GroupCommunicator.servlets.mails;
 
+/*
+
+    Redirects user to page where he can send new message.
+    Redirects to sendMail.jsp
+
+ */
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,8 +19,8 @@ import java.io.IOException;
 public class GoToMessageServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException{
+            throws ServletException, IOException {
         request.setAttribute("groupId", request.getParameter("groupId"));
-        request.getRequestDispatcher("sendmessage.jsp").forward(request, response);
+        request.getRequestDispatcher("sendMail.jsp").forward(request, response);
     }
 }

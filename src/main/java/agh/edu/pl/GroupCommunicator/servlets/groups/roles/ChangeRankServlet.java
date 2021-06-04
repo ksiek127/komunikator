@@ -1,8 +1,10 @@
 package agh.edu.pl.GroupCommunicator.servlets.groups.roles;
 
-import agh.edu.pl.GroupCommunicator.Main;
-import agh.edu.pl.GroupCommunicator.tables.*;
-import agh.edu.pl.GroupCommunicator.tables.pk.GroupRequestPK;
+import agh.edu.pl.GroupCommunicator.HibernateUtils;
+import agh.edu.pl.GroupCommunicator.tables.Group;
+import agh.edu.pl.GroupCommunicator.tables.GroupMember;
+import agh.edu.pl.GroupCommunicator.tables.GroupRank;
+import agh.edu.pl.GroupCommunicator.tables.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,9 +14,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @WebServlet(name = "ChangeRankServlet", urlPatterns = "/changeRank")
 public class ChangeRankServlet extends HttpServlet {
@@ -35,7 +34,7 @@ public class ChangeRankServlet extends HttpServlet {
         int groupId = Integer.parseInt(request.getParameter("groupId"));
         int userId = Integer.parseInt(request.getParameter("userId"));
 
-        Session session = Main.getSession();
+        Session session = HibernateUtils.getSession();
         try {
             Transaction tx = session.beginTransaction();
 

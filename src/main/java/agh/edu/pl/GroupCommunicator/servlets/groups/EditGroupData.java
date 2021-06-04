@@ -2,7 +2,7 @@ package agh.edu.pl.GroupCommunicator.servlets.groups;
 
 /*
 
-    Forwards group ID to page where user can edit group data, if they have permission to do it.
+    Redirects to editGroupData.jsp with a given groupId provided
 
  */
 
@@ -20,6 +20,6 @@ public class EditGroupData extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setAttribute("groupId", request.getParameter("groupId"));
-        request.getRequestDispatcher("editgroupdata.jsp").forward(request, response);
+        request.getRequestDispatcher("editGroupData.jsp").forward(request, response);
     }
 }

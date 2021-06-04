@@ -1,16 +1,10 @@
 package agh.edu.pl.GroupCommunicator.servlets.account;
 
-/*
-
-    Servlet that safely removes user from the database.
-
- */
-
-import agh.edu.pl.GroupCommunicator.Main;
+import agh.edu.pl.GroupCommunicator.HibernateUtils;
+import agh.edu.pl.GroupCommunicator.LoggedUser;
 import agh.edu.pl.GroupCommunicator.tables.Inbox;
 import agh.edu.pl.GroupCommunicator.tables.Outbox;
 import agh.edu.pl.GroupCommunicator.tables.User;
-import agh.edu.pl.GroupCommunicator.tables.pk.OutboxPK;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -37,9 +31,9 @@ public class RemoveUserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        User user = Main.getUser();
+        User user = LoggedUser.getUser();
 
-        Session session = Main.getSession();
+        Session session = HibernateUtils.getSession();
         try {
             Transaction tx = session.beginTransaction();
 
@@ -50,7 +44,7 @@ public class RemoveUserServlet extends HttpServlet {
 
             User deletedUser = getDeletedAccountUser(session);
 
-            for (Outbox item: outbox) {
+            for (Outbox item : outbox) {
                 List<Inbox> inbox = session
                         .createQuery("from Inbox as i where i.mail.mailID =: mailId", Inbox.class)
                         .setParameter("mailId", item.getMail().getMailID())
@@ -72,7 +66,7 @@ public class RemoveUserServlet extends HttpServlet {
             session.close();
         }
 
-        session = Main.getSession();
+        session = HibernateUtils.getSession();
         try {
             Transaction tx = session.beginTransaction();
             session.delete(user);

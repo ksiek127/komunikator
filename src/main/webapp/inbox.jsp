@@ -17,21 +17,27 @@
         </div>
         <div class="card-body">
             <ul class="list-group list-group-flush">
-                <c:forEach var="email" items="${requestScope.new_emails}">
+                <c:forEach var="mail" items="${requestScope.new_mails}">
                     <li class="list-group-item">
-                        <b>Title: </b>${email.title}  <span class="badge bg-primary">New</span> <br><br>
+                        <b>Title: </b>${mail.key.title} <span class="badge bg-primary">New</span> <br>
+                        <b>Date: </b>${mail.key.createdFormatted} <br>
+                        <b>Author: </b>${mail.value} <br>
+                        <b>Group: </b>${mail.key.group.name} <br><br>
                         <form action="message-servlet" method="post">
-                            <input type="hidden" name="mailId" value="${email.mailID}">
+                            <input type="hidden" name="mailId" value="${mail.key.mailID}">
                             <input type="hidden" name="path" value="inbox">
                             <input type="submit" value="Show message" class="btn btn-outline-primary">
                         </form>
                     </li>
                 </c:forEach>
-                <c:forEach var="email" items="${requestScope.old_emails}">
+                <c:forEach var="mail" items="${requestScope.old_mails}">
                     <li class="list-group-item">
-                        <b>Title: </b>${email.title} <br><br>
+                        <b>Title: </b>${mail.key.title} <br>
+                        <b>Date: </b>${mail.key.createdFormatted} <br>
+                        <b>Author: </b>${mail.value} <br>
+                        <b>Group: </b>${mail.key.group.name} <br><br>
                         <form action="message-servlet" method="post">
-                            <input type="hidden" name="mailId" value="${email.mailID}">
+                            <input type="hidden" name="mailId" value="${mail.key.mailID}">
                             <input type="hidden" name="path" value="inbox">
                             <input type="submit" value="Show message" class="btn btn-outline-primary">
                         </form>

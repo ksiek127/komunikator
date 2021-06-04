@@ -1,6 +1,13 @@
 package agh.edu.pl.GroupCommunicator.servlets.groups;
 
-import agh.edu.pl.GroupCommunicator.Main;
+/*
+
+    Deletes selected user from the group and redirects to GroupMembersListServlet with a success or failure variable
+    assigned
+
+ */
+
+import agh.edu.pl.GroupCommunicator.HibernateUtils;
 import agh.edu.pl.GroupCommunicator.tables.Group;
 import agh.edu.pl.GroupCommunicator.tables.GroupMember;
 import agh.edu.pl.GroupCommunicator.tables.User;
@@ -30,7 +37,7 @@ public class DeleteUserFromGroupServlet extends HttpServlet {
         int groupId = Integer.parseInt(request.getParameter("groupId"));
         int userId = Integer.parseInt(request.getParameter("userId"));
 
-        Session session = Main.getSession();
+        Session session = HibernateUtils.getSession();
         try {
             Transaction tx = session.beginTransaction();
 

@@ -2,16 +2,17 @@ package agh.edu.pl.GroupCommunicator.servlets.groups;
 
 /*
 
-    Checks if user is a member or an admin in the group they try to leave. If it's a regular member, they can just leave.
-    If it's an admin, they have to delete the group while leaving.
+    Checks chosen group data and redirects to leaveGroup.jsp with an information if the user is the only member
+    in the group and if the user is a group admin. On error redirects to returnPage assigned as a request parameter with
+    a failure variable.
 
  */
 
-import agh.edu.pl.GroupCommunicator.Main;
+import agh.edu.pl.GroupCommunicator.HibernateUtils;
+import agh.edu.pl.GroupCommunicator.LoggedUser;
 import agh.edu.pl.GroupCommunicator.tables.Group;
 import agh.edu.pl.GroupCommunicator.tables.GroupMember;
 import agh.edu.pl.GroupCommunicator.tables.GroupRank;
-import agh.edu.pl.GroupCommunicator.tables.GroupRequest;
 import agh.edu.pl.GroupCommunicator.tables.pk.GroupMemberPK;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -35,7 +36,7 @@ public class LeaveGroupServlet extends HttpServlet {
         Group group = null;
         GroupMember gm = null;
         List<GroupMember> gms = null;
-        Session session = Main.getSession();
+        Session session = HibernateUtils.getSession();
         try {
             Transaction tx = session.beginTransaction();
 
@@ -46,7 +47,7 @@ public class LeaveGroupServlet extends HttpServlet {
                     .setParameter("gId", groupId)
                     .getResultList();
 
-            GroupMemberPK gmPk = new GroupMemberPK(Main.getUser().getUserID(), groupId);
+            GroupMemberPK gmPk = new GroupMemberPK(LoggedUser.getUser().getUserID(), groupId);
             gm = session.get(GroupMember.class, gmPk);
 
             tx.commit();
@@ -73,7 +74,7 @@ public class LeaveGroupServlet extends HttpServlet {
             }
             request.setAttribute("returnPage", returnPage);
             request.setAttribute("group", group);
-            request.getRequestDispatcher("leavegroup.jsp").forward(request, response);
+            request.getRequestDispatcher("leaveGroup.jsp").forward(request, response);
         }
     }
 }

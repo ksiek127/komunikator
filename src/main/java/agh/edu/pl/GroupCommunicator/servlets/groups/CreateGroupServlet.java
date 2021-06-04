@@ -2,12 +2,14 @@ package agh.edu.pl.GroupCommunicator.servlets.groups;
 
 /*
 
-    When user tries to create a group, this servlet checks if the group name is not already taken, and if group details
-    do not violate constraints, the group is created.
+    Creates group with a given name and description.
+    Redirects to groupCreated.jsp on success and to createGroup.jsp
+    with error on failure
 
  */
 
-import agh.edu.pl.GroupCommunicator.Main;
+import agh.edu.pl.GroupCommunicator.HibernateUtils;
+import agh.edu.pl.GroupCommunicator.LoggedUser;
 import agh.edu.pl.GroupCommunicator.tables.Group;
 import agh.edu.pl.GroupCommunicator.tables.GroupMember;
 import agh.edu.pl.GroupCommunicator.tables.GroupRank;
@@ -23,7 +25,6 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.hibernate.query.Query;
 
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet(name = "CreateGroupServlet", value = "/create-group")
 public class CreateGroupServlet extends HttpServlet {
@@ -33,23 +34,23 @@ public class CreateGroupServlet extends HttpServlet {
             throws ServletException, IOException {
         String name = request.getParameter("name");
         String description = request.getParameter("description");
-        User user = Main.getUser();
-        if(name.isEmpty() || description.isEmpty()){
+        User user = LoggedUser.getUser();
+        if (name.isEmpty() || description.isEmpty()) {
             request.setAttribute("empty_fields", true);
-            request.getRequestDispatcher("/creategroup.jsp").forward(request, response);
+            request.getRequestDispatcher("/createGroup.jsp").forward(request, response);
         }
         Long count;
-        try(Session session = Main.getSession()) {
+        try (Session session = HibernateUtils.getSession()) {
             Query query = session.createQuery("select count(*) from Group group where group.name = :gName");
             query.setParameter("gName", name);
             count = (Long) query.uniqueResult();
         }
         if (count > 0) {
             request.setAttribute("name_taken", true);
-            request.getRequestDispatcher("/creategroup.jsp").forward(request, response);
-        } else{
+            request.getRequestDispatcher("/createGroup.jsp").forward(request, response);
+        } else {
             Group group = new Group(name, description);
-            try (Session session = Main.getSession()) {
+            try (Session session = HibernateUtils.getSession()) {
                 Transaction tx = session.beginTransaction();
                 session.save(group);
                 GroupMember groupMember = new GroupMember(user, group, GroupRank.ADMIN);
@@ -57,11 +58,11 @@ public class CreateGroupServlet extends HttpServlet {
                 tx.commit();
             } catch (ConstraintViolationException ex) {
                 request.setAttribute("constraint_exception", true);
-                request.getRequestDispatcher("/creategroup.jsp").forward(request, response);
+                request.getRequestDispatcher("/createGroup.jsp").forward(request, response);
             }
             request.setAttribute("name", name);
             request.setAttribute("description", description);
-            request.getRequestDispatcher("groupcreated.jsp").forward(request, response);
+            request.getRequestDispatcher("groupCreated.jsp").forward(request, response);
         }
     }
 }

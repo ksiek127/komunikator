@@ -1,13 +1,6 @@
 package agh.edu.pl.GroupCommunicator.servlets.account;
 
-/*
-
-    Checks if the data given by user in the registration form does not violate constraints, and if it's legal,
-    the user is now registered. If it's illegal, user has to correct invalid account details.
-
- */
-
-import agh.edu.pl.GroupCommunicator.Main;
+import agh.edu.pl.GroupCommunicator.HibernateUtils;
 import agh.edu.pl.GroupCommunicator.tables.Address;
 import agh.edu.pl.GroupCommunicator.tables.User;
 import jakarta.servlet.ServletException;
@@ -45,7 +38,7 @@ public class RegistrationHandlerServlet extends HttpServlet {
             Date birthDate = Date.valueOf(request.getParameter("birthdate"));
             Address address1 = new Address(street, city, zipCode, country);
             User user = new User(birthDate, firstname, lastname, email, address1);
-            Session session = Main.getSession();
+            Session session = HibernateUtils.getSession();
             try {
                 Transaction tx = session.beginTransaction();
                 session.save(user);

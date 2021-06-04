@@ -1,16 +1,7 @@
 package agh.edu.pl.GroupCommunicator.servlets.groups.requests;
 
-/*
-
-    Handles rejecting requests to join a group.
-
- */
-
-import agh.edu.pl.GroupCommunicator.Main;
-import agh.edu.pl.GroupCommunicator.tables.Group;
-import agh.edu.pl.GroupCommunicator.tables.GroupMember;
+import agh.edu.pl.GroupCommunicator.HibernateUtils;
 import agh.edu.pl.GroupCommunicator.tables.GroupRequest;
-import agh.edu.pl.GroupCommunicator.tables.User;
 import agh.edu.pl.GroupCommunicator.tables.pk.GroupRequestPK;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -31,7 +22,7 @@ public class RejectRequestServlet extends HttpServlet {
         int groupId = Integer.parseInt(request.getParameter("groupId"));
         int userId = Integer.parseInt(request.getParameter("userId"));
 
-        Session session = Main.getSession();
+        Session session = HibernateUtils.getSession();
         try {
             Transaction tx = session.beginTransaction();
 
@@ -41,7 +32,7 @@ public class RejectRequestServlet extends HttpServlet {
             session.delete(gr);
 
             tx.commit();
-        } catch (Throwable ex){
+        } catch (Throwable ex) {
             request.setAttribute("reject_fail", true);
             request.getRequestDispatcher("groupRequests").forward(request, response);
             ex.printStackTrace();

@@ -2,14 +2,13 @@ package agh.edu.pl.GroupCommunicator.servlets.groups;
 
 /*
 
-    Handles deleting a group.
+    Deletes group with a given id and redirects to a page provided as a request parameter (returnPage)
+    with success or failure variable assigned to inform the user about the result
 
  */
 
-import agh.edu.pl.GroupCommunicator.Main;
+import agh.edu.pl.GroupCommunicator.HibernateUtils;
 import agh.edu.pl.GroupCommunicator.tables.Group;
-import agh.edu.pl.GroupCommunicator.tables.GroupMember;
-import agh.edu.pl.GroupCommunicator.tables.pk.GroupMemberPK;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -19,7 +18,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet(name = "DeleteGroupServlet", urlPatterns = "/deleteGroup")
 public class DeleteGroupServlet extends HttpServlet {
@@ -34,7 +32,7 @@ public class DeleteGroupServlet extends HttpServlet {
         }
 
         Group group;
-        Session session = Main.getSession();
+        Session session = HibernateUtils.getSession();
         try {
             Transaction tx = session.beginTransaction();
 
