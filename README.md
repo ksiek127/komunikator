@@ -46,7 +46,7 @@ Outbox | Realizując relację wiele-do-wielu, przypisuje mailom ich nadawców z 
 Schemat bazy wynika ze sposobu działania aplikacji. Stawiając na komunikację grupową postanowiliśmy przypisać maile do grup zamiast użytkowników aplikacji.
 Jako że wiadomości przesyłane są do wielu użytkowników jednocześnie, zdecydowaliśmy się przechowywać jedną kopię maila w tabeli Mail oraz wiele wpisów w tabelach Inbox i Outbox, które informują o tym do kogo i od kogo maile wiadomości zostały wysłane. Natomiast podział na skrzynkę nadawcza i odbiorczą umożliwia nam śledzenie takich informacji jak fakt czy mail został przeczytany przez konkretnego odbiorcę, bądź usunięty z prywatnej skrzynki nadawczej przez nadawcę, bez jednoczesnego całkowitego usuwania maila u wszystkich użytkowników.
 
-## Uruchamianie aplikacji
+## Uruchamianie aplikacji (zalecane uruchamianie na Windowsie 10)
 #### Importowanie i budowa aplikacji
 ```
 git clone https://github.com/ksiek127/komunikator GroupCommunicator
@@ -54,10 +54,10 @@ cd GroupCommunicator
 gradle build
 ```
 #### Uruchamianie aplikacji z użyciem serwera Apache Tomcat 10.0.6 przy pomocy IDE IntelliJ IDEA 2021.1.1 (Ultimate Edition)
-Po otwarciu folderu z zaimportowanym projektem w IntelliJ należy zainstalować serwer [Apache Tomcat 10.0.6](https://tomcat.apache.org/download-10.cgi), a następnie zastosować następujące kroki:
+Po otwarciu folderu z zaimportowanym projektem w IntelliJ należy zainstalować serwer [Apache Tomcat 10.0.6](https://tomcat.apache.org/download-10.cgi) stosując następujące kroki:
 1. Dodać nową konfigurację aplikacji (`Run/Edit Configurations` a następnie `Add New Configuration`) i wybrać `Tomcat Server Local` ![config1](https://user-images.githubusercontent.com/39878361/120622054-c2da7a00-c45e-11eb-941e-0777a95aaded.png)
 
-2. Wskazać katalog, gdzie rozpakowano zainstalowany serwer Apache Tomcat 10.0.6 po naciśnięciu na `Configure...` przy opcji `Application Server` oraz nacisnąć na przycisk `Fix` w prawym dolnym rogu przy ostrzeżeniu `Warning: No artifacts marked for deployment` i wybrać domyślną wersję war ![config2](https://user-images.githubusercontent.com/39878361/120623176-ca4e5300-c45f-11eb-8d23-57e3f9fa3a0f.png)
+2. Wskazać katalog, gdzie rozpakowano pobrany serwer Apache Tomcat 10.0.6 po naciśnięciu na `Configure...` przy opcji `Application Server` oraz nacisnąć na przycisk `Fix` w prawym dolnym rogu przy ostrzeżeniu `Warning: No artifacts marked for deployment` i wybrać domyślną wersję war ![config2](https://user-images.githubusercontent.com/39878361/120623176-ca4e5300-c45f-11eb-8d23-57e3f9fa3a0f.png)
 3. Zakładka `Deployment` powinna wyglądać w następujący sposób ![config3](https://user-images.githubusercontent.com/39878361/120623403-fd90e200-c45f-11eb-97be-de73f1151b3c.png)
 4. Po zaakceptowaniu wprowadzonej konfiguracji można uruchomić aplikację ![config4](https://user-images.githubusercontent.com/39878361/120623708-4183e700-c460-11eb-801d-5ed3fe298b9d.png)
 
@@ -73,7 +73,7 @@ INSERT INTO [User] (city, country, street, zipCode, birthDate, email, firstname,
 ## Struktura kodu aplikacji
 
 ### WebServlets
-Opis oparty na Servletcie [GroupsSearchServlet](src/main/java/agh/edu/pl/GroupCommunicator/servlets/groups/GroupsSearchServlet) przetwarzającym żądania Get oraz Post.  
+Opis oparty na Servletcie [GroupsSearchServlet](src/main/java/agh/edu/pl/GroupCommunicator/servlets/groups/GroupsSearchServlet.java) przetwarzającym żądania Get oraz Post.  
 Na początku każdego Servletu opisane jest w komentarzu jego działanie
 ```
 /*
@@ -101,7 +101,7 @@ Przesłanianie metody doGet i przekierowanie `request` Servleta do zasobu zdefin
   }
 ```
 
-Przesłanianie metody doPost, pobieranie parametru `group_name` z otrzymanego żądania. Jeśli nie podano żadnej nazwy grupy, to zostaje wykonane przeniesienie z powrotem do `searchGroups.jsp` z odpowiednim atrybutem wykorzystywanym do wyświetlenia informacji o wymaganiu podania nazwy grupy, którą chcemy wyszukać.
+Przesłaniamy metodę doPost, pobieramy parametr `group_name` z otrzymanego żądania. Jeśli nie podano żadnej nazwy grupy, to zostaje wykonane przeniesienie z powrotem do `searchGroups.jsp` z odpowiednim atrybutem wykorzystywanym do wyświetlenia informacji o wymaganiu podania nazwy grupy, którą chcemy wyszukać.
 
 ```
   @Override
@@ -114,7 +114,7 @@ Przesłanianie metody doPost, pobieranie parametru `group_name` z otrzymanego ż
       } else {
 ```
 
-Jeśli podano szukaną nazwę grupy, to otwieramy sesję korzystając z metody `getSession()` z pliku [HibernateUtils](src/main/java/agh/edu/pl/GroupCommunicator/HibernateUtils), gdzie jest zaimplementowana `SessionFactory` oraz rozpoczynamy transakcję na otwartej sesji.
+Jeśli podano szukaną nazwę grupy, to otwieramy sesję korzystając z metody `getSession()` z pliku [HibernateUtils](src/main/java/agh/edu/pl/GroupCommunicator/HibernateUtils.java), gdzie jest zaimplementowana `SessionFactory` oraz rozpoczynamy transakcję na otwartej sesji.
 
 ```
   Session session = HibernateUtils.getSession();
@@ -192,7 +192,8 @@ Jeśli nie pojawiły się żadne błędy w czasie wykonywania transakcji, to prz
 ```
 
 ### JSP
-Opis oparty na [groupsSearch.jsp](src/main/webapp/searchGroups.jsp)
+Opis oparty na [groupsSearch.jsp](src/main/webapp/searchGroups.jsp), który w aplikacji prezentuje się następująco:
+![serachGroups jsp](https://user-images.githubusercontent.com/39878361/121169412-4546ad80-c854-11eb-80b7-ab7678987241.png)
 
 Definiujemy `ContentType` oraz kodowanie strony, następnie importujemy używane prefixy z biblioteki `Taglibs` oraz Bootstrapa 5.0.1
 
