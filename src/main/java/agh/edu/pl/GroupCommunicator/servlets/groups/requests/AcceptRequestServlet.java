@@ -13,6 +13,12 @@ import org.hibernate.Transaction;
 
 import java.io.IOException;
 
+/*
+
+    Handles accepting requests to join a group.
+
+ */
+
 @WebServlet(name = "AcceptRequestServlet", urlPatterns = "/acceptRequest")
 public class AcceptRequestServlet extends HttpServlet {
     @Override

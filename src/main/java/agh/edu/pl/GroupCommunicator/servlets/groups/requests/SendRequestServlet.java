@@ -14,6 +14,12 @@ import org.hibernate.Transaction;
 
 import java.io.IOException;
 
+/*
+
+    Handles sending requests to join a group.
+
+ */
+
 @WebServlet(name = "SendRequestServlet", urlPatterns = "/sendRequest")
 public class SendRequestServlet extends HttpServlet {
     @Override

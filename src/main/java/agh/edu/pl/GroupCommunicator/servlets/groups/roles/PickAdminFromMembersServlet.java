@@ -15,6 +15,12 @@ import org.hibernate.Transaction;
 import java.io.IOException;
 import java.util.List;
 
+/*
+
+    Picks new admin from group members.
+
+ */
+
 @WebServlet(name = "PickAdminFromMembersServlet", urlPatterns = "/pickAdminFromMembers")
 public class PickAdminFromMembersServlet extends HttpServlet {
     @Override

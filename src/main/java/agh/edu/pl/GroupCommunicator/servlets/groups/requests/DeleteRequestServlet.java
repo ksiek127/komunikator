@@ -15,6 +15,12 @@ import org.hibernate.Transaction;
 
 import java.io.IOException;
 
+/*
+
+    Deletes safely user's request to join a group.
+
+ */
+
 @WebServlet(name = "DeleteRequestServlet", urlPatterns = "/deleteRequest")
 public class DeleteRequestServlet extends HttpServlet {
 

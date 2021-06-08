@@ -15,6 +15,13 @@ import org.hibernate.exception.ConstraintViolationException;
 import java.io.IOException;
 import java.sql.Date;
 
+/*
+
+    Checks if the data given by user in the registration form does not violate constraints, and if it's legal,
+    the user is now registered. If it's illegal, user has to correct invalid account details.
+
+ */
+
 @WebServlet(name = "RegistrationHandlerServlet", value = "/registration-handler")
 public class RegistrationHandlerServlet extends HttpServlet {
 

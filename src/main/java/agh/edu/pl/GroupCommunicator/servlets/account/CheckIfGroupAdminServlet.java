@@ -1,3 +1,11 @@
+/*
+
+    When user tries to leave the group, this servlet checks if he's a regular member or a moderator and he can leave,
+    or if he's an admin and him leaving the group would mean deleting the entire group.
+
+ */
+
+
 package agh.edu.pl.GroupCommunicator.servlets.account;
 
 import agh.edu.pl.GroupCommunicator.HibernateUtils;
@@ -13,6 +21,13 @@ import org.hibernate.Session;
 
 import java.io.IOException;
 import java.util.List;
+
+/*
+
+    When user tries to leave the group, this servlet checks if he's a regular member or a moderator and he can leave,
+    or if he's an admin and him leaving the group would mean choosing another admin.
+
+ */
 
 @WebServlet(name = "CheckIfGroupAdminServlet", urlPatterns = "/checkIfGroupAdmin")
 public class CheckIfGroupAdminServlet extends HttpServlet {

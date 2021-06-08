@@ -16,6 +16,13 @@ import javax.persistence.PersistenceException;
 import java.io.IOException;
 import java.sql.Date;
 
+/*
+
+    When user wants to edit their data, this servlet checks if new data doesn't violate constraints,
+    and if it's legal, user's data is updated.
+
+ */
+
 @WebServlet(name = "EditDataHandlerServlet", value = "/edit-data-handler")
 public class EditDataHandlerServlet extends HttpServlet {
 
