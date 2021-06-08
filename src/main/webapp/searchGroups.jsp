@@ -123,7 +123,7 @@
                                 <c:if test="${group.value == 'joined'}">
                                     <form action="leaveGroup" method="post">
                                         <input type="hidden" name="group_id" value="${group.key.groupID}">
-                                        <input type="hidden" name="returnPage" value="searchgroup.jsp">
+                                        <input type="hidden" name="returnPage" value="searchGroups.jsp">
                                         <button type="submit" class="btn btn-outline-danger">Leave group</button>
                                     </form>
                                 </c:if>
