@@ -204,11 +204,10 @@ Definiujemy `ContentType` oraz kodowanie strony, następnie importujemy używane
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 ```
-
-Tworzymy strukturę HTML strony korzystając z klas Boostrapowych.  
-Formularz przekierowywujący do GroupsSearchServlet opisanego wyżej z parameterm `group_name`. Jest też możliwość powrotu do strony głównej profilu użytkownika naciskając na przycisk z napisem `Return` przekierowywującym do [ReturnToMainPageServlet](src/main/java/agh/edu/pl/GroupCommunicator/servlets/ReturnToMainPageServlet).  
+ 
+Tworzymy formularz przekierowywujący do GroupsSearchServlet opisanego wyżej z parameterm `group_name`. Jest też możliwość powrotu do strony głównej profilu użytkownika naciskając na przycisk z napisem `Return` przekierowywującym do [ReturnToMainPageServlet](src/main/java/agh/edu/pl/GroupCommunicator/servlets/ReturnToMainPageServlet.java).  
 Tag `if` prefixu `c` pozwala przy pomocy atrybutu `test` przetestować podany warunek. (poniżej podano tylko jeden przykład użycia dla większej przejrzystości kodu)  
-`requestScope` to mapa dzięki której możemy odczytywać wartości przypisane `request` na przykład w Servletach za pomocą metody `request.setAttribute(name, value)`
+`requestScope` to mapa dzięki której możemy odczytywać wartości przypisane `request` w Servletach za pomocą metody `request.setAttribute(name, value)`
 
 ```
   <!DOCTYPE html>
@@ -233,7 +232,7 @@ Tag `if` prefixu `c` pozwala przy pomocy atrybutu `test` przetestować podany wa
                       <div class="input-group mb-3">
                           <input type="text" class="form-control" placeholder="Group name" aria-label="Email"
                                  aria-describedby="basic-addon1" name="group_name" id="group_name"
-                                 value="${fn:escapeXml(param.group_name)}">
+                                 value="${param.group_name}">
                       </div>
                       <button type="submit" class="btn btn-outline-primary">Search</button>
                       <a href="returnToMainPage" class="btn btn-outline-primary">Return</a>
@@ -243,7 +242,7 @@ Tag `if` prefixu `c` pozwala przy pomocy atrybutu `test` przetestować podany wa
       </div>
 ```
 
-Jeśli zostało wykonane wyszukiwanie po podanej nazwie grupy, to do `requestScope` w Servletcie GroupsSearchServlets zostanie przypisana mapa z otrzymanymi grupami. Odczytujemy je oraz jej klucze i wartości korzystając z przefixu `c` oraz tagów `if` oraz `forEach`, gdzie tag `forEach` ma atrybut `items` wskazujący na obiekt, po którym będziemy iterować oraz `var` do którego zostaną przypisane kolejne wyniki iteracji po obiekcie `items`. Dzięki temu tworzymy strukturę HTML do wyświetlania danych pojedynczej grupy, ale będzie ona powtarzana tyle razy, ile grup otrzymaliśmy w wyniku wyszukiwania po nazwie grupy. Rozróżniamy grupy, które są kluczami w mapie po wartościach tych kluczów, czyli `none` -> użytkownik nie jest memeberem grupy oraz nie prosił o dołączenie, `requested` -> użytkownik nie jest memeberem grupy, ale prosił o dołączenie, `joined` -> użytkownik jest memeberem grupy
+Jeśli zostało wykonane wyszukiwanie po podanej nazwie grupy, to do `requestScope` w Servletcie GroupsSearchServlets zostanie przypisana mapa z otrzymanymi grupami. Odczytujemy je korzystając z przefixu `c` oraz tagów `if` oraz `forEach`, gdzie tag `forEach` ma atrybut `items` wskazujący na mapę `groups`, po której będziemy iterować oraz `var` do którego zostaną przypisane kolejne wyniki iteracji po `groups`. Dzięki temu tworzymy strukturę HTML do wyświetlania danych pojedynczej grupy, ale będzie ona powtarzana tyle razy, ile grup otrzymaliśmy w wyniku wyszukiwania po nazwie grupy. Rozróżniamy grupy, które są kluczami w mapie `groups` po wartościach tych kluczów, czyli `none` -> użytkownik nie jest memeberem grupy oraz nie prosił o dołączenie, `requested` -> użytkownik nie jest memeberem grupy, ale prosił o dołączenie, `joined` -> użytkownik jest memeberem grupy
 
 ```
   <c:if test="${requestScope.groups != null}">
@@ -290,8 +289,8 @@ Jeśli zostało wykonane wyszukiwanie po podanej nazwie grupy, to do `requestSco
 
 ### Hibernate Entity
 
-Stosowane do tworzenia klas będących potem mapowanych przez Hibernate do odpowiednich obiektów bazy danych  
-Dla przykładu opisujemy klasę [Mail](src/main/java/agh/edu/pl/GroupCommunicator/tables/Mail)
+Stosowane do tworzenia klas będących potem mapowanych przez Hibernate do odpowiednich tabel bazy danych  
+Dla przykładu opisujemy klasę [Mail](src/main/java/agh/edu/pl/GroupCommunicator/tables/Mail.java)
 
 Adnotacja `@Entity` opisuje, że definioawna klasa jest encją bazy danych.
 ```
@@ -305,7 +304,7 @@ Adnotacja `@Id` oznacza klucz główny encji, a `@GeneratedValue` określa strat
     private int mailID;
 ```
 Definiujemy kolejne atrybuty encji podając przy pomocy adnotacji `@Column`, czy mogą one zawierać wartości null oraz jaka może być ich maksymalna długość  
-`created` potrzebuje specjalnych adnotacji, które określają odpowiedni typ tego atrybutu i sposób tworzenia jego wartości
+`created` potrzebuje specjalnych adnotacji, które określają odpowiedni typ tego atrybutu i sposób tworzenia jego wartości (@CreationTimestamp zapewnia, że dla każdego nowego obiektu tej encji wartość tego atrybutu to data utworzenia tego obiektu)
 ```
     @Column(nullable = false, length = 1000)
     private String message;
