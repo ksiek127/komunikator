@@ -41,10 +41,10 @@ GroupRequest | Realizując relację wiele-do-wielu, informuje którzy użytkowni
 GroupMember | Realizując relację wiele-do-wielu, informuje jacy użytkownicy aktualnie przynależą do poszczególnych grup oraz jaką posiadają w rangę w danej grupie (admin/moderator/member)
 Mail | Przechowuje podstawowe informacje dotyczące wysłanych maili
 Inbox | Realizując relację wiele-do-wielu, przypisuje mailom ich odbiorców z tabeli User oraz przechowuje informację, czy mail został przeczytany przez danego użytkownika
-Outbox | Realizując relację wiele-do-wielu, przypisuje mailom ich nadawców z tabeli User oraz przechowuje informację, czy mail został usunięty przez danego użytkownika
+Outbox | Realizując relację wiele-do-wielu, przypisuje mailom ich nadawców z tabeli User oraz przechowuje informację, czy mail został usunięty ze skrzynki nadawczej przez nadawcę
 
 Schemat bazy wynika ze sposobu działania aplikacji. Stawiając na komunikację grupową postanowiliśmy przypisać maile do grup zamiast użytkowników aplikacji.
-Jako że wiadomości przesyłane są do wielu użytkowników jednocześnie, zdecydowaliśmy się przechowywać jedną kopię maila w tabeli Mail oraz wiele wpisów w tabelach Inbox i Outbox, które informują o tym do kogo i od kogo maile wiadomości zostały wysłane. Natomiast podział na skrzynkę nadawcza i odbiorczą umożliwia nam śledzenie takich informacji jak fakt czy mail został przeczytany przez konkretnego odbiorcę, bądź usunięty z prywatnej skrzynki nadawczej przez nadawcę, bez jednoczesnego całkowitego usuwania maila u wszystkich użytkowników.
+Jako że wiadomości przesyłane są do wielu użytkowników jednocześnie, zdecydowaliśmy się przechowywać jedną kopię maila w tabeli Mail oraz wiele wpisów w tabelach Inbox i Outbox, które informują o tym do kogo i od kogo maile wiadomości zostały wysłane. Natomiast podział na skrzynkę nadawcza i odbiorczą umożliwia nam śledzenie takich informacji jak fakt czy mail został przeczytany przez konkretnego odbiorcę, bądź usunięty z prywatnej skrzynki nadawczej przez nadawcę.
 
 ## Uruchamianie aplikacji (zalecane uruchamianie na Windowsie 10)
 #### Importowanie i budowa aplikacji
@@ -136,7 +136,7 @@ Uzyskujemy listę grup, które pasują do podanego parametru `group_name` korzys
 Następnie przetwarzamy otrzymane dane z bazy sprawdzając, czy zalogowany użytkownik jest członkiem znalezionych grup, czy prosił już o dołączenie, lub czy może prosić o dołączenie. Przy tej czynności także korzystamy z HQL, aby otrzymać odpowiednie dane z tabel GroupMember oraz GroupRequest. Na końcu wywołujemy `.commit()` na transakcji.
 
 ```
-for (Group group : groupsList) {
+                  for (Group group : groupsList) {
 //                    check if user is already in the group
                     List<GroupMember> gm = session
                             .createQuery("from GroupMember as gm where gm.group.groupID=:gId and gm.user.userID=:uId",
@@ -200,7 +200,6 @@ Definiujemy `ContentType` oraz kodowanie strony, następnie importujemy używane
 ```
   <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
   <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
-  <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 ```
@@ -242,7 +241,7 @@ Tag `if` prefixu `c` pozwala przy pomocy atrybutu `test` przetestować podany wa
       </div>
 ```
 
-Jeśli zostało wykonane wyszukiwanie po podanej nazwie grupy, to do `requestScope` w Servletcie GroupsSearchServlets zostanie przypisana mapa z otrzymanymi grupami. Odczytujemy je korzystając z przefixu `c` oraz tagów `if` oraz `forEach`, gdzie tag `forEach` ma atrybut `items` wskazujący na mapę `groups`, po której będziemy iterować oraz `var` do którego zostaną przypisane kolejne wyniki iteracji po `groups`. Dzięki temu tworzymy strukturę HTML do wyświetlania danych pojedynczej grupy, ale będzie ona powtarzana tyle razy, ile grup otrzymaliśmy w wyniku wyszukiwania po nazwie grupy. Rozróżniamy grupy, które są kluczami w mapie `groups` po wartościach tych kluczów, czyli `none` -> użytkownik nie jest memeberem grupy oraz nie prosił o dołączenie, `requested` -> użytkownik nie jest memeberem grupy, ale prosił o dołączenie, `joined` -> użytkownik jest memeberem grupy
+Jeśli zostało wykonane wyszukiwanie po podanej nazwie grupy, to do `requestScope` w Servletcie GroupsSearchServlets zostanie przypisana mapa z otrzymanymi grupami. Odczytujemy je korzystając z przefixu `c` oraz tagów `if` oraz `forEach`, gdzie tag `forEach` ma atrybut `items` wskazujący na mapę `groups`, po której będziemy iterować oraz `var` do którego zostaną przypisane kolejne wyniki iteracji po `groups`. Dzięki temu tworzymy strukturę HTML do wyświetlania danych pojedynczej grupy, ale będzie ona powtarzana tyle razy, ile grup otrzymaliśmy w wyniku wyszukiwania po nazwie grupy. Rozróżniamy grupy, które są kluczami w mapie `groups` po wartościach tych kluczów, czyli `none` -> użytkownik nie jest członkiem grupy oraz nie prosił o dołączenie, `requested` -> użytkownik nie jest członkiem grupy, ale prosił o dołączenie, `joined` -> użytkownik jest członkiem grupy
 
 ```
   <c:if test="${requestScope.groups != null}">
@@ -292,7 +291,7 @@ Jeśli zostało wykonane wyszukiwanie po podanej nazwie grupy, to do `requestSco
 Stosowane do tworzenia klas będących potem mapowanych przez Hibernate do odpowiednich tabel bazy danych  
 Dla przykładu opisujemy klasę [Mail](src/main/java/agh/edu/pl/GroupCommunicator/tables/Mail.java)
 
-Adnotacja `@Entity` opisuje, że definioawna klasa jest encją bazy danych.
+Adnotacja `@Entity` opisuje, że definiowana klasa jest encją bazy danych.
 ```
   @Entity
   public class Mail {
